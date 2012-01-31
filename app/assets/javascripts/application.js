@@ -13,3 +13,55 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//
+function toggle(button) {
+	img = button.children("img");
+	details = button.siblings(".details");
+	visible = details.is(':visible');
+	details.toggle();
+
+	prefix = ''; 
+
+	if(button.parent().hasClass('valid') || button.parent().hasClass('warning')) {
+		prefix = 'white_';
+	}
+
+	if(!visible) {
+		img.attr('src', '/assets/' + prefix + 'minus_alt_16x16.png');
+		img.attr('alt', '-');
+	}else {
+		img.attr('src', '/assets/' + prefix + 'plus_alt_16x16.png');
+		img.attr('alt', '+');
+	}
+}
+
+$(document).ready(function() {
+	$( ".plus" ).click(function() {
+		toggle($(this));
+		return false;
+	});
+
+	$(".show_form").click(function() {
+		$(this).addClass("disable");
+    $(this).parent().siblings("form").fadeIn(350);
+		$(this).parent().siblings("form").find(".form_name").focus();
+		return false;
+	});
+
+	$(".cancel").click(function() {
+    $(this).parents("form").fadeOut(250);
+		$(this).parents("form").siblings(".add-course").children(".show_form").removeClass("disable");
+		return false;
+	});
+
+	$(".show_teacher_card").click(function() {
+    $(".teacher_card").fadeIn(250);
+		return false;
+	});
+
+	$(".close_card").click(function() {
+    $(".teacher_card").fadeOut(250);
+		return false;
+	});
+});
+
