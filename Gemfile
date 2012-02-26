@@ -36,5 +36,9 @@ gem 'unicorn'
 # Deploy with Capistrano
 gem 'capistrano'
 
+group :development, :test do
+  gem 'rr'
+end
+
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
