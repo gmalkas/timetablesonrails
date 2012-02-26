@@ -36,6 +36,13 @@ describe SchoolYear do
     assert subject.activated?
   end
 
+  it "can be disabled" do
+    subject.activate!
+    assert subject.activated?
+    subject.disable!
+    refute subject.activated?
+  end
+
   it "is unarchived when activated" do
     subject.archive!
     assert subject.archived?

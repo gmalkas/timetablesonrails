@@ -25,6 +25,10 @@ class SchoolYear
     @activated = true
   end
 
+  def disable!
+    @activated = false
+  end
+
   def activated?
     @activated
   end
