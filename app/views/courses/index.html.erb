@@ -1,25 +1,109 @@
-<h1>Listing courses</h1>
+<header>
+	<h1>Unités d'enseignement</h1>
+</header>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Teacher</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<section class="utilities" style="text-align: center">
+	<div class="add-course">
+		<%= link_to "Ajouter une U.E...", root_path, :class => 'show_form' %>
+	</div>
+  ou 
+	<div class="filters" style="padding: 0.5em; border-radius: 6px; background-color: #EEE;">
+		<em style="font-size: 0.875em">Filtrer par</em> &raquo;
+		<ul>
+			<li style="font-weight: bold;">Semestre</li>
+			<li><%= link_to "Statut", root_path %></li>
+			<li><%= link_to "Responsable", root_path %></li>
+		</ul>
+	</div>
+	<form method="post" action="" style="padding: 0.5em; margin-top: 1em; border-top: 2px dashed #DDD; border-bottom: 2px dashed #DDD; display: none;">
+    <div>
+			<label for="name">Nom :</label>
+			<input type="text" class="form_name" id="name" name="name" style="border: none; padding: 0.25em; background-color: #EEE; border: 2px solid #DDD; color: #2B2B2B; font-size: 0.875em; border-radius: 4px;" %>
+		</div>
+		
+    <div>
+			<label for="semestre">Semestre :</label>
+			<select name="semestre" style="width: 4em;">
+        <option value="5">5</option>
+				<option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+				<option value="9">9</option>
+			</select>
+		</div>
+		<div>
+			<input type="submit" value="Créer" /> ou <a href="" class="cancel">annuler</a>
+		</div>
+	</form>
+</section>
 
-<% @courses.each do |course| %>
-  <tr>
-    <td><%= course.name %></td>
-    <td><%= course.teacher %></td>
-    <td><%= link_to 'Show', course %></td>
-    <td><%= link_to 'Edit', edit_course_path(course) %></td>
-    <td><%= link_to 'Destroy', course, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<aside class="teacher_card">
+  <img class="close_card" src="assets/x_alt_16x16.png" />
+  <%# <div style="margin: 0.5em 0.5em 0 0; float: right;"> %>
+		<%# <img src="assets/bertier.jpg" alt="" height="64px" style="border: 2px solid #CCC;" /> %>
+	<%# </div> %>
+  <header>
+		<h1>Marin Bertier</h1>
+		<h2 style="font-size: 0.75em; letter-spacing: 0;">Enseignant-Chercheur</h2>
+	</header>
+	<p class="contact_information">
+		<img src="assets/iphone_12x16.png" alt="Email" /> +33 (0)2 23 23 86 79<br />
+		<img src="assets/at_16x16.png" alt="Email" /> marin.bertier@irisa.fr<br />
+	</p>
+	<h3>
+	 Responsabilités
+	</h3>
+	<p>
+		&raquo; <a href="">C#</a> &raquo; <a href="">Systèmes d'exploitation</a>
+	</p>
+</aside>
+
+<% @semesters.each do |sem| %>
+
+	<h2>Semestre <%= sem[:id] %></h2>
+
+	<% if sem[:courses].empty? %>
+    <p style="margin: 1em; padding: 0.5em; background-color: #EEE; border-radius: 6px; width: 35em;" class="informations">Aucune matière n'a été ajoutée pour ce semestre.</p>
+	<% else %>
+		<div class="courses">
+
+			<% sem[:courses].each do |course| %>
+
+				<% css_class = (course[:postulants].count > 1) ? "warning" : (course[:postulants].count > 0) ? "valid" : "nobody" %>
+				<% img_prefix = (css_class == "warning" || css_class == "valid") ? "white_" : "" %>
+				<article class="course <%= css_class %>">
+					<a href="" class="plus"><img src="assets/<%= img_prefix %>plus_alt_16x16.png" alt="+" /></a>
+					<h3><%= course[:name] %></h3>
+
+					<p class="informations">
+						<% if course[:postulants].empty? %>
+							<em>Aucun postulant</em>
+						<% else %>
+							<%= pluralize(course[:postulants].count, "postulant") %>
+						<% end %>
+					</p>
+
+					<div class="details" style="background-color: #FAFAFA; border-radius: 6px; padding: 0.5em; margin-top: 0.5em;">
+						<p style="padding: 0.5em;" class="postulants">
+							<% if course[:postulants].empty? %>
+								<em>Aucun postulant</em>
+							<% else %>
+								<% course[:postulants].each do |p| %>
+									&raquo; <%= link_to p[:name], root_path, :class => 'show_teacher_card' %><br />
+								<% end %>
+							<% end %>
+						</p>
+						<p class="course-actions <%= css_class %>">
+              <a href="" class="button icon user">Choisir un responsable</a>
+              <a href="" class="button icon edit">Modifier</a>
+              <a href="" class="button icon trash">Supprimer</a>
+						</p>
+					</div>
+					
+				</article>
+			<% end %>
+
+		</div>
+	<% end %>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Course', new_course_path %>
+</div>
