@@ -1,7 +1,7 @@
 require_relative '../spec_helper_lite.rb'
 require_relative '../../app/models/school_year_manager.rb'
 
-describe SchoolYearManager.instance do
+describe SchoolYearManager do
 
   before do
     SchoolYearManager.instance.clear
