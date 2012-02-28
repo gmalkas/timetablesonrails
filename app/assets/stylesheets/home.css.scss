@@ -1,3 +1,110 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  padding: 0;
+  background-image: url('/assets/background.png');
+}
+
+#logo {
+  margin: auto;
+  text-align: center;
+  width: 256px;
+  height: 96px;
+}
+
+#form {
+  padding: 10% 0;
+}
+
+#sign_in {
+
+  display: table;
+  margin: 1em auto;
+  padding: 1em;
+  background-color: #FBFBFB;
+  box-shadow: 0 0 3px 3px #EEE;
+
+  header {
+    h1 {
+      font-size: 1.25em;
+      font-family: helvetica, arial, sans-serif;
+      text-align: left;
+      color: #2B2B2B;
+    }
+  }
+
+  form {
+
+    .field, .labeled_field {
+      margin: 1em;
+
+      .description {
+        font-size: 0.75em;
+        text-align: right;
+        width: 26.75em;
+        margin: 0.5em 0 1.5em 0;
+      }
+
+      .error {
+        color: #A62F00;
+        font-weight: bold;
+      }
+
+      input[type=text], input[type=password], input[type=email], textarea {
+        border: none;
+        background-color: #F3F3F3;
+        height: 2em;
+        text-indent: 2px;
+        width: 22em;
+        border: 1px solid #EAEAEA;
+      }
+
+      input[type=text]:focus, input[type=password]:focus {
+        background-color: #B4F4BF; /* Valid field */
+        background-color: #EF8A62; /* Error field */
+        background-color: #E9E9E9; /* Normal field */
+      }
+
+    }
+
+    .labeled_field {
+      
+      label {
+        font-size: 0.875em;
+        color: #2B2B2B;
+      }
+
+      input[type=checkbox] {
+        vertical-align: middle;
+      }
+
+    }
+
+    .actions {
+      text-align: right;
+      margin: 0 1em;
+    }
+
+    input[type=submit] {
+      border-radius: 12px;
+      border: none;
+      background-color: #043E6B; /* Error */
+      color: #FFF;
+      padding: 0.25em 0.5em;
+      cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+      background-color: #A62F00;
+      background-color: #007C21; /* Valid form */
+    }
+
+    hr {
+      border: none;
+      border-bottom: 4px solid #A62F00;
+      height: 2px;
+      margin: 1em 0;
+    }
+  }
+}
