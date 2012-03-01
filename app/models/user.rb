@@ -1,11 +1,5 @@
-class User
-  attr_accessor :name, :username, :password_digest
+class User < ActiveRecord::Base
+  attr_accessible :username, :name, :email, :session_token
 
-  def initialize(attributes={})
-    attributes.each do |key, value|
-      send "#{key}=", value 
-    end
-  end
-
-
+  has_secure_password
 end
