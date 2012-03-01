@@ -7,6 +7,10 @@
     <header>
       <h1>Connectez-vous pour continuer</h1>
     </header>
+    
+    <p style="margin: 0.5em; padding: 0.5em;">
+      <%= current_user.name if current_user %>
+    </p>
 
     <%= form_tag do |t| %>
       <div class="fields">
