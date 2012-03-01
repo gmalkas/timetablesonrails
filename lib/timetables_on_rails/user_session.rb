@@ -10,6 +10,7 @@ module TimetablesOnRails
     def create(user, permanent=false)
       @session.create permanent
       user.session_token = @session.token
+      user.save!
     end
 
     def create_permanent
@@ -29,16 +30,17 @@ module TimetablesOnRails
     end
 
     def current_user
-      @current_user || recover_from_cookies
+      @current_user || retrieve_user
     end
 
     private
 
-    def recover_from_cookies
+    def retrieve_user
       begin
-        @current_user ||= User.find_by_session_token @session.token if @session.active? or @session.permanent?
+        @current_user ||= User.find_by_session_token! @session.token if @session.active? or @session.permanent?
       rescue ActiveRecord::RecordNotFound
         destroy
+        nil
       end
     end
 

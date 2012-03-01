@@ -1,3 +1,5 @@
+require_relative './token'
+
 module TimetablesOnRails
   class Session
 

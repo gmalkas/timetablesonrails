@@ -7,15 +7,17 @@
     <header>
       <h1>Connectez-vous pour continuer</h1>
     </header>
-    
-    <p style="margin: 0.5em; padding: 0.5em;">
-      <%= current_user.name if current_user %>
-    </p>
 
-    <%= form_tag do |t| %>
+    <% if @sign_in_error %>
+      <p class="error">
+        <%= @sign_in_error %>
+      </p>
+    <% end %>
+
+    <%= form_tag sign_in_path do |t| %>
       <div class="fields">
         <div class="field">
-          <%= text_field_tag :username, "", placeholder: "Nom d'utilisateur" %><br />
+          <%= text_field_tag :username, params[:username], placeholder: "Nom d'utilisateur" %><br />
         </div>
         <div class="field">
           <%= password_field_tag :password, "", placeholder: "Mot de passe" %>
@@ -27,7 +29,8 @@
       </div>
 
       <div class="labeled_field">
-        <input type="checkbox" id="remember_me" /> <label for="remember_me">Se souvenir de moi</label>
+        <%= check_box_tag :remember_me %>
+        <label for="remember_me">Se souvenir de moi</label>
       </div>
     <% end %>
   </section>
