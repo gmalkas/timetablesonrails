@@ -1,6 +1,6 @@
-require_relative '../spec_helper_lite'
-require_relative '../../lib/user_authentification'
-require_relative '../../lib/password_hasher'
+require_relative '../../spec_helper_lite'
+require_relative '../../../lib/timetablesonrails/user_authentification'
+require_relative '../../../lib/timetablesonrails/password_hasher'
 
 require 'ostruct'
 

@@ -1,5 +1,5 @@
-require_relative '../spec_helper_lite'
-require_relative '../../lib/token'
+require_relative '../../spec_helper_lite'
+require_relative '../../../lib/timetablesonrails/token'
 
 require 'rr'
 
