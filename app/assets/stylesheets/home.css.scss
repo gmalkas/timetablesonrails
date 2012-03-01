@@ -1,9 +1,22 @@
 // Place all the styles related to the home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-body {
+header, section, nav, aside, footer, article {
+	display: block;
+}
+
+* {
+	margin: 0;
   padding: 0;
+}
+
+body {
+	font-size: 100%;
+	font-family: helvetica, verdana, sans-serif;
   background-image: url('/assets/background.png');
+  a {
+    color: #004495;
+  }
 }
 
 #logo {
