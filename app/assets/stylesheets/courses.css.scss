@@ -88,18 +88,23 @@ ul {
   }
 }
 
-.teacher_card {
-  display: none;
+.quick-info {
 
   width: 17em;
-  position: fixed;
+  position: absolute;
   right: 14%;
+
+  margin: 0 1em;
+}
+
+.teacher_card {
+  display: none;
 
   border: 3px solid #DDD;
   border-radius: 6px;
   background-color: #EEE;
 
-  margin: 0 1em;
+  margin-bottom: 1em;
 
   .close_card {
     float: right; 

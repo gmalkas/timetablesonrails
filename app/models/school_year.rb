@@ -41,5 +41,6 @@ class SchoolYear
     semester = Semester.new(name, start_date, end_date)
     semester.school_year = self
     @semesters << semester
+    semester
   end
 end
