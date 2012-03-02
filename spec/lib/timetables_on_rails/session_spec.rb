@@ -1,6 +1,6 @@
 require_relative '../../spec_helper_lite'
-require_relative '../../../lib/timetablesonrails/session'
-require_relative '../../../lib/timetablesonrails/token'
+require_relative '../../../lib/timetables_on_rails/session'
+require_relative '../../../lib/timetables_on_rails/token'
 
 require 'ostruct'
 
