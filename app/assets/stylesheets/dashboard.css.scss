@@ -9,33 +9,6 @@ section.active-year, section.recent-activity {
       color: #0B0B0B;
     }
   }
-}
-
-section.active-year {
-  margin-top: 1em;
-
-  p {
-    display: inline-table;
-
-    margin: 0 0.5em;
-    padding: 0.5em;
-
-    background-color: #FFBF40;
-  }
-
-  p.error {
-    background-color: #A62F00;
-    color: #FFF;
-  }
-
-  p.success {
-    background-color: #3B9F4C;
-    color: #FFF;
-  }
-}
-
-section.recent-activity {
-  margin: 1em 0;
 
   section.utilities {
     float: right;
@@ -60,6 +33,35 @@ section.recent-activity {
   section.utilities:hover {
     opacity: 1;
   }
+}
+
+section.active-year {
+  margin-top: 2em;
+
+  article {
+    p {
+      display: inline-block;
+
+      margin: 0 0.5em;
+      padding: 0.5em;
+
+      background-color: #FFBF40;
+    }
+
+    p.error {
+      background-color: #A62F00;
+      color: #FFF;
+    }
+
+    p.success {
+      background-color: #3B9F4C;
+      color: #FFF;
+    }
+  }
+}
+
+section.recent-activity {
+  margin: 1em 0;
 
   article {
     header {
@@ -136,5 +138,4 @@ section.recent-activity {
       margin-bottom: 1em;
     }
   }
-
 }
