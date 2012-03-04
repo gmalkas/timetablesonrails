@@ -1,106 +1,75 @@
-<header>
+<header> 
   <hgroup>
     <h1>Tableau de bord</h1>
   </hgroup>
 </header>
 
-<hr />
+<section class="utilities">
+  <header>Montrer l'activité depuis</header>
+  <p>
+    &raquo; <a href="">1 semaine</a>
+    &rarr; <span style="font-style: italic;">2 semaines</span>
+    &raquo; <a href="">1 mois</a>
+    &raquo; <a href="">3 mois</a>
+  </p>
+</section>
 
-<aside class="quick-info">
-  <section class="teacher_card" style="display: block;">
-    <header>
-      <h1>2011 - 2012</h1>
-      <h2 style="font-size: 0.75em; letter-spacing: 0;">En cours</h2>
-    </header>
-    <p class="contact_information" style="color: #AB592B; cursor: pointer;">
-      4 U.E non validées	
-    </p>
-    <p>
-    &raquo; <a href="">C#</a><br /> &raquo; <a href="">Systèmes d'exploitation</a> <br />
-    &raquo; <a href="">Logique séquentielle</a> <br />&raquo; <a href="">Assembleur</a>
-    </p>
-    <p class="contact_information" style=" font-weight: normal; cursor: pointer; background-color: #E9E9E9;">
-      23 U.E validées &rarr;
-    </p>
-  </section>
-
-  <section class="teacher_card" style="display: block;">
-    <header>
-      <h1>Archives</h1>
-      <h2 style="font-size: 0.75em; letter-spacing: 0;">Les 3  dernières archives</h2>
-    </header>
-    <p class="contact_information" style=" font-weight: normal; font-size: 0.75em; cursor: pointer; background-color: #E9E9E9;">
-      &raquo; <a href="">2010 - 2011</a> <br />
-      &raquo; <a href="">2009 - 2010</a> <br />
-      &raquo; <a href="">2008 - 2009</a> <br />
-    </p>
-    <p class="contact_information" style="text-align: right; font-size: 0.75em; font-weight: normal; cursor: pointer; background-color: #E9E9E9;">
-      <a href="">Tous les archives &rarr;</a>
-    </p>
-  </section>
-</aside>
-
-<section class="courses" style="min-height: 54em;">
+<section class="recent-activity">
   <header>
-    <h2 style="margin-bottom: 0.5em;">Activité récente</h2>
+    <h1>Lundi 5 Mars</h1>
   </header>
-  
-  <h3>Aujourd'hui</h3>
 
-  <article class="course" style="margin-left: 0;">
-    <h3 style="font-size: 1em; font-weight: normal;"><a href="">M. Bertier</a> a postulé pour gérer <a href="">Logique séquentielle</a></h3>
+  <ol>
+    <li class="event error">
+      <time datetime="2012-03-05T11:16:45">10h16</time>
+      <a href="">M. Bertier</a> a postulé pour gérer <a href="">Programmation Orientée Objet</a> (3 candidats)
+    </li>
 
-    <p class="informations">
-    </p>
+    <li class="event">
+      <time datetime="2012-03-05T11:16:45">10h02</time>
+      <a href="">I. Leplumey</a> a postulé pour gérer <a href="">Langage C</a>
+    </li>
 
-    <div class="details" style="background-color: #FAFAFA; border-radius: 6px; padding: 0.5em; margin-top: 0.5em;">
-      <p style="padding: 0.5em;" class="postulants">
-      </p>
-      <p class="course-actions">
-        <a href="" class="button icon user">Choisir un responsable</a>
-        <a href="" class="button icon edit">Modifier</a>
-        <a href="" class="button icon trash">Supprimer</a>
-      </p>
-    </div>
-    
-  </article>
+    <li class="event">
+      <time datetime="2012-03-05T11:16:45">08h35</time>
+      <a href="">L. Marchand</a> a postulé pour gérer <a href="">Assembleur</a>
+    </li>
+  </ol>
 
-  <article class="course" style="margin-left: 0;">
-    <h3 style="font-size: 1em; font-weight: normal;"><a href="">M. Bertier</a> a postulé pour gérer <a href="">Logique séquentielle</a></h3>
+  <header>
+    <h1>Vendredi 2 Mars</h1>
+  </header>
 
-    <p class="informations">
-    </p>
+  <ol>
+    <li class="event">
+      <time datetime="2012-03-05T11:16:45">15h26</time>
+      <a href="">I. Leplumey</a> a ajouté <a href="">2 activités</a> à <a href="">F.U.S</a>
+    </li>
+  </ol>
 
-    <div class="details" style="background-color: #FAFAFA; border-radius: 6px; padding: 0.5em; margin-top: 0.5em;">
-      <p style="padding: 0.5em;" class="postulants">
-      </p>
-      <p class="course-actions">
-        <a href="" class="button icon user">Choisir un responsable</a>
-        <a href="" class="button icon edit">Modifier</a>
-        <a href="" class="button icon trash">Supprimer</a>
-      </p>
-    </div>
-    
-  </article>
+  <header>
+    <h1>Jeudi 1 Mars</h1>
+  </header>
 
-  <h3>Lundi 5 Mars</h3>
+  <ol class="last">
+    <li class="event success">
+      <time datetime="2012-03-05T11:16:45">17h46</time> 
+      <a href="">B. Arnaldi</a> a validé <a href="">Logique séquentielle</a>
+    </li>
 
-  <article class="course" style="margin-left: 0;">
-    <h3 style="font-size: 1em; font-weight: normal;"><a href="">M. Bertier</a> a postulé pour gérer <a href="">Logique séquentielle</a></h3>
+    <li class="event">
+      <time datetime="2012-03-05T11:16:45">17h22</time>
+      <a href="">I. Leplumey</a> a postulé pour gérer <a href="">Langages de script</a>
+    </li>
 
-    <p class="informations">
-    </p>
+    <li class="event error">
+      <time datetime="2012-03-05T11:16:45">15h12</time>
+      <a href="">C. Raymond</a> a postulé pour gérer <a href="">TP</a> de <a href="">Langage C</a> (5 candidats)
+    </li>
 
-    <div class="details" style="background-color: #FAFAFA; border-radius: 6px; padding: 0.5em; margin-top: 0.5em;">
-      <p style="padding: 0.5em;" class="postulants">
-      </p>
-      <p class="course-actions">
-        <a href="" class="button icon user">Choisir un responsable</a>
-        <a href="" class="button icon edit">Modifier</a>
-        <a href="" class="button icon trash">Supprimer</a>
-      </p>
-    </div>
-    
-  </article>
-
+    <li class="event">
+      <time datetime="2012-03-05T11:16:45">09h25</time>
+      <a href="">L. Marchand</a> a postulé pour gérer <a href="">Projet Compilateur</a>
+    </li>
+  </ol>
 </section>
