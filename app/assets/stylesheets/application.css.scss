@@ -24,6 +24,33 @@ body {
     width: 60em;
 		height: 6em;
 		margin: 1em auto 0 auto;
+
+    nav {
+      float: right;
+
+      margin: 9% 1em;
+
+      color: #DDD;
+
+      opacity: 0.3;
+
+      a {
+        margin: 0 0.25em;
+        font-size: 0.875em;
+      }
+
+      a:hover {
+        color: #1C4270;
+      }
+
+      a#sign_out:hover {
+        color: #AB592B;
+      }
+    }
+
+    nav:hover {
+      opacity: 1;
+    }
 	}
 
   // Main content

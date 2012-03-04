@@ -9,6 +9,15 @@
 </head>
 <body>
 	<header>
+    <nav>
+      <%= link_to "Année en cours", root_path %>
+      <%= link_to "Enseignants", root_path %>
+      |
+      <%= link_to "Tableau de bord", root_path %>
+      |
+      <%= link_to "(#{current_user.username})", root_path %>
+      <%= link_to "Déconnexion", sign_out_path, id: "sign_out" %> 
+    </nav>
 		<%= link_to image_tag('logo.png'), root_path, :height => 96, :width => 256 %>
 	</header>
 
