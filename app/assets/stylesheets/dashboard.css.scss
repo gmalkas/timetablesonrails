@@ -1,6 +1,7 @@
 section.utilities {
   float: right;
   margin: 1em;
+  opacity: 0.3;
   font-size: 0.875em;
 
   header {
@@ -15,6 +16,10 @@ section.utilities {
       text-decoration: none;
     }
   }
+}
+
+section.utilities:hover {
+  opacity: 1;
 }
 
 section.recent-activity {
