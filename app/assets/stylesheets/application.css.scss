@@ -43,9 +43,6 @@ body {
         color: #1C4270;
       }
 
-      a#sign_out:hover {
-        color: #AB592B;
-      }
     }
 
     nav:hover {
@@ -87,6 +84,19 @@ body {
         color: #AB592B;
       }
 		}
+
+    > section {
+      > header {
+        h1 {
+          margin-bottom: 0.5em;
+
+          font-weight: normal;
+          font-size: 1.6em;
+
+          color: #0B0B0B;
+        }
+      }
+    }
     
     a {
       color: #004495;
@@ -95,5 +105,10 @@ body {
     a:hover {
       color: #5B8DCA;
     }
+
 	}
+
+  .warning:hover {
+    color: #AB592B;
+  }
 }

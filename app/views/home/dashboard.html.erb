@@ -10,7 +10,7 @@
 
   <section class="utilities">
     <header>
-      <%= link_to "Gestion des années scolaires &rarr;".html_safe, root_path %>
+      <%= link_to "Gestion des années scolaires &rarr;".html_safe, school_years_path %>
     </header>
   </section>
 
@@ -18,11 +18,7 @@
     <h1>Année en cours</h1>
   </header>
 
-  <article>
-    <p>Progression &rarr; 12 / 36</p>
-    <p class="error">4 conflits</p>
-    <p class="success">12 unités d'enseignement validées</p>
-  </article>
+  <%= render 'school_years/active_year' %>
 </section>
 
 <section class="recent-activity">

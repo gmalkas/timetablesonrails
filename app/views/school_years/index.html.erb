@@ -1,8 +1,26 @@
+<% title "Années scolaires" %>
+
 <header>
   <hgroup>
     <h1>Années scolaires</h1>
-    <h2>Administration des années scolaires</h2>
   </hgroup>
 </header>
 
+<section class="active-year">
+  <header>
+    <h1>Année en cours</h1>
+  </header>
 
+  <%= render 'school_years/active_year' %>
+</section>
+
+<section class="archives">
+  <header>
+    <h1>Archives</h1>
+  </header>
+
+  <ol>
+    <li><a href="">2010 - 2011</a> <span class="actions">(<a href="">Activer</a> <a href="">Retirer des archives</a> <a href="" class="warning">Supprimer</a>)</span></li>
+    <li><a href="">2009 - 2010</a> <span class="actions">(<a href="">Activer</a> <a href="">Retirer des archives</a> <a href="" class="warning">Supprimer</a>)</span></li>
+  </ol>
+</section>
