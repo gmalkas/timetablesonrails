@@ -56,3 +56,28 @@ form {
     }
   }
 }
+
+form.inline-form {
+  .field {
+    display: inline-block;
+  }
+
+  input[type=submit] {
+    margin: 0 1em; 
+    padding: 0.25em 0.5em;
+
+    border: none;
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    background-color: #043E6B; /* Error */
+
+    color: #FFF;
+  }
+
+  input[type=submit]:hover {
+    background-color: #A62F00;
+    background-color: #007C21; /* Valid form */
+  }
+}

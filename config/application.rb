@@ -64,5 +64,10 @@ module Timetablesonrails
       g.test_framework  false 
       g.stylesheets     false
     end
+    
+		# Disable form error messages
+		ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
+			html_tag.html_safe
+		end
   end
 end

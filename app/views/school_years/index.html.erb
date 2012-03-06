@@ -6,21 +6,90 @@
   </hgroup>
 </header>
 
-<section class="active-year">
-  <header>
-    <h1>Année en cours</h1>
-  </header>
+<%= render 'shared/flash_messages' %>
 
-  <%= render 'school_years/active_year' %>
-</section>
+<% if @active_school_year %>
+  <section class="active-year">
+    <section class="utilities nav-tools">
+      <header>
+        ( <%= link_to "Archiver", archive_school_year_path(@active_school_year), method: :post %>
+        <%= link_to "Désactiver", disable_school_year_path(@active_school_year), method: :post %>
+        <%= link_to "Supprimer", @active_school_year, method: :destroy, class: 'warning' %> )
+      </header>
+    </section>
+
+    <header>
+      <h1>Année en cours / <%= @active_school_year %></h1>
+    </header>
+
+    <%= render 'school_years/active_year', school_year: @active_school_year %>
+  </section>
+<% end %>
 
 <section class="archives">
   <header>
     <h1>Archives</h1>
   </header>
 
-  <ol>
-    <li><a href="">2010 - 2011</a> <span class="actions">(<a href="">Activer</a> <a href="">Retirer des archives</a> <a href="" class="warning">Supprimer</a>)</span></li>
-    <li><a href="">2009 - 2010</a> <span class="actions">(<a href="">Activer</a> <a href="">Retirer des archives</a> <a href="" class="warning">Supprimer</a>)</span></li>
-  </ol>
+  <% if @archived_school_years.any? %>
+    <ol>
+      <% @archived_school_years.each do |sc| %>
+        <li>
+          <%= link_to sc, sc %>
+          <span class="actions">
+            (<%= link_to "Activer", activate_school_year_path(sc), method: :post %> 
+            <%= link_to "Retirer des archives", remove_from_archive_school_year_path(sc), method: :post %>
+            <%= link_to "Supprimer", sc, method: :delete, confirm: 'Êtes-vous sûr de vouloir supprimer cette année scolaire ?', class: 'warning' %>)
+          </span>
+        </li>
+      <% end %>
+    </ol>
+  <% else %>
+    <p class="information">
+      Il n'y a aucune année scolaire archivée.
+    </p>
+  <% end %>
+</section>
+
+<% if @disabled_school_years.any? %>
+  <section class="archives">
+    <header>
+      <h1>Autres</h1>
+    </header>
+
+      <ol>
+        <% @disabled_school_years.each do |sc| %>
+          <li>
+            <%= link_to sc, sc %>
+            <span class="actions">
+              (<%= link_to "Activer", activate_school_year_path(sc), method: :post %> 
+              <%= link_to "Supprimer", sc, method: :delete, confirm: 'Êtes-vous sûr de vouloir supprimer cette année scolaire ?', class: 'warning' %>)
+            </span>
+          </li>
+        <% end %>
+      </ol>
+  </section>
+<% end %>
+
+<section class="new-school-year-form">
+  <header>
+    <h1>Créer une année scolaire</h1>
+  </header>
+
+  <% if @school_year.errors.any? %>
+    <p class="error">
+      <% @school_year.errors[:start_year].each do |e| %>
+        <strong class="error"><%= @school_year.errors.full_message(:start_year, e) %></strong><br />
+      <% end %>
+    </p>
+  <% end %>
+
+  <%= form_for @school_year, html: { class: 'inline-form' } do |t| %>
+    <div class="fields">
+      <div class="field">
+        <%= t.text_field :start_year, placeholder: "Année de départ, e.g 2011" %>
+        <%= submit_tag "Créer &rarr;".html_safe %>
+      </div>
+    </div>
+  <% end %>
 </section>

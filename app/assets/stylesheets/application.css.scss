@@ -108,7 +108,35 @@ body {
 
 	}
 
+  p.error { 
+    margin: 0.5em;
+    padding: 0.5em;
+
+    background-color: #A62F00;
+
+    font-weight: bold;
+    font-size: 0.875em;
+
+    color: #FFF;
+
+    text-align: center;
+  }
+
   .warning:hover {
     color: #AB592B;
+  }
+
+  .success {
+    background-color: #B4F4BF;
+  }
+
+  .notice {
+    margin: 0.5em;
+    padding: 0.5em;
+    
+    background-color: #EEE;
+
+    font-weight: bold;
+    font-size: 0.875em;
   }
 }

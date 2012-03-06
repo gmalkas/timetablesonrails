@@ -65,3 +65,6 @@ $(document).ready(function() {
 	});
 });
 
+$(document).ready(function() {
+  $('.nav-tools').hover(function() { $(this).fadeTo(200, 1); }, function() { $(this).fadeTo(500, 0.3); });
+});
