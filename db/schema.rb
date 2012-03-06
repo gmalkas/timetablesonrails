@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120303115939) do
+ActiveRecord::Schema.define(:version => 20120306170752) do
 
   create_table "candidates_courses", :id => false, :force => true do |t|
     t.integer "candidate_id"
@@ -27,12 +27,12 @@ ActiveRecord::Schema.define(:version => 20120303115939) do
   end
 
   create_table "school_years", :force => true do |t|
-    t.date     "start_year"
-    t.date     "end_year"
     t.boolean  "archived",   :default => false
     t.boolean  "activated",  :default => false
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.date     "start_date"
+    t.date     "end_date"
   end
 
   create_table "semesters", :force => true do |t|

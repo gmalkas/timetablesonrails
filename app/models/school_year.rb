@@ -4,9 +4,10 @@ require_relative './semester'
 class SchoolYear < ActiveRecord::Base
 
   # === DATA ===
-  attr_accessible :start_year, :end_year, :archived, :activated
+  attr_accessor :start_year
+  attr_accessible :start_date, :end_date
 
-  validates :start_year, :end_year, presence: true, uniqueness: true
+  validates :start_date, :end_date, presence: true, uniqueness: true
   
   has_many :semesters, dependent: :destroy
 
@@ -44,11 +45,11 @@ class SchoolYear < ActiveRecord::Base
   end
 
   def to_s
-    "#{self.start_year.year} - #{self.end_year.year}"
+    "#{self.start_date.year} - #{self.end_date.year}"
   end
 
   def to_param
-    self.start_year.year.to_s
+    self.start_date.year.to_s
   end
 
   protected

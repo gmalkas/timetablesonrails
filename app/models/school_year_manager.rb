@@ -13,7 +13,7 @@ class SchoolYearManager
     return SchoolYear.new if year.nil?
 
     starting_day = (year.is_a? Date) ? year : start_date_from_year(year)
-    school_year = SchoolYear.new(start_year: starting_day, end_year: starting_day.next_year)
+    school_year = SchoolYear.new(start_date: starting_day, end_date: starting_day.next_year)
     activate_school_year(school_year) if @school_years.empty?
     @school_years << school_year if school_year.valid?
     school_year

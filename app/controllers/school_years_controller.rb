@@ -24,7 +24,7 @@ class SchoolYearsController < ApplicationController
     school_year = SchoolYearManager.instance.find! params[:id]
     SchoolYearManager.instance.activate_school_year school_year
     flash[:success] = "L'année a été activée."
-    redirect_to school_years_path, success:
+    redirect_to school_years_path
   end
 
   def disable
