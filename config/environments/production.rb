@@ -19,6 +19,9 @@ Timetablesonrails::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+  
+  # Include stylesheet
+  config.assets.precompile += ['home.css']
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH

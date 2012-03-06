@@ -1,0 +1,14 @@
+<% title "Accès non autorisé", "Erreur 401" %>
+<header>
+  <hgroup>
+	  <h1>Erreur 401 : Accès non autorisé</h1>
+		<h2>Vous n'avez pas les autorisations nécessaires pour accéder à cette page</h2>
+	</hgroup>
+</header>
+
+<% if !current_user %>
+	<p class="notice centered">
+		<%= link_to 'Connectez-vous', signin_path %> avant de poursuivre
+		votre visite.
+	</p>
+<% end %>

@@ -1,9 +1,21 @@
-class Semester
-  attr_accessor :name, :start, :end, :school_year
+class Semester < ActiveRecord::Base
 
-  def initialize(name="", start_date=Time.now, end_date=Time.now)
-    @name = name
-    @start = start_date
-    @end = end_date
+  # === DATA ===
+  attr_accessible :name, :start_date, :end_date
+
+  validates_presence_of :name, :start_date, :end_date
+  validates :school_year_id, presence: true
+
+  belongs_to :school_year
+  has_many :courses
+
+  # === BEHAVIOR ===
+  
+  def new_course(name)
+    course = Course.new name: name
+    course.semester = self
+    self.courses << course if course.valid?
+    course
   end
+
 end

@@ -1,7 +1,7 @@
 Timetablesonrails::Application.routes.draw do
   get 'administration' => 'administration#dashboard', as: 'dashboard'
-  get 'home/index'
-  get 'courses' => 'school_years#index'
+  post '/' => 'home#sign_in', as: 'sign_in'
+  get '/deconnexion' => 'home#sign_out', as: 'sign_out'
 
   root :to => 'home#index'
 end

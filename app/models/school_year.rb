@@ -1,45 +1,54 @@
 require 'date'
 require_relative './semester'
 
-class SchoolYear
-  attr_accessor :start, :end
+class SchoolYear < ActiveRecord::Base
 
-  def initialize(start_date=Date.new(Time.now.year), end_date=start_date)
-    @archived = false
-    @activated = false
-    @semesters = []
-    @start = start_date
-    @end = end_date
-  end
+  # === DATA ===
+  attr_accessible :start_year, :end_year, :archived, :activated
+
+  validates :start_year, :end_year, presence: true, uniqueness: true
+  
+  has_many :semesters, dependent: :destroy
+
+  after_create :create_default_semesters
+
+  # === BEHAVIOR ===
 
   def archive!
-    @archived = true
+    self.archived = true
+    self.disable!
   end
 
   def archived?
-    @archived
+    self.archived
   end
 
   def activate!
-    @archived = false
-    @activated = true
+    self.archived = false
+    self.activated = true
   end
 
   def disable!
-    @activated = false
+    self.activated = false
   end
 
   def activated?
-    @activated
-  end
-
-  def semesters
-    @semesters
+    self.activated
   end
 
   def new_semester(name, start_date, end_date)
-    semester = Semester.new(name, start_date, end_date)
+    semester = Semester.new name: name, start_date: start_date, end_date: end_date
     semester.school_year = self
-    @semesters << semester
+    self.semesters << semester if semester.valid?
+    semester
+  end
+
+  protected
+
+  def create_default_semesters
+    new_semester "Semestre 5", Date.new(start_year.year, 9, 14),
+                               Date.new(end_year.year, 2, 14)
+    new_semester "Semestre 6", Date.new(end_year.year, 2, 15),
+                               Date.new(end_year.year, 6, 15)
   end
 end
