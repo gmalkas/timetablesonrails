@@ -65,7 +65,7 @@ body {
 
 			h1 {
         padding: 0 0 0.25em 0;
-        margin-bottom: 0.25em;
+        margin-bottom: 1em;
 
         border-bottom: 3px double #081111;
 
@@ -122,15 +122,11 @@ body {
     text-align: center;
   }
 
-  .warning:hover {
-    color: #AB592B;
-  }
-
-  .success {
+  p.success {
     margin: 0.5em;
     padding: 0.5em;
     
-    background-color: #B4F4BF;
+    background-color: #3B9F4C;
 
     color: #FFF;
 
@@ -138,13 +134,22 @@ body {
     font-size: 0.875em;
   }
 
-  .notice {
+  p.notice {
     margin: 0.5em;
-    padding: 0.5em;
+    padding: 0.5em 1em;
     
     background-color: #EEE;
 
-    font-weight: bold;
+    color: #2B2B2B;
+
     font-size: 0.875em;
+    font-weight: normal;
+
+    text-shadow: 0 1px 0 #FFF;
   }
+
+  .warning:hover {
+    color: #AB592B;
+  }
+
 }

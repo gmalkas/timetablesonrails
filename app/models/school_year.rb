@@ -20,6 +20,10 @@ class SchoolYear < ActiveRecord::Base
     self.disable!
   end
 
+  def restore!
+    self.archived = false
+  end
+
   def archived?
     self.archived
   end
@@ -55,9 +59,9 @@ class SchoolYear < ActiveRecord::Base
   protected
 
   def create_default_semesters
-    new_semester "Semestre 5", Date.new(start_year.year, 9, 14),
-                               Date.new(end_year.year, 2, 14)
-    new_semester "Semestre 6", Date.new(end_year.year, 2, 15),
-                               Date.new(end_year.year, 6, 15)
+    new_semester "Semestre 5", Date.new(start_date.year, 9, 14),
+                               Date.new(end_date.year, 2, 14)
+    new_semester "Semestre 6", Date.new(end_date.year, 2, 15),
+                               Date.new(end_date.year, 6, 15)
   end
 end

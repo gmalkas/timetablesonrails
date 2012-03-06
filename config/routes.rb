@@ -8,7 +8,7 @@ Timetablesonrails::Application.routes.draw do
         post 'activer' => 'school_years#activate', as: 'activate'
         post 'desactiver' => 'school_years#disable', as: 'disable'
         post 'archiver' => 'school_years#archive', as: 'archive'
-        post 'desarchiver' => 'school_years#remove_from_archive', as: 'remove_from_archive'
+        post 'desarchiver' => 'school_years#restore', as: 'restore'
       end
     end
   end

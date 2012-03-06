@@ -8,13 +8,19 @@
 
 <%= render 'shared/flash_messages' %>
 
+<% if @school_years.empty? %>
+  <p class="notice">
+    Il n'y a aucune année scolaire. Vous pouvez en créer une à l'aide du formulaire présent sur cette page.
+  </p>
+<% end %>
+
 <% if @active_school_year %>
   <section class="active-year">
     <section class="utilities nav-tools">
       <header>
         ( <%= link_to "Archiver", archive_school_year_path(@active_school_year), method: :post %>
         <%= link_to "Désactiver", disable_school_year_path(@active_school_year), method: :post %>
-        <%= link_to "Supprimer", @active_school_year, method: :destroy, class: 'warning' %> )
+        <%= link_to "Supprimer", @active_school_year, method: :delete, confirm: 'Êtes-vous sûr de vouloir supprimer cette année scolaire ?', class: 'warning' %> )
       </header>
     </section>
 
@@ -26,30 +32,26 @@
   </section>
 <% end %>
 
-<section class="archives">
-  <header>
-    <h1>Archives</h1>
-  </header>
+<% if @archived_school_years.any? %>
+  <section class="archives">
+    <header>
+      <h1>Archives</h1>
+    </header>
 
-  <% if @archived_school_years.any? %>
     <ol>
       <% @archived_school_years.each do |sc| %>
         <li>
           <%= link_to sc, sc %>
           <span class="actions">
             (<%= link_to "Activer", activate_school_year_path(sc), method: :post %> 
-            <%= link_to "Retirer des archives", remove_from_archive_school_year_path(sc), method: :post %>
+            <%= link_to "Retirer des archives", restore_school_year_path(sc), method: :post %>
             <%= link_to "Supprimer", sc, method: :delete, confirm: 'Êtes-vous sûr de vouloir supprimer cette année scolaire ?', class: 'warning' %>)
           </span>
         </li>
       <% end %>
     </ol>
-  <% else %>
-    <p class="information">
-      Il n'y a aucune année scolaire archivée.
-    </p>
-  <% end %>
-</section>
+  </section>
+<% end %>
 
 <% if @disabled_school_years.any? %>
   <section class="archives">
@@ -78,8 +80,8 @@
 
   <% if @school_year.errors.any? %>
     <p class="error">
-      <% @school_year.errors[:start_year].each do |e| %>
-        <strong class="error"><%= @school_year.errors.full_message(:start_year, e) %></strong><br />
+      <% @school_year.errors[:start_date].each do |e| %>
+        <strong class="error"><%= @school_year.errors.full_message(:start_date, e) %></strong><br />
       <% end %>
     </p>
   <% end %>

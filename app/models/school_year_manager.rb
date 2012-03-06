@@ -6,22 +6,26 @@ class SchoolYearManager
   include Singleton
 
   def initialize
-    @active = nil
+    load_school_years
   end
 
-  def new_school_year(year=nil)
-    return SchoolYear.new if year.nil?
+  def build_school_year(year=nil)
+    return SchoolYear.new if year.blank?
 
     starting_day = (year.is_a? Date) ? year : start_date_from_year(year)
-    school_year = SchoolYear.new(start_date: starting_day, end_date: starting_day.next_year)
-    activate_school_year(school_year) if @school_years.empty?
+    SchoolYear.new(start_date: starting_day, end_date: starting_day.next_year)
+  end
+
+  def new_school_year(school_year)
+    activate_school_year(school_year) if @active.nil?
     @school_years << school_year if school_year.valid?
+    school_year.save!
     school_year
   end
 
   def school_years
     load_school_years
-    @school_years.sort { |s1, s2| s1.start_year.year <=> s2.start_year.year } 
+    @school_years.sort { |s1, s2| s1.start_date.year <=> s2.start_date.year } 
   end
 
   def clear
@@ -29,7 +33,7 @@ class SchoolYearManager
   end
 
   def find!(start_year)
-    SchoolYear.find_by_start_year! start_date_from_year(start_year)
+    SchoolYear.find_by_start_date! start_date_from_year(start_year)
   end
 
   def activate_school_year(school_year)
@@ -48,6 +52,16 @@ class SchoolYearManager
     @active = nil
   end
 
+  def archive_school_year(school_year)
+    school_year.archive!
+    school_year.save!
+  end
+
+  def restore_school_year(school_year)
+    school_year.restore!
+    school_year.save!
+  end
+
   def destroy_school_year(school_year)
     school_year.destroy
   end
@@ -60,7 +74,7 @@ class SchoolYearManager
   
   def load_school_years
     @school_years = SchoolYear.all
-    @active ||= @school_years.select { |s_y| s_y.activated? }.first
+    @active = @school_years.select { |s_y| s_y.activated? }.first
   end
 
   def start_date_from_year(year)

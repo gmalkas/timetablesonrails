@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
   def index
     if current_user
+      @active_school_year = SchoolYearManager.instance.active_school_year
       render 'dashboard'
     else
       render 'index', :layout => 'sign_in'

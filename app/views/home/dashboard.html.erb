@@ -14,11 +14,13 @@
     </header>
   </section>
 
-  <header>
-    <h1>Année en cours / 2011 - 2012</h1>
-  </header>
+  <% if @active_school_year %>
+    <header>
+      <h1>Année en cours / <%= @active_school_year %></h1>
+    </header>
 
-  <%= render 'school_years/active_year' %>
+    <%= render 'school_years/active_year', school_year: @active_school_year %>
+  <% end %>
 </section>
 
 <section class="recent-activity">
