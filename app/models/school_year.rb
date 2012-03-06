@@ -43,6 +43,14 @@ class SchoolYear < ActiveRecord::Base
     semester
   end
 
+  def to_s
+    "#{self.start_year.year} - #{self.end_year.year}"
+  end
+
+  def to_param
+    self.start_year.year.to_s
+  end
+
   protected
 
   def create_default_semesters

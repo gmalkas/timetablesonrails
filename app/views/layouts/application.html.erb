@@ -2,20 +2,22 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<title><%= content_for?(:title) ? yield(:title) : "" %> TimetablesOnRails</title>
-	<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Ressources dédiées à l'apprentissage et au perfectionnement des techniques et outils de développement informatique." %>" />
+	<title><%= content_for?(:title) ? yield(:title) : "" %> - TimetablesOnRails</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 	<header>
-	  <section>
-      <nav>
-        <%= link_to "Tableau de bord", root_path %> |
-        <%= link_to "Déconnexion", sign_out_path, :id => "signout_link", :class => "last" %>
-      </nav>
-		</section>
+    <nav class="nav-tools">
+      <%= link_to "Année en cours", root_path %>
+      <%= link_to "Enseignants", root_path %>
+      |
+      <%= link_to "Tableau de bord", root_path %>
+      |
+      <%= link_to "(#{current_user.username})", root_path %>
+      <%= link_to "Déconnexion", sign_out_path, class: "warning" %> 
+    </nav>
 		<%= link_to image_tag('logo.png'), root_path, :height => 96, :width => 256 %>
 	</header>
 

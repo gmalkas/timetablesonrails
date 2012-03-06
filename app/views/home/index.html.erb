@@ -1,9 +1,9 @@
-<section id="form">
+<section id="sign_in">
   <header id="logo">
-    <%= image_tag "logo.png", width: "256px", height: "96px" %>
+    <%= image_tag "logo.png", width: "256", height: "96" %>
   </header>
 
-  <section id="sign_in">
+  <section id="sign_in_form">
     <header>
       <h1>Connectez-vous pour continuer</h1>
     </header>
@@ -24,18 +24,18 @@
         </div>
       </div>
 
-      <div style="float: right;" class="actions">
+      <div class="actions">
         <%= submit_tag "Connexion &rarr;".html_safe %>
       </div>
 
-      <div class="labeled_field">
+      <div class="field">
         <%= check_box_tag :remember_me %>
         <label for="remember_me">Se souvenir de moi</label>
       </div>
     <% end %>
   </section>
 
-  <section style="text-align: center; font-size: 0.875em; color: #2B2B2B;" id="help">
-    <p>Besoin d'aide ? <a href="">Contacter le responsable technique</a></p>
+  <section id="help_message">
+    <p>Besoin d'aide ? <a href="mailto:gabriel.malkas@insa-rennes.fr">Contacter le responsable technique</a></p>
   </section>
 </section>

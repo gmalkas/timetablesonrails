@@ -1,0 +1,33 @@
+section.archives {
+  margin: 1em 0;
+
+  ol {
+    li {
+      list-style-type: none;
+
+      .actions {
+        visibility: hidden;
+
+        a {
+          margin: 0 0.25em;
+          font-size: 0.875em;
+        }
+      }
+    }
+
+    li:hover {
+      .actions {
+        visibility: visible;
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+section.new-school-year-form {
+  header {
+    h1 {
+      margin: 0;
+    }
+  }
+}
