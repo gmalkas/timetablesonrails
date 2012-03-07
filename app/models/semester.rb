@@ -7,7 +7,7 @@ class Semester < ActiveRecord::Base
   validates :school_year_id, presence: true
 
   belongs_to :school_year
-  has_many :courses, dependent: :destroy
+  has_many :courses
 
   # === BEHAVIOR ===
   
