@@ -43,6 +43,7 @@ class SchoolYearManager
     end
     school_year.activate!
     school_year.save!
+    load_school_years
     @active = school_year 
   end
 
@@ -64,9 +65,11 @@ class SchoolYearManager
 
   def destroy_school_year(school_year)
     school_year.destroy
+    load_school_years
   end
 
   def active_school_year
+    load_school_years
     @active 
   end
 

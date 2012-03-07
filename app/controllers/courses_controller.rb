@@ -1,79 +1,54 @@
 # encoding: utf-8
 class CoursesController < ApplicationController
-  # GET /courses
-  # GET /courses.json
+
+  before_filter :load_active_year
+
   def index
-    @courses = Course.all
-  end
-
-  # GET /courses/1
-  # GET /courses/1.json
-  def show
-    @course = Course.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @course }
-    end
-  end
-
-  # GET /courses/new
-  # GET /courses/new.json
-  def new
     @course = Course.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @course }
-    end
   end
 
-  # GET /courses/1/edit
-  def edit
-    @course = Course.find(params[:id])
-  end
-
-  # POST /courses
-  # POST /courses.json
   def create
-    @course = Course.new(params[:course])
+    @course = @active_school_year.find_semester(params[:semester_id]).new_course(params[:course][:name])
 
-    respond_to do |format|
-      if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
-        format.json { render json: @course, status: :created, location: @course }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
+    if @course.save
+      flash[:success] = "#{@course.name} a été ajouté avec succès au semestre #{@course.semester.name}."
+      redirect_to active_school_year_path
+    else
+      render 'index'
     end
   end
 
-  # PUT /courses/1
-  # PUT /courses/1.json
-  def update
-    @course = Course.find(params[:id])
+  def choose_course_manager
+    course = Course.find_by_id params[:id]
+    candidate = course.candidates.find params[:candidate]
+    course.assign! candidate
+    course.save!
 
-    respond_to do |format|
-      if @course.update_attributes(params[:course])
-        format.html { redirect_to @course, notice: 'Course was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
-    end
+    flash[:success] = "#{candidate.name} est désormais responsable de l'U.E #{course.name}."
+    redirect_to active_school_year_path
   end
 
-  # DELETE /courses/1
-  # DELETE /courses/1.json
+  def dismiss_candidate
+    course = Course.find_by_id params[:id]
+    candidate = course.candidates.find params[:candidate]
+    course.dismiss_candidate candidate
+    course.save!
+
+    flash[:success] = "#{candidate.name} est a été retiré de la liste de candidature de l'U.E #{course.name}."
+    redirect_to active_school_year_path
+  end
+
   def destroy
-    @course = Course.find(params[:id])
-    @course.destroy
+    course = Course.find_by_id params[:id]
+    course.destroy
+    flash[:success] = "L'unité d'enseignement #{course.name} a été supprimé avec succès."
+    redirect_to active_school_year_path
+  end
 
-    respond_to do |format|
-      format.html { redirect_to courses_url }
-      format.json { head :no_content }
-    end
+  private
+
+  def load_active_year
+    @active_school_year = SchoolYearManager.instance.active_school_year
+    @semesters = @active_school_year.semesters
   end
 end

@@ -40,6 +40,10 @@ class Course < ActiveRecord::Base
   def dismiss_candidates
     self.candidates.clear
   end
+
+  def conflict?
+    self.candidates.count > 1 
+  end
   
   # === Exceptions ===
   class CourseAlreadyAssignedException < StandardError; end

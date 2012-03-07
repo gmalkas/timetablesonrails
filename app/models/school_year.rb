@@ -48,6 +48,10 @@ class SchoolYear < ActiveRecord::Base
     semester
   end
 
+  def find_semester(id)
+    Semester.find_by_id(id)
+  end
+
   def to_s
     "#{self.start_date.year} - #{self.end_date.year}"
   end
@@ -59,9 +63,17 @@ class SchoolYear < ActiveRecord::Base
   protected
 
   def create_default_semesters
-    new_semester "Semestre 5", Date.new(start_date.year, 9, 14),
+    new_semester "5", Date.new(start_date.year, 9, 14),
                                Date.new(end_date.year, 2, 14)
-    new_semester "Semestre 6", Date.new(end_date.year, 2, 15),
+    new_semester "6", Date.new(end_date.year, 2, 15),
+                               Date.new(end_date.year, 6, 15)
+    new_semester "7", Date.new(start_date.year, 9, 14),
+                               Date.new(end_date.year, 2, 14)
+    new_semester "8", Date.new(end_date.year, 2, 15),
+                               Date.new(end_date.year, 6, 15)
+    new_semester "9", Date.new(start_date.year, 9, 14),
+                               Date.new(end_date.year, 2, 14)
+    new_semester "10", Date.new(end_date.year, 2, 15),
                                Date.new(end_date.year, 6, 15)
   end
 end

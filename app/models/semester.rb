@@ -18,4 +18,8 @@ class Semester < ActiveRecord::Base
     course
   end
 
+  def courses
+    super.sort { |c1, c2| c1.name <=> c2.name }
+  end
+
 end

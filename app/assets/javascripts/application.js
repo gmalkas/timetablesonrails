@@ -43,14 +43,14 @@ $(document).ready(function() {
 
 	$(".show_form").click(function() {
 		$(this).addClass("disable");
-    $(this).parent().siblings("form").fadeIn(350);
+    $(this).parent().parent().siblings("form").fadeIn(350);
 		$(this).parent().siblings("form").find(".form_name").focus();
 		return false;
 	});
 
 	$(".cancel").click(function() {
-    $(this).parents("form").fadeOut(250);
-		$(this).parents("form").siblings(".add-course").children(".show_form").removeClass("disable");
+    $(this).parents("form").fadeOut(150);
+		$(this).parents(".semester").children('.new-course').children('.add-course').children(".show_form").removeClass("disable");
 		return false;
 	});
 

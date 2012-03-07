@@ -60,10 +60,13 @@ form {
 form.inline-form {
   .field {
     display: inline-block;
+
+    input {
+      margin: 0 0.5em;
+    }
   }
 
   input[type=submit] {
-    margin: 0 1em; 
     padding: 0.25em 0.5em;
 
     border: none;
