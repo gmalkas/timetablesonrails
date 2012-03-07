@@ -1,5 +1,5 @@
 <article>
-  <p>Progression &rarr; 12 / 36</p>
-  <p class="error">4 conflits</p>
-  <p class="success">12 unités d'enseignement validées</p>
+  <p>Progression &rarr; <%= active_school_year.validated_courses.count %> / <%= active_school_year.courses.count %></p>
+  <p class="error"><%= pluralize active_school_year.conflicts.count, "conflit" %> </p>
+  <p class="success"><%= active_school_year.validated_courses.count %> unités d'enseignement validées</p>
 </article>

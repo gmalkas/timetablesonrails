@@ -20,7 +20,7 @@
       <header>
         ( <%= link_to "Archiver", archive_school_year_path(@active_school_year), method: :post %>
         <%= link_to "Désactiver", disable_school_year_path(@active_school_year), method: :post %>
-        <%= link_to "Supprimer", @active_school_year, method: :delete, confirm: 'Êtes-vous sûr de vouloir supprimer cette année scolaire ?', class: 'warning' %> )
+        <%= link_to "Supprimer", @active_school_year, method: :delete, confirm: 'Êtes-vous sûr de vouloir définitivement supprimer cette année scolaire ? Toutes les données associées seront perdues !', class: 'warning' %> )
       </header>
     </section>
 
@@ -28,7 +28,7 @@
       <h1>Année en cours / <%= @active_school_year %></h1>
     </header>
 
-    <%= render 'school_years/active_year', school_year: @active_school_year %>
+    <%= render 'school_years/active_year', active_school_year: @active_school_year %>
   </section>
 <% end %>
 
@@ -45,7 +45,7 @@
           <span class="actions">
             (<%= link_to "Activer", activate_school_year_path(sc), method: :post %> 
             <%= link_to "Retirer des archives", restore_school_year_path(sc), method: :post %>
-            <%= link_to "Supprimer", sc, method: :delete, confirm: 'Êtes-vous sûr de vouloir supprimer cette année scolaire ?', class: 'warning' %>)
+            <%= link_to "Supprimer", sc, method: :delete, confirm: 'Êtes-vous sûr de vouloir définitivement supprimer cette année scolaire ? Toutes les données associées seront perdues !', class: 'warning' %>)
           </span>
         </li>
       <% end %>
@@ -65,7 +65,7 @@
             <%= link_to sc, sc %>
             <span class="actions">
               (<%= link_to "Activer", activate_school_year_path(sc), method: :post %> 
-              <%= link_to "Supprimer", sc, method: :delete, confirm: 'Êtes-vous sûr de vouloir supprimer cette année scolaire ?', class: 'warning' %>)
+              <%= link_to "Supprimer", sc, method: :delete, confirm: 'Êtes-vous sûr de vouloir définitivement supprimer cette année scolaire ? Toutes les données associées seront perdues !', class: 'warning' %>)
             </span>
           </li>
         <% end %>

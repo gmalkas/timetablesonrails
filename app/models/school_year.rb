@@ -10,6 +10,7 @@ class SchoolYear < ActiveRecord::Base
   validates :start_date, :end_date, presence: true, uniqueness: true
   
   has_many :semesters, dependent: :destroy
+  has_many :courses, through: :semesters
 
   after_create :create_default_semesters
 
@@ -50,6 +51,14 @@ class SchoolYear < ActiveRecord::Base
 
   def find_semester(id)
     Semester.find_by_id(id)
+  end
+
+  def conflicts
+    self.courses.select { |c| c.conflict? }
+  end
+
+  def validated_courses
+    self.courses.select { |c| c.assigned? }
   end
 
   def to_s
