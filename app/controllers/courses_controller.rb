@@ -40,6 +40,12 @@ class CoursesController < ApplicationController
     redirect_to active_school_year_path
   end
 
+  def apply
+  end
+
+  def withdraw
+  end
+
   def destroy
     course = Course.find_by_id params[:id]
     course.destroy

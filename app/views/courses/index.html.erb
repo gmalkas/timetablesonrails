@@ -107,7 +107,11 @@
                 <% if current_user.administrator? %>
                   <%= link_to "Supprimer", course, method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
                 <% else %>
-                  
+                  <% if current_user.applied?(course) %>
+                    <%= link_to "Retirer ma candidature", withdraw_course_management_application_path(course), method: :post, class: "button" %>
+                  <% elsif not course.assigned? %>
+                    <%= link_to "Postuler", apply_to_course_management_path(course), method: :post, class: "button" %>
+                  <% end %>
                 <% end %>
               </p>
             </div>

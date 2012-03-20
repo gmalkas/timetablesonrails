@@ -21,4 +21,10 @@ class User < ActiveRecord::Base
     course.dismiss_candidate self
   end
 
+  ##
+  # Checks whether the user has already applied to a given course
+  def applied?(course)
+    courses.include? course
+  end
+
 end

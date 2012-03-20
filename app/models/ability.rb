@@ -7,6 +7,8 @@ class Ability
       can :manage, :all
     else
       can :read, Course
+      can :apply, Course
+      can :withdraw, Course
     end
   end
 end
