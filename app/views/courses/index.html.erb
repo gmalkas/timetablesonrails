@@ -20,6 +20,7 @@
   <% @semesters.each do |sem| %>
 
     <article class="semester">
+
       <% if current_user.administrator? %>
         <section class="new-course">
           <div class="add-course">
@@ -90,10 +91,12 @@
                       <li>
                         <%= link_to p.name, root_path %>
                         <span class="actions">
-                          (
-                          <%= link_to "Désigner responsable", choose_course_manager_path(course, p), method: :post %>
-                          <%= link_to "Supprimer de la liste", dismiss_candidate_path(course, p), method: :post %>
-                          )
+                          <% if current_user.administrator? %>
+                            (
+                            <%= link_to "Désigner responsable", choose_course_manager_path(course, p), method: :post %>
+                            <%= link_to "Supprimer de la liste", dismiss_candidate_path(course, p), method: :post %>
+                            )
+                          <% end %>
                         </span>
                       </li>
                     <% end %>
@@ -101,7 +104,11 @@
                 <% end %>
               </div>
               <p class="actions <%= css_class %>">
-                <%= link_to "Supprimer", course, method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
+                <% if current_user.administrator? %>
+                  <%= link_to "Supprimer", course, method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
+                <% else %>
+                  
+                <% end %>
               </p>
             </div>
             
