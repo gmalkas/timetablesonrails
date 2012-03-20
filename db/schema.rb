@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120306170752) do
+ActiveRecord::Schema.define(:version => 20120320234558) do
 
   create_table "candidates_courses", :id => false, :force => true do |t|
     t.integer "candidate_id"
@@ -47,11 +47,11 @@ ActiveRecord::Schema.define(:version => 20120306170752) do
     t.string   "email"
     t.string   "password_digest"
     t.string   "status"
-    t.boolean  "administrator"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
     t.string   "session_token"
     t.string   "username"
+    t.boolean  "administrator",   :default => false
   end
 
 end
