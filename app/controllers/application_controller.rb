@@ -3,8 +3,9 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
-	rescue_from ActiveRecord::RecordNotFound, :with => :not_found
-	rescue_from Errno::ECONNREFUSED, :with => :unavailable
+	rescue_from ActiveRecord::RecordNotFound, with: :not_found
+	rescue_from Errno::ECONNREFUSED, with: :unavailable
+  rescue_from CanCan::AccessDenied, with: :unauthorized
 
   # Ensure the user is logged in
   before_filter :require_login

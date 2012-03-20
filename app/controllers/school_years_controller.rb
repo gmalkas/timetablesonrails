@@ -3,6 +3,8 @@ class SchoolYearsController < ApplicationController
 
   before_filter :load_school_years
 
+  authorize_resource
+
   rescue_from ActiveRecord::RecordNotFound, :with => :school_year_not_found
 
   def index

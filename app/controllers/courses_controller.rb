@@ -3,6 +3,8 @@ class CoursesController < ApplicationController
 
   before_filter :load_active_year
 
+  authorize_resource
+
   def index
     @course = Course.new
   end

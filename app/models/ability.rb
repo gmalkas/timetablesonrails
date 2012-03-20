@@ -6,7 +6,7 @@ class Ability
     if user.administrator?
       can :manage, :all
     else
-      can :read, :all
+      can :read, Course
     end
   end
 end
