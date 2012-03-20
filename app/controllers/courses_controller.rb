@@ -41,9 +41,30 @@ class CoursesController < ApplicationController
   end
 
   def apply
+    course = Course.find_by_id params[:id]
+
+    unless current_user.applied? course
+      current_user.apply_to_course_management course
+
+      flash[:success] = "Votre candidature à la gestion de l'U.E #{course.name} a été enregistrée."
+      redirect_to active_school_year_path
+    else
+      redirect_to active_school_year_path, alert: "Vous avez déjà postulé à la gestion de l'U.E #{course.name}."
+    end
   end
 
   def withdraw
+    course = Course.find_by_id params[:id]
+    
+    if current_user.applied? course
+      current_user.withdraw_course_management_application course
+
+      flash[:success] = "Votre candidature à la gestion de l'U.E #{course.name} a été retirée."
+      redirect_to active_school_year_path
+    else
+      redirect_to active_school_year_path, alert: "Vous n'avez pas postulé à la gestion de l'U.E #{course.name}."
+    end
+
   end
 
   def destroy
