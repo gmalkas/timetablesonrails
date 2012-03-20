@@ -27,4 +27,7 @@ class User < ActiveRecord::Base
     courses.include? course
   end
 
+  def self.teachers
+    self.where("administrator = ?", false)
+  end
 end

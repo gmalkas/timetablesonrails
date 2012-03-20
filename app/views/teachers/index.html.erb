@@ -1,0 +1,11 @@
+<% title "Enseignants", @active_school_year %>
+
+<header>
+  <h1><%= @active_school_year %> / Enseignants</h1>
+</header>
+
+<%= render 'shared/flash_messages' %>
+
+<% @teachers.each do |teacher| %>
+  <%= teacher.name %> <br />
+<% end %>
