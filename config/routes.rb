@@ -5,8 +5,8 @@ Timetablesonrails::Application.routes.draw do
   get '/annee-active' => 'courses#index', as: 'active_school_year'
   post '/annee-active/choisir-responsable/:id/:candidate' => 'courses#choose_course_manager', as: 'choose_course_manager'
   post '/annee-active/supprimer-candidat/:id/:candidate' => 'courses#dismiss_candidate', as: 'dismiss_candidate'
-  post '/annee-active/postuler/:id' => 'courses#apply', as: 'apply_to_course_management_path' 
-  post '/annee-active/retirer-candidature/:id' => 'courses#withdraw', as: 'withdraw_course_management_application_path'
+  post '/annee-active/postuler/:id' => 'courses#apply', as: 'apply_to_course_management' 
+  post '/annee-active/retirer-candidature/:id' => 'courses#withdraw', as: 'withdraw_course_management_application'
 
   resources :courses
 
