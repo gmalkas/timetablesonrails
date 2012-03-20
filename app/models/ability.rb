@@ -5,10 +5,10 @@ class Ability
     user ||= User.new
     if user.administrator?
       can :manage, :all
+      cannot [:apply, :withdraw], Course
     else
       can :read, Course
-      can :apply, Course
-      can :withdraw, Course
+      can [:apply, :withdraw], Course
     end
   end
 end
