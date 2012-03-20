@@ -20,11 +20,13 @@
   <% @semesters.each do |sem| %>
 
     <article class="semester">
-      <section class="new-course">
-        <div class="add-course">
-          <%= link_to "Ajouter une U.E &rarr;".html_safe, root_path, :class => 'show-form' %>
-        </div>
-      </section>
+      <% if current_user.administrator? %>
+        <section class="new-course">
+          <div class="add-course">
+            <%= link_to "Ajouter une U.E &rarr;".html_safe, root_path, :class => 'show-form' %>
+          </div>
+        </section>
+      <% end %>
 
       <header>
         <h2>Semestre <%= sem.name %></h2>

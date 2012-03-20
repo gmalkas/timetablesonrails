@@ -8,6 +8,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <% if alert %>
+    <p class="error">
+      <%= alert %>
+    </p>
+  <% end %>
 	<header>
     <nav class="nav-tools">
       <%= link_to "Année en cours", active_school_year_path %>

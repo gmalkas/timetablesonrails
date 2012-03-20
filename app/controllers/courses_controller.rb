@@ -49,6 +49,11 @@ class CoursesController < ApplicationController
 
   def load_active_year
     @active_school_year = SchoolYearManager.instance.active_school_year
-    @semesters = @active_school_year.semesters
+
+    unless @active_school_year.nil?
+      @semesters = @active_school_year.semesters
+    else
+      redirect_to root_path, alert: "Il n'existe aucune année active !"
+    end
   end
 end
