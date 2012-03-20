@@ -16,3 +16,4 @@
 
 # Ignore vim backup files
 *.swp
+*~
