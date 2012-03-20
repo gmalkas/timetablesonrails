@@ -1,8 +1,8 @@
 Timetablesonrails::Application.routes.draw do
-  post '/' => 'home#sign_in', as: 'sign_in'
-  get '/deconnexion' => 'home#sign_out', as: 'sign_out'
-  get '/annee-active' => 'courses#index', as: 'active_school_year'
+  post '/' => 'session#sign_in!', as: 'sign_in'
+  get '/deconnexion' => 'session#sign_out', as: 'sign_out'
 
+  get '/annee-active' => 'courses#index', as: 'active_school_year'
   post '/annee-active/choisir-responsable/:id/:candidate' => 'courses#choose_course_manager', as: 'choose_course_manager'
   post '/annee-active/supprimer-candidat/:id/:candidate' => 'courses#dismiss_candidate', as: 'dismiss_candidate'
 
@@ -19,5 +19,5 @@ Timetablesonrails::Application.routes.draw do
     end
   end
 
-  root :to => 'home#index'
+  root :to => 'home#dashboard'
 end

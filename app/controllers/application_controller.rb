@@ -1,3 +1,4 @@
+# encoding: utf-8
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
@@ -5,7 +6,16 @@ class ApplicationController < ActionController::Base
 	rescue_from ActiveRecord::RecordNotFound, :with => :not_found
 	rescue_from Errno::ECONNREFUSED, :with => :unavailable
 
+  # Ensure the user is logged in
+  before_filter :require_login
+
 	private
+
+  def require_login
+    unless logged_in?
+      render 'session/sign_in', layout: 'sign_in'
+    end
+  end
 
   def not_found
     render "errors/404", :status => 404
@@ -24,5 +34,9 @@ class ApplicationController < ActionController::Base
     @user_session.current_user
   end
 
-  helper_method :current_user
+  def logged_in?
+    !!current_user
+  end
+
+  helper_method :current_user, :logged_in?
 end

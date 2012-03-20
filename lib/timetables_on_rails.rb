@@ -1,0 +1,6 @@
+require_relative './timetables_on_rails/authentification'
+require_relative './timetables_on_rails/password_hasher'
+require_relative './timetables_on_rails/session'
+require_relative './timetables_on_rails/token'
+require_relative './timetables_on_rails/user_authentification'
+require_relative './timetables_on_rails/user_session'
