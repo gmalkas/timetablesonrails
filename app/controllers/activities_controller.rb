@@ -8,40 +8,41 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @activity = @active_school_year.find_semester(params[:semester_id]).new_course(params[:course][:name])
+    @activity = @active_school_year.find_semester(params[:semester_id]).find_course(params[:course][:name]).new_activity(params[:type], params[:duration], params[:groups])
 
-    if @course.save
-      flash[:success] = "#{@course.name} a été ajouté avec succès au semestre #{@course.semester.name}."
+    if @activity.save
+      flash[:success] = "#{@activity.type} a été ajouté avec succès au cours #{@activity.courses.name}."
       redirect_to active_school_year_path
     else
       render 'index'
     end
   end
+	
+	# La liste des profs dépend de l'activité en question (donc du nombre de groupe)
+  def choose_activity_teachers
+    activity = Activity.find_by_id params[:id]
+    candidate = activity.candidates.find params[:candidate]
+    activity.assign! candidate
+    activity.save!
 
-  def choose_course_manager
-    course = Course.find_by_id params[:id]
-    candidate = course.candidates.find params[:candidate]
-    course.assign! candidate
-    course.save!
-
-    flash[:success] = "#{candidate.name} est désormais responsable de l'U.E #{course.name}."
+    flash[:success] = "#{candidate.name} postule pour enseigner dans l'U.E #{course.name} pour l'activité #{activity.type}"
     redirect_to active_school_year_path
   end
 
   def dismiss_candidate
-    course = Course.find_by_id params[:id]
-    candidate = course.candidates.find params[:candidate]
-    course.dismiss_candidate candidate
-    course.save!
+    activity = Activity.find_by_id params[:id]
+    candidate = activity.candidates.find params[:candidate]
+    activity.dismiss_candidate candidate
+    activity.save!
 
-    flash[:success] = "#{candidate.name} est a été retiré de la liste de candidature de l'U.E #{course.name}."
+    flash[:success] = "#{candidate.name} est a été retiré de la liste de candidature à l'U.E #{course.name} pour l'activité #{activity.type}"
     redirect_to active_school_year_path
   end
 
   def destroy
-    course = Course.find_by_id params[:id]
-    course.destroy
-    flash[:success] = "L'unité d'enseignement #{course.name} a été supprimé avec succès."
+    activity = Activity.find_by_id params[:id]
+    activity.destroy
+    flash[:success] = "L'activité #{activity.name} pour l'U.E #{course.name} a été supprimée avec succès."
     redirect_to active_school_year_path
   end
 
