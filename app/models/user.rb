@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_and_belongs_to_many :courses, join_table: 'candidates_courses', foreign_key: 'candidate_id'
+  has_many :responsabilities, class_name: 'Course', foreign_key: 'manager_id', dependent: :nullify
 
   # === BEHAVIOR ===
   
