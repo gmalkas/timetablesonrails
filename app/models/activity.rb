@@ -2,7 +2,6 @@ class Activity < ActiveRecord::Base
 
   # === DATA ===
   # Type : String, Duration : int, groups : int, teachers : array of users
-  # Commentaire pour passer le push
   attr_accessible :type, :duration, :groups, :teachers
 
   belongs_to :courses, foreign_key: 'name', class_name: 'Course'
@@ -18,11 +17,11 @@ class Activity < ActiveRecord::Base
   end
 
   ## 
-  # Assign a teacher to a course.
+  # Assign a candidate to an activity.
   # Warning: Removes all candidates
   # 
-  def assign!(user)
-    self.teachers << user
+  def assign!(candidate)
+    self.teachers << candidate
     if self.teachers.count == self.groups
     	dismiss_candidates
     end
