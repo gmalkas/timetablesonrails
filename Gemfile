@@ -10,7 +10,7 @@ gem 'mysql2'
 
 gem 'therubyracer'
 
-#Authentification
+# Authentification
 gem 'cancan'
 
 # Gems used only for assets and not required
@@ -41,6 +41,7 @@ gem 'capistrano'
 
 group :development, :test do
   gem 'rr'
+  gem 'rspec'
 end
 
 # To use debugger
