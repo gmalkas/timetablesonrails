@@ -1,0 +1,130 @@
+section.teachers-stats {
+   > article { 
+    p {
+      display: inline-block;
+
+      margin: 0 0.5em;
+      padding: 0.5em;
+
+      background-color: #FFBF40;
+
+      text-shadow: 1px 1px 0 #DDD;
+    }
+  }
+
+  section.utilities {
+    float: right;
+    margin: 1em;
+    opacity: 0.3;
+    font-size: 0.875em;
+
+    header {
+      display: inline-block;
+    }
+  }
+
+  section.utilities:hover {
+    opacity: 1;
+  }
+}
+
+section.teachers {
+
+  margin: 2em 0 0 0;
+
+  article.teacher {
+    width: 35em;
+
+    margin: 1em;
+    padding: 0.5em;
+
+    border: 2px solid #DEDEDE;
+    border-radius: 8px;
+
+    background-color: #EEE;
+
+    .show-details {
+      display: block;
+
+      float: right;
+
+      margin-top: 5px;
+
+      cursor: pointer;
+    }
+
+    h3 {
+      display: inline-block;
+    }
+
+    .informations {
+      display: inline-block;
+
+      img {
+        vertical-align: middle;
+      }
+
+    }
+
+    .details {
+      display: none;
+
+      border-radius: 6px;
+      background-color: #FAFAFA;
+      
+      margin-top: 0.5em;
+      padding: 0.5em;
+
+      p.actions {
+        margin: 0.5em 0.5em 0 0.5em;
+        padding: 0.5em 0 0 0;
+
+        border-top: 1px dashed #CCC;
+      }
+
+      h4 {
+        padding: 0.25em;
+
+        border-radius: 6px;
+        background-color: #2B2B2B;
+
+        font-family: Georgia, serif;
+        font-weight: normal;
+        font-size: 1em;
+
+        color: #EEE;
+      }
+
+    }
+  }
+
+  article:hover {
+    box-shadow: 0 0 8px #CCC;
+  }
+
+  article.warning {
+    background-color: #F19C6D;
+    border-color: #F17E3C;
+
+    h3, p.informations {
+      color: #943500;
+    }
+  }
+
+  article.warning:hover {
+    box-shadow: 0 0 8px #CAA;
+  }
+
+  article.valid {
+    background-color: #DFF2BF;
+    border-color: #CEE1AE;
+
+    h3, .informations {
+      color: #63782E;
+    }
+  }
+  
+  article.valid:hover {
+    box-shadow: 0 0 8px #ACA;
+  }
+}

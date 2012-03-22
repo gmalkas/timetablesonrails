@@ -4,6 +4,7 @@ class TeachersController < ApplicationController
 
   def index
     @teachers = User.teachers
+    @indexes = TimetablesOnRails::FirstLetterIndex.build_from_name @teachers
   end
 
   private

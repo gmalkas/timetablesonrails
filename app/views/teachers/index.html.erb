@@ -6,6 +6,48 @@
 
 <%= render 'shared/flash_messages' %>
 
-<% @teachers.each do |teacher| %>
-  <%= teacher.name %> <br />
-<% end %>
+<section class="teachers-stats">
+  <header>
+    <h1>Résumé</h1>
+  </header>
+
+  <section class="utilities nav-tools">
+    <header>
+      <%= link_to "Ajouter un enseignant &rarr;".html_safe, school_years_path %>
+    </header>
+  </section>
+  <article>
+    <p><%= pluralize @teachers.count, "Enseignant" %></p> 
+  </article>
+</section>
+
+<section class="teachers">
+  <header>
+    <h1>Liste des enseignants</h1>
+  </header>
+
+  <% if @teachers.empty? %>
+    <p class="notice">Aucun professeur ne s'est inscrit.</p>
+  <% else %>
+    <% @indexes.each do |letter, teachers| %>
+
+      <h2><%= letter %></h2>
+      <% teachers.each do |teacher| %>
+
+        <article class="teacher">
+          <%= image_tag "plus_alt_16x16.png", class: "show-details", atl: "+" %>
+          <h3><%= teacher.name %></h3>
+
+          <p class="informations">
+          </p>
+
+          <div class="details">
+            <p class="actions">
+            </p>
+          </div>
+          
+        </article>
+      <% end %>
+    <% end %>
+  <% end %>
+</section>

@@ -28,6 +28,6 @@ class User < ActiveRecord::Base
   end
 
   def self.teachers
-    self.where("administrator = ?", false)
+    self.where("administrator = ?", false).order("name ASC")
   end
 end
