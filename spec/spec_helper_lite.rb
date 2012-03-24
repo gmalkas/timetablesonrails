@@ -1,6 +1,1 @@
-require 'minitest/autorun'
-require 'rr'
-
-class MiniTest::Unit::TestCase
-  include RR::Adapters::MiniTest
-end
+require_relative './spec_helper.rb'
