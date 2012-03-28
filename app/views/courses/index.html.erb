@@ -112,6 +112,10 @@
                   <% elsif not course.assigned? %>
                     <%= link_to "Postuler", apply_to_course_management_path(course), method: :post, class: "button" %>
                   <% end %>
+
+                  <% if course.manager == current_user %>
+                    <%= link_to "Gérer", apply_to_course_management_path(course), class: "button" %>
+                  <% end %>
                 <% end %>
               </p>
             </div>
