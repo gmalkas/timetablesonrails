@@ -7,15 +7,19 @@
 <%= render 'shared/flash_messages' %>
 
 <section class="teachers-stats">
+  
+  <% if current_user.administrator? %>
+    <section class="utilities nav-tools">
+      <header>
+        <%= link_to "Ajouter un enseignant &rarr;".html_safe, new_teacher_path %>
+      </header>
+    </section>
+  <% end %>
+
   <header>
     <h1>Résumé</h1>
   </header>
 
-  <section class="utilities nav-tools">
-    <header>
-      <%= link_to "Ajouter un enseignant &rarr;".html_safe, school_years_path %>
-    </header>
-  </section>
   <article>
     <p><%= pluralize @teachers.count, "Enseignant" %></p> 
   </article>
