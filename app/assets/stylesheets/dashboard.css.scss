@@ -126,3 +126,121 @@ section.recent-activity {
     }
   }
 }
+
+section.teacher-summary {
+  margin: 1em 0;
+
+  article {
+    header {
+      h1 {
+        display: inline-block;
+
+        margin: 0 1em;
+        padding: 0.5em 1em;
+
+        background-color: #EEE;
+
+        font-size: 1em;
+        font-weight: normal;
+        font-family: "Gill Sans", arial, sans-serif;
+
+        text-transform: uppercase;
+        text-shadow: 0 1px 0 #FFF;
+        letter-spacing: 2px;
+      }
+    }
+    
+  article.course {
+	  width: 35em;
+
+	  margin: 1em;
+	  padding: 0.5em;
+
+	  border: 2px solid #DEDEDE;
+	  border-radius: 8px;
+
+	  background-color: #EEE;
+
+	  .show-details {
+	    display: block;
+
+	    float: right;
+
+	    margin-top: 5px;
+
+	    cursor: pointer;
+	  }
+
+	  h3 {
+	    display: inline-block;
+	  }
+
+		a.manage {
+			margin-right: 10px;
+			float: right;
+		}
+		
+		em.volume-horaire {
+					float: right;
+					margin-right: 15px;
+					font-weight : bold;
+				}
+				
+	  .informations {
+	    display: inline-block;
+	    
+	    img {
+	      vertical-align: middle;
+	    }
+				em.candidats {
+					margin-left: 20px;
+				}
+				em.activity {
+					margin-left: 20px;
+				}
+	  }
+
+	  .details {
+	    display: none;
+	
+	    border-radius: 6px;
+	    background-color: #FAFAFA;
+	    
+	    margin-top: 0.5em;
+	    padding: 0.5em;
+
+
+	    div.candidates {
+	      padding: 0.5em;
+
+	      span.actions {
+	        opacity: 0.7;
+	        color: #2B2B2B;
+	        font-size: 0.875em;
+	      }
+	    }
+
+	    p.actions {
+	      margin: 0.5em 0.5em 0 0.5em;
+	      padding: 0.5em 0 0 0;
+
+	      border-top: 1px dashed #CCC;
+	    }
+
+	    h4 {
+	      padding: 0.25em;
+
+	      border-radius: 6px;
+	      background-color: #2B2B2B;
+
+	      font-family: Georgia, serif;
+	      font-weight: normal;
+	      font-size: 1em;
+
+	      color: #EEE;
+	    }
+		}
+  }
+	}
+}
+

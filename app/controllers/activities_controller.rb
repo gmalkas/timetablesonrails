@@ -19,7 +19,7 @@ class ActivitiesController < ApplicationController
   end
 	
 	# La liste des profs dépend de l'activité en question (donc du nombre de groupe)
-  def choose_activity_teachers
+  def choose_activity_teacher
     activity = Activity.find_by_id params[:id]
     candidate = activity.candidates.find params[:candidate]
     activity.assign! candidate
