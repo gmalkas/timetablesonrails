@@ -30,6 +30,16 @@ form {
       vertical-align: middle;
     }
 
+    .description {
+      font-size: 0.75em;
+      text-align: right;
+      margin: 0.5em 0 0.5em 0;
+    }
+
+    .error {
+      color: #A62F00;
+      font-weight: bold;
+    }
   }
 
   .actions {
@@ -83,4 +93,9 @@ form.inline-form {
     background-color: #A62F00;
     background-color: #007C21; /* Valid form */
   }
+}
+
+form.centered-form {
+  display: table;
+  margin: auto;
 }

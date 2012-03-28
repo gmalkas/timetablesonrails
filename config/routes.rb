@@ -1,6 +1,4 @@
 Timetablesonrails::Application.routes.draw do
-  get "teachers/index", as: 'teachers'
-
   post '/' => 'session#sign_in!', as: 'sign_in'
   get '/deconnexion' => 'session#sign_out', as: 'sign_out'
 
@@ -21,6 +19,7 @@ Timetablesonrails::Application.routes.draw do
         post 'desarchiver' => 'school_years#restore', as: 'restore'
       end
     end
+    resources :teachers, path: "enseignants"
   end
 
   root :to => 'home#dashboard'

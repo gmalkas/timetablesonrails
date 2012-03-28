@@ -1,0 +1,5 @@
+<% if resource.errors[field].any? %>
+  <% resource.errors[field].each do |e| %>
+    <strong class="error"><%= resource.errors.full_message(field, e) %></strong><br />
+  <% end %>
+<% end %>

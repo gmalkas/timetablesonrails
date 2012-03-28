@@ -1,11 +1,24 @@
 class User < ActiveRecord::Base
   # === DATA ===
-  attr_accessible :username, :name, :email, :session_token
+  attr_accessible :username, :firstname, :lastname, :email, :session_token, :status
 
   has_secure_password
 
   has_and_belongs_to_many :courses, join_table: 'candidates_courses', foreign_key: 'candidate_id'
   has_many :responsabilities, class_name: 'Course', foreign_key: 'manager_id', dependent: :nullify
+
+  validates_presence_of :firstname, :lastname, :username
+  validates_uniqueness_of :username
+
+  def name
+   self.lastname + " " + self.firstname
+  end
+
+  def self.build_teacher
+    u = self.new
+    u.administrator = false
+    u
+  end
 
   # === BEHAVIOR ===
   
@@ -28,6 +41,6 @@ class User < ActiveRecord::Base
   end
 
   def self.teachers
-    self.where("administrator = ?", false).order("name ASC")
+    self.where("administrator = ?", false).order("lastname ASC")
   end
 end
