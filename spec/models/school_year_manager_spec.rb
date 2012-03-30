@@ -50,9 +50,12 @@ describe SchoolYearManager do
   describe "#school_years" do
      
     it "returns existing school years ordered by starting date" do
-      year_one = SchoolYearManager.instance.new_school_year 2011
-      year_three = SchoolYearManager.instance.new_school_year 2013
-      year_two = SchoolYearManager.instance.new_school_year 2012
+      year_one = SchoolYearManager.instance.build_school_year 2011
+      year_one = SchoolYearManager.instance.new_school_year year_one
+      year_three = SchoolYearManager.instance.build_school_year 2013
+      year_three = SchoolYearManager.instance.new_school_year year_three
+      year_two = SchoolYearManager.instance.build_school_year 2012
+      year_two = SchoolYearManager.instance.new_school_year year_two
       SchoolYearManager.instance.school_years.should == [year_one, year_two, year_three]
     end
 
@@ -60,15 +63,18 @@ describe SchoolYearManager do
 
   describe "#active_school_year" do
     it "returns the active school year" do
-      year_one = SchoolYearManager.instance.new_school_year 2011
+      year_one = SchoolYearManager.instance.build_school_year 2011
+      year_one = SchoolYearManager.instance.new_school_year year_one
       SchoolYearManager.instance.active_school_year.should == year_one
     end
   end
 
   describe "#activate_school_year" do
     it "deactivates all school years except one" do
-      year_one = SchoolYearManager.instance.new_school_year 2011
-      year_two = SchoolYearManager.instance.new_school_year 2012
+      year_one = SchoolYearManager.instance.build_school_year 2011
+      year_one = SchoolYearManager.instance.new_school_year year_one
+      year_two = SchoolYearManager.instance.build_school_year 2012
+      year_two = SchoolYearManager.instance.new_school_year year_two
       SchoolYearManager.instance.activate_school_year year_two
       year_two.activated?.should be_true
       year_one.activated?.should be_false

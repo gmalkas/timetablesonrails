@@ -3,76 +3,78 @@ require_relative '../../app/models/school_year'
 
 describe SchoolYear do
   before do
-    @date = Time.now
+    @date = Date.new Time.now.year
   end
 
   subject { SchoolYear.new }
 
   it "supports reading and writing a starting date" do
-    subject.start = @date
-    subject.start.must_equal @date
+    subject.start_date = @date
+    subject.start_date.should == @date
   end
 
   it "supports reading and writing an ending date" do
-    subject.end = @date
-    subject.end.must_equal @date
+    subject.end_date = @date
+    subject.end_date.should == @date
   end
 
   it "is not archived when newly created" do
-    refute subject.archived? 
+    subject.archived?.should be_false
   end
 
   it "is not activated when newly created" do
-    refute subject.activated?
+    subject.activated?.should be_false
   end
 
   it "can be archived" do
     subject.archive!
-    assert subject.archived?
+    subject.archived?.should be_true
   end
 
   it "can be activated" do
     subject.activate!
-    assert subject.activated?
+    subject.activated?.should be_true
   end
 
   it "can be disabled" do
     subject.activate!
-    assert subject.activated?
+    subject.activated?.should be_true
     subject.disable!
-    refute subject.activated?
+    subject.activated?.should be_false
   end
 
   it "is unarchived when activated" do
     subject.archive!
-    assert subject.archived?
+    subject.archived?.should be_true
     subject.activate!
-    refute subject.archived?
+    subject.archived?.should be_false
   end
 
   it "has semesters" do
-    subject.semesters.must_be_empty 
+    subject.semesters.should be_empty
   end
 
   it "supports being initialized with attributes" do
-    school_year = SchoolYear.new(@date, @date + 10)
-    school_year.start.must_equal @date
-    school_year.end.must_equal @date + 10
+    school_year = SchoolYear.new start_date: @date, end_date: @date + 10
+    school_year.start_date.should == @date
+    school_year.end_date.should == @date + 10
   end
 
   describe "#add_semester" do
 
+    subject { SchoolYear.create start_date: @date, end_date: @date + 10 }
+
     it "creates a semester" do
       subject.new_semester "Semester", @date, @date
-      semester = subject.semesters.first
-      semester.name.must_equal "Semester"
-      semester.start.must_equal @date
-      semester.end.must_equal @date
+      semester = subject.semesters.last
+      semester.name.should == "Semester"
+      semester.start_date.should == @date
+      semester.end_date.should == @date
     end
 
     it "sets the semester's school year reference to itself" do
       subject.new_semester "Semester", @date, @date
-      subject.semesters.first.school_year.must_equal subject
+      subject.semesters.first.school_year.should == subject
     end
 
   end

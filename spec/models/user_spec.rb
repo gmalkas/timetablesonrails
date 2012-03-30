@@ -5,9 +5,14 @@ describe User do
 
   subject { User.new }
 
-  it "supports reading and writing a name" do
-    subject.name = "foo"
-    subject.name.should == "foo"
+  it "supports reading and writing a firstname" do
+    subject.firstname = "foo"
+    subject.firstname.should == "foo"
+  end
+  
+  it "supports reading and writing a lastname" do
+    subject.lastname = "foo"
+    subject.lastname.should == "foo"
   end
 
   it "supports reading and writing a username" do
@@ -21,8 +26,9 @@ describe User do
   end
 
   it "supports being initialized with attributes" do
-    user = User.new name: "John Doe", username: "jdoe"
-    user.name.should == "John Doe"
+    user = User.new firstname: "John", lastname: "Doe", username: "jdoe"
+    user.firstname.should == "John"
+    user.lastname.should == "Doe"
     user.username.should == "jdoe"
   end
 
