@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # === DATA ===
-  attr_accessible :username, :firstname, :lastname, :email, :session_token, :status
+  attr_accessible :username, :firstname, :lastname
 
   has_secure_password
 
@@ -16,8 +16,10 @@ class User < ActiveRecord::Base
 
   def self.build_teacher
     u = self.new
-    u.administrator = false
-    u
+  end
+
+  def teacher?
+    not administrator?
   end
 
   # === BEHAVIOR ===
