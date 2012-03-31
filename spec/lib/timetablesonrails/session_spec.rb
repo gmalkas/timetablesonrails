@@ -1,4 +1,3 @@
-require_relative '../../spec_helper_lite'
 require_relative '../../../lib/timetables_on_rails/session'
 require_relative '../../../lib/timetables_on_rails/token'
 
