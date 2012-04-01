@@ -1,3 +1,5 @@
+require_relative './user'
+
 class Course < ActiveRecord::Base
 
   # === DATA ===

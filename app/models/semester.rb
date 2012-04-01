@@ -1,3 +1,5 @@
+require_relative './course'
+
 class Semester < ActiveRecord::Base
 
   # === DATA ===

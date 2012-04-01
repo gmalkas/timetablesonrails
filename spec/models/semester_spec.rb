@@ -1,4 +1,4 @@
-require_relative '../spec_helper_lite.rb'
+require_relative '../spec_helper_lite'
 require_relative '../../app/models/school_year'
 require_relative '../../app/models/semester'
 
