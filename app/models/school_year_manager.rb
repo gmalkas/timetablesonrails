@@ -30,6 +30,7 @@ class SchoolYearManager
 
   def clear
     @school_years.clear
+    @active = nil
   end
 
   def find!(start_year)
@@ -47,10 +48,9 @@ class SchoolYearManager
     @active = school_year 
   end
 
-  def disable_school_year(school_year)
+  def disable_school_year
     @active.disable!
     @active.save!
-    @active = nil
   end
 
   def archive_school_year(school_year)

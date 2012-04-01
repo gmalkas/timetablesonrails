@@ -6,23 +6,18 @@ describe SchoolYearManager do
   before do
     SchoolYearManager.instance.clear
   end
-  
-  describe "#new_school_year" do
 
-    before do
-      @year = Time.now.year
+  describe "#build_school_year" do
+
+    it "can build an empty school year" do
+      school_year = SchoolYearManager.instance.build_school_year
+      school_year.should be_new_record
     end
-
-    it "can build a school year with a String year" do
+    
+    it "can build a school year with a String" do
       school_year = SchoolYearManager.instance.build_school_year "2012"
       school_year.start_date.year.should == 2012
       school_year.end_date.year.should == 2013
-    end
-
-    it "can build a school year with an integer year" do
-      school_year = SchoolYearManager.instance.build_school_year @year
-      school_year.start_date.year.should == @year
-      school_year.end_date.year.should == @year + 1
     end
 
     it "can build a school year with a Date" do
@@ -31,6 +26,10 @@ describe SchoolYearManager do
       school_year.start_date.should == date
       school_year.end_date.should == date.next_year
     end
+
+  end
+
+  describe "#new_school_year" do
 
     it "activates the school year if it is the first one created" do
       school_year = SchoolYearManager.instance.build_school_year "2012"
@@ -45,10 +44,15 @@ describe SchoolYearManager do
       school_year_two = SchoolYearManager.instance.new_school_year school_year_two
       school_year_two.activated?.should be_false
     end
+
+    it "adds the school year to the school years list" do
+      school_year = SchoolYearManager.instance.build_school_year "2012"
+      school_year = SchoolYearManager.instance.new_school_year school_year
+      SchoolYearManager.instance.school_years.should include(school_year)
+    end
   end
 
   describe "#school_years" do
-     
     it "returns existing school years ordered by starting date" do
       year_one = SchoolYearManager.instance.build_school_year 2011
       year_one = SchoolYearManager.instance.new_school_year year_one
@@ -58,7 +62,6 @@ describe SchoolYearManager do
       year_two = SchoolYearManager.instance.new_school_year year_two
       SchoolYearManager.instance.school_years.should == [year_one, year_two, year_three]
     end
-
   end
 
   describe "#active_school_year" do
@@ -81,5 +84,14 @@ describe SchoolYearManager do
     end
   end
 
+  describe "#disable_school_year" do
+    it "disables the active school year" do
+      year_one = SchoolYearManager.instance.build_school_year 2011
+      year_one = SchoolYearManager.instance.new_school_year year_one
+      SchoolYearManager.instance.disable_school_year
+      year_one.activated?.should be_false
+      SchoolYearManager.instance.active_school_year.should be_nil
+    end
+  end
 
 end
