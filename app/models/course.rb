@@ -5,8 +5,7 @@ class Course < ActiveRecord::Base
   # === DATA ===
   attr_accessible :name
 
-  validates_presence_of :name
-  validates :semester_id, presence: true
+  validates :name, :semester_id, presence: true
 
   belongs_to :semester
   belongs_to :manager, foreign_key: 'manager_id', class_name: 'User'
@@ -31,7 +30,7 @@ class Course < ActiveRecord::Base
   end
 
   def new_candidate(user)
-    raise CourseAlreadyAssignedException if assigned?
+    raise AlreadyAssignedException if assigned?
     self.candidates << user
   end
 
@@ -48,6 +47,6 @@ class Course < ActiveRecord::Base
   end
   
   # === Exceptions ===
-  class CourseAlreadyAssignedException < StandardError; end
+  class AlreadyAssignedException < StandardError; end
 
 end
