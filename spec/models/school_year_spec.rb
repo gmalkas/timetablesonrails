@@ -1,4 +1,4 @@
-require_relative '../spec_helper_lite.rb'
+require_relative '../spec_helper_lite'
 require_relative '../../app/models/school_year'
 
 describe SchoolYear do
@@ -16,6 +16,17 @@ describe SchoolYear do
   it "supports reading and writing an ending date" do
     subject.end_date = @date
     subject.end_date.should == @date
+  end
+
+  it "supports reading and writing a starting year" do
+    subject.start_year = "2011"
+    subject.start_year.should == "2011"
+  end
+
+  it "supports being initialized with attributes" do
+    school_year = SchoolYear.new start_date: @date, end_date: @date + 10
+    school_year.start_date.should == @date
+    school_year.end_date.should == @date + 10
   end
 
   it "is not archived when newly created" do
@@ -50,33 +61,18 @@ describe SchoolYear do
     subject.archived?.should be_false
   end
 
-  it "has semesters" do
-    subject.semesters.should be_empty
+  describe "#to_s" do
+    it "returns a readable format" do
+      school_year = SchoolYear.new start_date: Date.new(2011), end_date: Date.new(2012)
+      school_year.to_s.should == "2011 - 2012"
+    end
   end
 
-  it "supports being initialized with attributes" do
-    school_year = SchoolYear.new start_date: @date, end_date: @date + 10
-    school_year.start_date.should == @date
-    school_year.end_date.should == @date + 10
-  end
-
-  describe "#add_semester" do
-
-    subject { SchoolYear.create start_date: @date, end_date: @date + 10 }
-
-    it "creates a semester" do
-      subject.new_semester "Semester", @date, @date
-      semester = subject.semesters.last
-      semester.name.should == "Semester"
-      semester.start_date.should == @date
-      semester.end_date.should == @date
+  describe "#to_param" do
+    it "returns the starting year" do
+      school_year = SchoolYear.new start_date: Date.new(2011), end_date: Date.new(2012)
+      school_year.to_param.should == "2011"
     end
-
-    it "sets the semester's school year reference to itself" do
-      subject.new_semester "Semester", @date, @date
-      subject.semesters.first.school_year.should == subject
-    end
-
   end
 
 end
