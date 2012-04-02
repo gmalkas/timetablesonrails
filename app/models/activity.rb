@@ -1,17 +1,19 @@
 class Activity < ActiveRecord::Base
 
   # === DATA ===
-  # Type : String, Duration : int, groups : int, teachers : array of users
-  attr_accessible :type, :duration, :groups, :teachers
+  # attr_accessible :type, :duration, :groups, :teachers
+  attr_accessible :type, :duration, :groups
 
-  belongs_to :courses, foreign_key: 'name', class_name: 'Course'
+  belongs_to :course
 
   has_and_belongs_to_many :candidates, class_name: 'User',
-                                       join_table: 'candidates_activities',
+                                       join_table: 'activities_candidates',
                                        association_foreign_key: 'candidate_id'
 
+  has_and_belongs_to_many :teachers, class_name: 'User',
+                                     join_table: 'activities_teachers',
+                                     association_foreign_key: 'teacher_id'
   # === BEHAVIOR ===
- 
   def assigned?
     self.teachers.count == self.groups
   end
@@ -28,7 +30,7 @@ class Activity < ActiveRecord::Base
   end
 
   def new_candidate(user)
-    raise ActivityAlreadyAssignedException if assigned?
+    raise AlreadyAssignedException if assigned?
     self.candidates << user
   end
 
@@ -45,6 +47,6 @@ class Activity < ActiveRecord::Base
   end
   
   # === Exceptions ===
-  class ActivityAlreadyAssignedException < StandardError; end
+  class AlreadyAssignedException < StandardError; end
 
 end
