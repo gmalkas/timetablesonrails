@@ -28,13 +28,11 @@ module Notifications
 
       it "returns the teacher" do
         User.stub(:find_by_id) { user }
-
         subject.teacher.id.should == 1
       end
 
       it "returns the course" do
         Course.stub(:find_by_id) { course }
-
         subject.course.id.should == 5
       end
     end

@@ -1,17 +1,15 @@
 module Notifications
   class NewCourseCandidate < Notification
     def candidates
-     self.properties.select { |p| p.name == 'candidates' }.first.value
+      find_property! 'candidates'
     end
 
     def teacher
-      id = self.properties.select { |p| p.name == 'teacher' }.first.value
-      User.find_by_id id
+      User.find_by_id find_property!('teacher')
     end
 
     def course
-      id = self.properties.select { |p| p.name == 'course' }.first.value
-      Course.find_by_id id
+      Course.find_by_id find_property!('course')
     end
   end
 end
