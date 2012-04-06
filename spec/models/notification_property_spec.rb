@@ -10,11 +10,6 @@ describe NotificationProperty do
     subject.name.should == "manager"
   end
 
-  it "supports reading and writing a type" do
-    subject.type = "user"
-    subject.type.should == "user"
-  end
-
   it "supports reading and writing a value" do
     subject.value = "5"
     subject.value.should == "5"
@@ -26,9 +21,8 @@ describe NotificationProperty do
   end
 
   it "supports being initialized with attributes" do
-    property = NotificationProperty.new type: "user", name: "manager",
+    property = NotificationProperty.new name: "manager",
                                         value: "5"
-    property.type.should == "user"
     property.name.should == "manager"
     property.value.should == "5"
   end

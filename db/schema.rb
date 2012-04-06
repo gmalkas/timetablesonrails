@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403194516) do
+ActiveRecord::Schema.define(:version => 20120406160452) do
 
   create_table "activities", :force => true do |t|
     t.string   "type"
@@ -47,7 +47,6 @@ ActiveRecord::Schema.define(:version => 20120403194516) do
 
   create_table "notification_properties", :force => true do |t|
     t.string  "name"
-    t.string  "type"
     t.string  "value"
     t.integer "notification_id"
   end
