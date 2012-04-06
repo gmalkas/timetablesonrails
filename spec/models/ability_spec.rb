@@ -1,6 +1,7 @@
+require 'cancan'
 require 'cancan/matchers'
 
-require_relative '../spec_helper'
+require_relative '../spec_helper_lite'
 require_relative '../../app/models/ability'
 
 describe User do

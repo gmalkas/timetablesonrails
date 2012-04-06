@@ -1,4 +1,4 @@
-require_relative '../spec_helper'
+require_relative '../spec_helper_lite'
 require_relative '../../app/models/course'
 
 describe Course do
