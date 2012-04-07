@@ -2,6 +2,8 @@ require_relative '../spec_helper_lite'
 require_relative '../../app/models/notification'
 require_relative '../../app/models/notification_property'
 
+require 'ostruct'
+
 describe Notification do
   subject { Notification.new }
   

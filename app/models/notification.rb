@@ -4,6 +4,6 @@ class Notification < ActiveRecord::Base
   private
 
   def find_property!(name)
-    self.properties.select { |p| p.name == name }.first.value
+    self.properties.select { |p| p.name == name }.first
   end
 end

@@ -1,15 +1,44 @@
 module Notifications
   class NewCourseCandidate < Notification
+
+    before_create :build_style
+
     def candidates
-      find_property! 'candidates'
+      find_property!('candidates').value
     end
 
     def teacher
-      User.find_by_id find_property!('teacher')
+      User.find_by_id find_property!('teacher').value
     end
 
     def course
-      Course.find_by_id find_property!('course')
+      Course.find_by_id find_property!('course').value
+    end
+
+    protected
+
+    def build_style
+      self.style = case
+      when candidates > 1
+        'error'
+      when candidates == 1
+        'success'
+      else
+        ''
+      end
     end
   end
+end
+
+class Notification
+
+  def self.notify_new_course_candidate(teacher, course)
+    notification = Notifications::NewCourseCandidate.new 
+    notification.properties << NotificationProperty.new(name: 'teacher', value: teacher.id)
+    notification.properties << NotificationProperty.new(name: 'course', value: course.id)
+    notification.properties << NotificationProperty.new(name: 'candidates', value: course.candidates.size)
+    notification.save!
+    notification
+  end
+
 end
