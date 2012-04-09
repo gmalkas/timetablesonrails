@@ -54,11 +54,12 @@
         <time datetime="2012-03-05T11:16:45">10h02</time>
         <a href="">I. Leplumey</a> a postulé pour gérer <a href="">Langage C</a>
       </li>
+    </ol>
 
-      <li class="event">
-        <time datetime="2012-03-05T11:16:45">08h35</time>
-        <a href="">L. Marchand</a> a postulé pour gérer <a href="">Assembleur</a>
-      </li>
+    <ol>
+      <% @notifications.each do |notification| %>
+        <%= notification.render self %>
+      <% end %>
     </ol>
   </article>
 

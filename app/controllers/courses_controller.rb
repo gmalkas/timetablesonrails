@@ -1,4 +1,6 @@
 # encoding: utf-8
+require_relative '../models/notifications/new_course_candidate'
+
 class CoursesController < ApplicationController
 
   before_filter :load_active_year
@@ -45,6 +47,7 @@ class CoursesController < ApplicationController
 
     unless current_user.applied? course
       current_user.apply_to_course_management course
+      Notification.notify_new_course_candidate current_user, course
 
       flash[:success] = "Votre candidature à la gestion de l'U.E #{course.name} a été enregistrée."
       redirect_to active_school_year_path

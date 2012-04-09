@@ -1,10 +1,12 @@
+require_relative '../spec_helper_lite'
 require_relative '../../app/models/notification'
 require_relative '../../app/models/notification_property'
+require_relative '../../app/models/notifications/new_course_candidate'
 require_relative '../../app/presenters/notification_presenter'
 
 describe NotificationPresenter do
 
-  let(:notification) { Notification.new }
+  let(:notification) { Notifications::NewCourseCandidate.new }
   subject { NotificationPresenter.new notification }
 
   it "supports being initialized with a notification" do
@@ -32,8 +34,7 @@ describe NotificationPresenter do
       let(:context) { mock }
 
     it "renders the proper partial according to the notification type" do
-      notification.type = 'new_course_candidate'
-      context.should_receive(:render) { 'notifications/new_course_candidate' }
+      context.should_receive(:render).with('notifications/new_course_candidate', {notification: subject.notification})
       subject.render(context)
     end
   end

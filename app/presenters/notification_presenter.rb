@@ -18,6 +18,6 @@ class NotificationPresenter
   end
 
   def render(context)
-    context.render File.join('notifications', type)
+    context.render type.underscore, notification: self.notification
   end
 end
