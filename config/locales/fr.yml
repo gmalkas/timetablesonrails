@@ -4,6 +4,7 @@ fr:
       default: "%d/%m/%Y"
       short: "%e %b"
       long: "%e %B %Y"
+      human: "%A %d %B"
     day_names:
       - dimanche
       - lundi
@@ -56,7 +57,7 @@ fr:
   time:
     formats:
       default: "%d %B %Y à %Hh%Mmin%S"
-      short: "%d %b à %Hh%M"
+      short: "%Hh%M"
       long: "%A %d %B %Y à %Hh%M"
     am: 'am'
     pm: 'pm'

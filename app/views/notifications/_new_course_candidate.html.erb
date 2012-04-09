@@ -1,4 +1,4 @@
-<li class="event">
-  <time datetime="2012-03-05T11:16:45">08h35</time>
+<li class="event <%= notification.style %>">
+  <time datetime="<%= notification.created_at %>"><%= l notification.created_at.to_time, format: :short %></time>
   <%= link_to notification.teacher.name, teacher_path(notification.teacher) %> a postulé pour gérer <%= link_to notification.course.name, notification.course %>
 </li>
