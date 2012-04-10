@@ -71,8 +71,7 @@ describe Semester do
     end
 
     it "destroys the courses when destroyed" do
-      subject.destroy
-      Course.all.should be_empty
+      lambda { subject.destroy }.should change(subject.courses, :count).from(3).to(0)
     end
   end
 end
