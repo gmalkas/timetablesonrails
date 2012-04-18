@@ -6,6 +6,8 @@ require_relative '../../../app/models/notification_property'
 require_relative '../../../app/models/notifications/new_course_candidate'
 require_relative '../../../app/models/school_year_manager'
 
+require 'ostruct'
+
 describe Notification do
 
   describe ".notify_new_course_candidate" do
@@ -34,7 +36,11 @@ describe Notification do
 
     context "when there is more than one candidate" do
       before do
-        course.stub(:candidates) { [1, 2, 3] }
+        course.stub(:candidates) { [teacher, OpenStruct.new(id: 2), OpenStruct.new(id: 3)] }
+      end
+
+      it "creates properties for the other candidates" do
+        subject.properties.select { |p| p.name =~ /candidate_/ }.size.should == 2
       end
 
       it "sets the style to error" do
