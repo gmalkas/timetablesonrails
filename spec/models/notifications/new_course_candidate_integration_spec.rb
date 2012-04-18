@@ -42,15 +42,6 @@ describe Notification do
       end
     end
 
-    context  "when there is only one candidate" do
-      before do
-        course.stub(:candidates) { [teacher] }
-      end
-
-      it "sets the style to success" do
-        subject.style.should == "success"
-      end
-    end
   end
 
 end

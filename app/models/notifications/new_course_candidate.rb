@@ -18,14 +18,7 @@ module Notifications
     protected
 
     def build_style
-      self.style = case
-      when candidates > 1
-        'error'
-      when candidates == 1
-        'success'
-      else
-        ''
-      end
+      self.style = (candidates > 1) ? 'error' : ''
     end
   end
 end
@@ -34,8 +27,8 @@ class Notification
 
   def self.notify_new_course_candidate(teacher, course)
     notification = Notifications::NewCourseCandidate.new 
-    notification.properties << NotificationProperty.new(name: 'teacher', value: teacher.id)
-    notification.properties << NotificationProperty.new(name: 'course', value: course.id)
+    notification.properties << NotificationProperty.new(name: 'teacher', value: teacher.id, resource: 'user')
+    notification.properties << NotificationProperty.new(name: 'course', value: course.id, resource: 'course')
     notification.properties << NotificationProperty.new(name: 'candidates', value: course.candidates.size)
     notification.save!
     notification

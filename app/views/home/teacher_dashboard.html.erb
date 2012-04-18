@@ -144,39 +144,23 @@
     <h1>Activité récente</h1>
   </header>
 
-  <article>
-    <header>
-      <h1>Lundi 5 Mars</h1>
-    </header>
+  <% if @notifications.empty? %>
+    <p class="notice">
+      Aucune activité récente.
+    </p>
+  <% end %>
 
-    <ol>
-      <li class="event error">
-        <time datetime="2012-03-05T11:16:45">10h16</time>
-        <a href="">B. Arnaldi</a> a postulé pour gérer <a href="">Programmation Orientée Objet</a> (3 candidats)
-      </li>
+  <% @notifications.each do |date, notifications| %>
+    <article>
+      <header>
+        <h1><%= l date, format: :human %></h1>
+      </header>
 
-      <li class="event">
-        <time datetime="2012-03-05T11:16:45">10h02</time>
-        <a href="">I. Leplumey</a> a postulé pour gérer <a href="">TP</a> de <a href="">Langage C</a>
-      </li>
-
-      <li class="event success">
-        <time datetime="2012-03-05T11:16:45">08h35</time>
-        <a href="">N. Jacquinot</a> vous a assigné l'unité d'enseignement <a href="">Langage C</a>
-      </li>
-    </ol>
-  </article>
-
-  <article>
-    <header>
-      <h1>Vendredi 2 Mars</h1>
-    </header>
-
-    <ol>
-      <li class="event error">
-        <time datetime="2012-03-05T11:16:45">15h26</time>
-        <a href="">N. Jacquinot</a> a assigné l'unité d'enseignement <a href="">F.U.S</a> à <a href="">I. Leplumey</a>
-      </li>
-    </ol>
-  </article>
+      <ol>
+        <% notifications.each do |notification| %>
+          <%= notification.render self %>
+        <% end %>
+      </ol>
+    </article>
+  <% end %>
 </section>
