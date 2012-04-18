@@ -3,10 +3,10 @@ module TimetablesOnRails
     def self.build_from_name users
       index = Hash.new
       users.each do |u|
-        if index[u.name.first]
-          index[u.name.first] << u
+        if index[u.name[0]]
+          index[u.name[0]] << u
         else
-          index[u.name.first] = [u]
+          index[u.name[0]] = [u]
         end
       end
       index.sort { |v1, v2| v1[0] <=> v2[0] }
