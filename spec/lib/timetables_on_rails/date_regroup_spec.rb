@@ -20,9 +20,9 @@ module TimetablesOnRails
 
       it "regroups the resources according to the day of creation" do
         result = { 
-          now => [resource_one, resource_four],
-          now + 1 => [resource_three],
-          now + 3 => [resource_two]
+          now => Set.new([resource_one, resource_four]),
+          now + 1 => Set.new([resource_three]),
+          now + 3 => Set.new([resource_two])
         }
 
         DateRegroup.group_by_day(resources).should == result
