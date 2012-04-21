@@ -26,6 +26,10 @@ describe Notification do
     SchoolYearManager.instance.new_school_year(SchoolYearManager.instance.build_school_year 2011)
   }
 
+  let(:old_school_year) {
+    SchoolYearManager.instance.new_school_year(SchoolYearManager.instance.build_school_year 2010)
+  }
+
   let(:ruby) {
     school_year.semesters.first.new_course "Ruby"
   }
@@ -34,7 +38,7 @@ describe Notification do
     school_year.semesters.first.new_course "PHP"
   }
 
-  subject { Notification.notify_new_course_candidate gabriel, ruby }
+  subject { Notification.notify_new_course_candidate school_year, gabriel, ruby }
 
   describe "#properties" do
     it "destroys properties when destroyed" do
@@ -45,7 +49,7 @@ describe Notification do
   describe ".for_user" do
 
     let(:notification_two) { 
-      Notification.notify_new_course_candidate gabriel, php
+      Notification.notify_new_course_candidate school_year, gabriel, php
     }
 
     before do
@@ -53,15 +57,25 @@ describe Notification do
       subject
       notification_two
       #
-      Notification.notify_new_course_candidate marin, ruby
+      Notification.notify_new_course_candidate school_year, marin, ruby
     end
 
     it "only returns notifications that involves the user" do
-      Set.new(Notification.for_user(gabriel)).should == Set.new([subject, notification_two])
+      Set.new(Notification.for_user(gabriel, school_year)).should == Set.new([subject, notification_two])
     end
 
     it "orders the result by creation date, from the most recent to the oldest" do
-      Notification.for_user(gabriel).should == [notification_two, subject]
+      Notification.for_user(gabriel, school_year).should == [notification_two, subject]
+    end
+
+    context "when there are many shool years" do
+      before do
+        Notification.notify_new_course_candidate old_school_year, gabriel, ruby
+      end
+
+      it "only returns notifications related to the given school year" do
+        Notification.for_user(gabriel, school_year).should == [notification_two, subject] 
+      end
     end
   end
 end

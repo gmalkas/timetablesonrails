@@ -23,6 +23,11 @@ describe Notification do
     subject.style.should == "success"
   end
 
+  it "supports reading and writing a school year reference" do
+    subject.school_year_id = 1
+    subject.school_year_id.should == 1
+  end
+
   it "starts with no properties" do
     subject.properties.should be_empty
   end

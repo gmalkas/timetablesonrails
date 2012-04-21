@@ -19,12 +19,15 @@ describe Notification do
       user
     }
 
+    let(:school_year) {
+      SchoolYearManager.instance.new_school_year(SchoolYearManager.instance.build_school_year 2011)
+    }
+
     let(:course) {
-      school_year = SchoolYearManager.instance.new_school_year(SchoolYearManager.instance.build_school_year 2011)
       school_year.semesters.first.new_course "Ruby"
     }
 
-    subject { Notification.notify_new_course_candidate teacher, course }
+    subject { Notification.notify_new_course_candidate school_year, teacher, course }
 
     it "can create a new course candidate notification" do
       course.stub(:candidates) { [teacher] }
@@ -32,6 +35,10 @@ describe Notification do
       subject.candidates.should == 1
       subject.teacher.should == teacher
       subject.course.should == course
+    end
+
+    it "sets the school year reference" do
+      subject.school_year.should == school_year
     end
 
     context "when there is more than one candidate" do

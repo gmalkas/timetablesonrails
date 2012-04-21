@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120419120952) do
+ActiveRecord::Schema.define(:version => 20120420130022) do
 
   create_table "activities", :force => true do |t|
     t.string   "type"
@@ -55,8 +55,9 @@ ActiveRecord::Schema.define(:version => 20120419120952) do
   create_table "notifications", :force => true do |t|
     t.string   "type"
     t.string   "style"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "school_year_id"
   end
 
   create_table "school_years", :force => true do |t|
