@@ -2,6 +2,11 @@ class Notification < ActiveRecord::Base
   has_many :properties, class_name: 'NotificationProperty', dependent: :destroy
   belongs_to :school_year
 
+  scope :last_week, lambda { where(created_at: (1.week.ago)..(Time.zone.now) ) }
+  scope :last_two_weeks, lambda { where(created_at: (2.week.ago)..(Time.zone.now)) }
+  scope :last_month, lambda { where(created_at: (1.month.ago)..(Time.zone.now) ) }
+  scope :last_three_months, lambda { where(created_at: (3.month.ago)..(Time.zone.now) ) }
+
   #
   # Fetches the notifications related to the given user.
   #
