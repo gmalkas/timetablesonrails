@@ -11,6 +11,7 @@ class SchoolYear < ActiveRecord::Base
   
   has_many :semesters, dependent: :destroy
   has_many :courses, through: :semesters
+  has_many :notifications
 
   after_create :create_default_semesters
 

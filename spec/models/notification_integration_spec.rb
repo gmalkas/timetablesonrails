@@ -61,20 +61,24 @@ describe Notification do
     end
 
     it "only returns notifications that involves the user" do
-      Set.new(Notification.for_user(gabriel, school_year)).should == Set.new([subject, notification_two])
+      Set.new(Notification.related_to_user(gabriel)).should == Set.new([subject, notification_two])
     end
 
     it "orders the result by creation date, from the most recent to the oldest" do
-      Notification.for_user(gabriel, school_year).should == [notification_two, subject]
+      Notification.related_to_user(gabriel).should == [notification_two, subject]
     end
 
     context "when there are many shool years" do
-      before do
+      let(:old_notification) {
         Notification.notify_new_course_candidate old_school_year, gabriel, ruby
+      }
+
+      before do
+        old_notification
       end
 
       it "only returns notifications related to the given school year" do
-        Notification.for_user(gabriel, school_year).should == [notification_two, subject] 
+        Notification.occured_in(old_school_year).should == [old_notification] 
       end
     end
   end
