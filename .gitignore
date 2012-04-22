@@ -20,3 +20,6 @@
 
 # Ignore .rspec conf file
 .rspec
+
+# Ignore DB config
+/config/database.yml
