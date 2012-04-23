@@ -1,5 +1,5 @@
 <p>
-  <% [ { number: 1, type: 'semaine' }, { number: 2, type: 'semaine' }, { number: 1, type: 'mois' }, { number: 3, type: 'mois' } ].each do |since| %>
+  <% [ { number: 1, type: 'semaine' }, { number: 2, type: 'semaines' }, { number: 1, type: 'mois' }, { number: 3, type: 'mois' } ].each do |since| %>
     <% selected = params[:depuis] == "#{since[:number]}-#{since[:type]}" %>
     <%= selected ? "&rarr;".html_safe : "&raquo;".html_safe %>
     <% if selected %>

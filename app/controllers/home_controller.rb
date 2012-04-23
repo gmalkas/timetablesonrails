@@ -3,6 +3,7 @@ class HomeController < ApplicationController
 
   def dashboard
     @active_school_year = SchoolYearManager.instance.active_school_year
+    params[:depuis] ||= '2-semaines'
 
     notifications = case params[:depuis]
                       when '1-semaine'
