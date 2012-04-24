@@ -57,7 +57,7 @@
       <section class="courses">
 
         <% sem.courses.each do |course| %>
-          <%= render course %>
+          <%= CoursePresenter.new(course).render self %>
         <% end %>
 
       </div>
