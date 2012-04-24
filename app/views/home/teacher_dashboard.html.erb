@@ -13,7 +13,7 @@
 		<h1>Vos responsabilités</h1>
 	</header>
 
-  <% if @responsabilities.empty? %>
+  <% if @responsabilities.empty? && @activities.empty? %>
 
     <p class="notice">
       Vous n'avez aucune responsabilité pour le moment.
@@ -23,6 +23,12 @@
     <section class="courses">
       <% @responsabilities.each do |responsability| %>
         <%= responsability.render self %>
+      <% end %>
+    </section>
+
+    <section class="activities">
+      <% @activities.each do |activity| %>
+        <%= activity.render self %>
       <% end %>
     </section>
 

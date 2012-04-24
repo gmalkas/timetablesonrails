@@ -1,0 +1,10 @@
+<li>
+<%= link_to teacher.name, teacher_path(teacher) %>
+<span class="actions">
+  <% if can? :dismiss_teacher, activity %>
+    (
+    <%= link_to "Supprimer", dismiss_activity_teacher_course_activity_path(activity.course, activity, teacher), method: :post %>
+    )
+  <% end %>
+</span>
+</li>

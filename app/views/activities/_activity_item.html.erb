@@ -8,18 +8,40 @@
   </p>
 
   <div class="details">
-    <div class="candidates">
 
-      <% if activity.candidates.any? %>
+    <% unless activity.assigned? %>
+      <h4>Candidats</h4>
+      <div class="candidates">
+        <% if activity.candidates.any? %>
+          <ul>
+            <%= render partial: "teachers/activity_candidate_item", collection: activity.candidates, as: :candidate, locals: { activity: activity } %>
+          </ul>
+        <% else %>
+          <em>Aucun candidat pour le moment.</em>
+        <% end %>
+      </div>
+    <% end %>
 
+    <h4>Enseignants</h4>
+    <div class="teachers">
+      <% if activity.teachers.any? %>
+        <ul>
+          <%= render partial: "teachers/activity_teacher_item", collection: activity.teachers, as: :teacher, locals: { activity: activity } %>
+        </ul>
       <% else %>
-        <em>Aucun candidat pour le moment.</em>
+        <em>Aucun enseignant n'a été désigné pour le moment.</em>
       <% end %>
     </div>
 
     <p class="actions">
+      <% unless activity.assigned? %>
+        <% if current_user.applied_to_activity_teaching? activity %>
+        <% else %>
+          <%= link_to "Postuler", apply_to_activity_course_activity_path(activity.course, activity), method: :post, class: 'button' %>
+        <% end %>
+      <% end %>
       <% if can? :destroy, activity %>
-        <%= link_to "Supprimer", course_activities_path(activity.course), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer cette activité ? Toutes les données associées seront perdues !", class: "button icon trash" %>
+        <%= link_to "Supprimer", course_activity_path(activity.course, activity), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer cette activité ? Toutes les données associées seront perdues !", class: "button icon trash" %>
       <% end %>
     </p>
   </div>

@@ -22,7 +22,15 @@ Timetablesonrails::Application.routes.draw do
       member do
         post 'demissionner' => 'courses#resign', as: 'resign_as_manager'
       end
-      resources :activities, path: 'activites'
+      resources :activities, path: 'activites' do
+        member do
+          post 'choisir-candidat/:candidate' => 'activities#choose_activity_teacher', as: 'choose_activity_teacher'
+          post 'postuler' => 'activities#apply', as: 'apply_to_activity'
+          post 'retirer-candidature' => 'activities#withdraw', as: 'withdraw_activity_teaching_application'
+          post 'retirer-enseignant/:teacher' => 'activities#dismiss_teacher', as: 'dismiss_activity_teacher'
+          post 'supprimer-candidat/:candidate' => 'activities#dismiss_candidate', as: 'dismiss_activity_candidate'
+        end
+      end
     end
   end
 

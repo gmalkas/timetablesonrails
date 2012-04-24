@@ -24,6 +24,7 @@ class HomeController < ApplicationController
     else
       @notifications = TimetablesOnRails::DateRegroup.group_by_day(notifications.related_to_user(current_user).map {|n| NotificationPresenter.new n})
       @responsabilities = current_user.responsabilities.map { |c| CoursePresenter.new c }
+      @activities = current_user.activities.map { |activity| ActivityItemPresenter.new activity }
       render 'teacher_dashboard'
     end
   end

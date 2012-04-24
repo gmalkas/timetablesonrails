@@ -5,14 +5,33 @@
   <p style="" class="informations">
     &rarr;
     <span class="manager-name"><%= course.manager.name %></span>
-    <span style="display: inline-block; margin: 0 0.25em; background-color: #943500; color: #FFF; border-radius: 4px; padding: 0.1em 0.3em;">3 activités</span>
+    <span style="display: inline-block; margin: 0 0.25em; background-color: #943500; color: #FFF; border-radius: 4px; padding: 0.1em 0.3em;"><%= pluralize(course.activities.size, "activité") %></span>
   </p>
 
-  <div class="activities">
-
-  </div>
-
   <div class="details">
+    <div class="activities">
+      <% course.activities.each do |activity| %>
+        <h4><%= activity.type %> &rarr; <%= pluralize(activity.groups, "groupe") %>, <%= pluralize(activity.duration, "heure")%>/groupe</h4>
+        
+        <% if activity.candidates.any? %>
+          <h5>Candidats</h5>
+
+          <ul>
+            <%= render partial: "teachers/activity_candidate_item", collection: activity.candidates, as: :candidate, locals: { activity: activity } %>
+          </ul>
+        <% end %>
+
+        <% if activity.teachers.any? %>
+          <h5>Enseignants</h5>
+
+          <ul>
+            <%= render partial: "teachers/activity_teacher_item", collection: activity.teachers, as: :teacher, locals: { activity: activity } %>
+          </ul>
+        <% end %>
+
+      <% end %>
+    </div>
+
     <p class="actions">
       <% if can? :create, Activity.new %> 
         <%= link_to "Créer une activité", new_course_activity_path(course), class: "button icon add" %>

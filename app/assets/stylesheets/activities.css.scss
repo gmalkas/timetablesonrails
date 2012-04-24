@@ -52,8 +52,18 @@ section.activities {
       margin-top: 0.5em;
       padding: 0.5em;
 
+      ul {
+        li {
+          margin: 0 0.25em;
 
-      div.candidates {
+          font-size: 0.875em;
+
+          list-style-type: none;
+
+        }
+      }
+
+      div.candidates, div.teachers {
         padding: 0.5em;
 
         span.actions {

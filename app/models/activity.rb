@@ -33,6 +33,7 @@ class Activity < ActiveRecord::Base
   # 
   def assign!(candidate)
     self.teachers << candidate
+    dismiss_candidate candidate
     if self.teachers.count == self.groups
     	dismiss_candidates
     end
@@ -49,6 +50,10 @@ class Activity < ActiveRecord::Base
 
   def dismiss_candidates
     self.candidates.clear
+  end
+
+  def dismiss_teacher(teacher)
+    self.teachers.delete teacher
   end
 
   def conflict?

@@ -15,7 +15,7 @@ class Ability
       can [:read, :apply, :withdraw], Course
       can [:read, :apply, :withdraw], Activity
       can [:create], Activity
-      can [:choose_teacher, :destroy], Activity, course: { manager_id: user.id }
+      can [:choose_teacher, :dismiss_teacher, :destroy], Activity, course: { manager_id: user.id }
       can [:resign], Course, manager_id: user.id
     end
   end

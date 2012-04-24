@@ -4,7 +4,9 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  has_and_belongs_to_many :courses, join_table: 'candidates_courses', foreign_key: 'candidate_id'
+  has_and_belongs_to_many :course_management_applications, class_name: 'Course', join_table: 'candidates_courses', foreign_key: 'candidate_id'
+  has_and_belongs_to_many :activity_applications, class_name: 'Activity',  join_table: 'activities_candidates', foreign_key: 'candidate_id'
+  has_and_belongs_to_many :activities, class_name: 'Activity',  join_table: 'activities_teachers', foreign_key: 'teacher_id'
   has_many :responsabilities, class_name: 'Course', foreign_key: 'manager_id', dependent: :nullify
 
   validates_presence_of :firstname, :lastname, :username
@@ -39,7 +41,7 @@ class User < ActiveRecord::Base
   ##
   # Checks whether the user has already applied to a given course
   def applied?(course)
-    courses.include? course
+    course_management_applications.include? course
   end
 
   def manage?(course)
@@ -48,6 +50,18 @@ class User < ActiveRecord::Base
 
   def resign_as_manager(course)
     responsabilities.delete course
+  end
+
+  def apply_to_activity_teaching(activity)
+    self.activity_applications << activity
+  end
+
+  def withdraw_activity_teaching_application(activity)
+    self.activity_applications.delete activity
+  end
+
+  def applied_to_activity_teaching?(activity)
+    self.activity_applications.include? activity
   end
 
   def self.teachers
