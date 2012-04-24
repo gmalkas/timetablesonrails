@@ -11,7 +11,7 @@ class Notification < ActiveRecord::Base
   # Fetches the notifications related to the given user.
   #
   def self.related_to_user(user)
-    self.joins(:properties).where('notification_properties.resource = ?', 'user').where('notification_properties.value = ?', user.id).order('notifications.created_at DESC')
+    self.joins(:properties).where('notification_properties.resource = ?', 'user').where('notification_properties.value = ?', user.id)
   end
 
   #
@@ -31,3 +31,4 @@ end
 # Necessary because of Rails autoloading
 require_relative './notifications/new_course_candidate'
 require_relative './notifications/withdraw_course_management_application'
+require_relative './notifications/choose_course_manager'

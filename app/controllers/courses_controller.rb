@@ -25,6 +25,7 @@ class CoursesController < ApplicationController
   def choose_course_manager
     course = Course.find_by_id params[:id]
     candidate = course.candidates.find params[:candidate]
+    Notification.notify_course_manager_chosen @active_school_year, current_user, candidate, course
     course.assign! candidate
     course.save!
 
