@@ -1,7 +1,6 @@
 class Activity < ActiveRecord::Base
 
   # === DATA ===
-  # attr_accessible :type, :duration, :groups, :teachers
   attr_accessible :type, :duration, :groups
 
   belongs_to :course
