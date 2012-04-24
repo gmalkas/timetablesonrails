@@ -28,4 +28,6 @@ class Notification < ActiveRecord::Base
   end
 end
 
+# Necessary because of Rails autoloading
 require_relative './notifications/new_course_candidate'
+require_relative './notifications/withdraw_course_management_application'

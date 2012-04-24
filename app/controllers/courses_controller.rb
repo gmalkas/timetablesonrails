@@ -61,6 +61,7 @@ class CoursesController < ApplicationController
     
     if current_user.applied? course
       current_user.withdraw_course_management_application course
+      Notification.notify_withdraw_course_management_application  @active_school_year, current_user, course
 
       flash[:success] = "Votre candidature à la gestion de l'U.E #{course.name} a été retirée."
       redirect_to active_school_year_path
