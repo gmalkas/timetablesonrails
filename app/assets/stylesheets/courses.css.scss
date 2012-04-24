@@ -123,6 +123,15 @@ section.courses {
 
     h3 {
       display: inline-block;
+
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
     }
 
     .informations {

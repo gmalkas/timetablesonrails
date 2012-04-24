@@ -42,6 +42,14 @@ class User < ActiveRecord::Base
     courses.include? course
   end
 
+  def manage?(course)
+    responsabilities.include? course
+  end
+
+  def resign_as_manager(course)
+    responsabilities.delete course
+  end
+
   def self.teachers
     self.where("administrator = ?", false).order("lastname ASC")
   end

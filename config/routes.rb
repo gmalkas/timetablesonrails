@@ -8,8 +8,6 @@ Timetablesonrails::Application.routes.draw do
   post '/annee-active/postuler/:id' => 'courses#apply', as: 'apply_to_course_management' 
   post '/annee-active/retirer-candidature/:id' => 'courses#withdraw', as: 'withdraw_course_management_application'
 
-  resources :courses
-
   scope(:path_names => { :new => "nouveau", :edit => "modifier" }) do
     resources :school_years, :path => 'annees-scolaires', :constraints => {:id => /[0-9]{4}/} do
       member do
@@ -20,6 +18,12 @@ Timetablesonrails::Application.routes.draw do
       end
     end
     resources :teachers, path: "enseignants"
+    resources :courses, path: 'unites-enseignement' do
+      member do
+        post 'demissionner' => 'courses#resign', as: 'resign_as_manager'
+      end
+      resources :activities, path: 'activites'
+    end
   end
 
   root :to => 'home#dashboard'
