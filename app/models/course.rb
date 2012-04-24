@@ -47,6 +47,10 @@ class Course < ActiveRecord::Base
   def conflict?
     self.candidates.count > 1 
   end
+
+  def new_activity(type, groups, duration)
+    self.activities.build type: type, groups: groups, duration: duration
+  end
   
   # === Exceptions ===
   class AlreadyAssignedException < StandardError; end

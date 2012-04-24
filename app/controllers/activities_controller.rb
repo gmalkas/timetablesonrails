@@ -1,23 +1,23 @@
 # encoding: utf-8
 class ActivitiesController < ApplicationController
 
-  before_filter :load_active_year
+  before_filter :load_active_year_and_course
 
-  def index
-    @activity = Activity.new
+  def new
+    @activity = @course.activities.build
   end
 
   def create
-    @activity = @active_school_year.find_semester(params[:semester_id]).find_course(params[:course][:name]).new_activity(params[:type], params[:duration], params[:groups])
+    @activity = @course.new_activity params[:activity][:type], params[:activity][:groups], params[:activity][:groups]
 
     if @activity.save
-      flash[:success] = "#{@activity.type} a été ajouté avec succès au cours #{@activity.courses.name}."
-      redirect_to active_school_year_path
+      flash[:success] = "#{@activity.type} a été ajouté avec succès au cours #{@course.name}."
+      redirect_to @course
     else
-      render 'index'
+      render 'new'
     end
   end
-	
+
 	# La liste des profs dépend de l'activité en question (donc du nombre de groupe)
   def choose_activity_teacher
     activity = Activity.find_by_id params[:id]
@@ -48,8 +48,8 @@ class ActivitiesController < ApplicationController
 
   private
 
-  def load_active_year
+  def load_active_year_and_course
     @active_school_year = SchoolYearManager.instance.active_school_year
-    @semesters = @active_school_year.semesters
+    @course = Course.find_by_id params[:course_id]
   end
 end

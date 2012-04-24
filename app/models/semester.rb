@@ -14,10 +14,11 @@ class Semester < ActiveRecord::Base
   # === BEHAVIOR ===
   
   def new_course(name)
-    course = Course.new name: name
-    course.semester = self
-    self.courses << course if course.valid?
-    course
+    self.courses.build name: name
+  end
+
+  def find_course(id)
+    self.courses.find id
   end
 
 end

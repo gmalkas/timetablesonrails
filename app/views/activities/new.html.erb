@@ -1,0 +1,45 @@
+<% title "Créer une activité", @course.name, @active_school_year %>
+
+<header>
+  <h1><%= @active_school_year %> / <%= @course.name %> / Créer une activité</h1>
+</header>
+
+<section id="creer-activite" class="new-activity">
+
+  <% if @activity.errors.any? %>
+    <p class="error">
+      Ce formulaire comporte <%= pluralize @activity.errors.count, "erreur" %>.
+    </p>
+  <% end %>
+
+  <%= form_for @activity, url: course_activities_path(@course), html: { class: 'centered-form' } do |t| %>
+    <div class="fields">
+      <div class="field">
+        <%= t.label :type, "Type :" %>
+        <%= t.select(:type, options_for_select([['Cours', 'Cours'], ['TD', 'TD'], ['TP', 'TP'], ['Projet', 'Projet']]))  %>
+        <p class="description">
+          <%= render 'shared/form_error', resource: @activity, field: :type %>
+        </p>
+      </div>
+      <div class="field">
+        <%= t.label :groups, "Nombre de groupes :" %><br />
+        <%= t.text_field :groups %>
+        <p class="description">
+          <%= render 'shared/form_error', resource: @activity, field: :groups %>
+        </p>
+      </div>
+
+      <div class="field">
+        <%= t.label :duration, "Durée de l'activité (e.g 1,5 pour 1h30) :" %><br />
+        <%= t.text_field :duration %>
+        <p class="description">
+          <%= render 'shared/form_error', resource: @activity, field: :duration %>
+        </p>
+      </div>
+
+      <div class="actions">
+        <%= t.submit "Créer &rarr;".html_safe %>
+      </div>
+    </div>
+  <% end %>
+</section>

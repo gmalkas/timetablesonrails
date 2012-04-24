@@ -1,10 +1,19 @@
-<p id="notice"><%= notice %></p>
+<% title @course.name, @active_school_year %>
 
-<p>
-  <b>Name:</b>
-  <%= @course.name %>
-</p>
+<header>
+  <h1><%= @active_school_year %> / <%= @course.name %></h1>
+</header>
 
+<section class="course-information">
+  <p class="manager-name">Responsable &rarr; <%= link_to @course.manager.name, teacher_path(@course.manager), class: 'manager-name' %></p>
+</section>
 
-<%= link_to 'Edit', edit_course_path(@course) %> |
-<%= link_to 'Back', courses_path %>
+<section class="activities">
+  <header>
+    <h1>Activités</h1>
+  </header>
+
+  <% @course.activities.each do |activity| %>
+    <strong><%= activity.type %></strong>
+  <% end %>
+</section>

@@ -15,7 +15,12 @@ class Activity < ActiveRecord::Base
                                      association_foreign_key: 'teacher_id'
 
   validates_presence_of :course_id, :type, :duration, :groups
+  validates :groups, numericality: true
   validates :type, inclusion: { in: %w(TP TD Cours Projet), message: "%{value} n'est pas un type d'activité correct."}
+
+  def self.inheritance_column
+    ''
+  end
 
   # === BEHAVIOR ===
   def assigned?
