@@ -1,0 +1,61 @@
+<% css_class = (course.conflict?) ? "warning" : (course.candidates.count > 0 || course.assigned? ) ? "valid" : "nobody" %>
+<% img_prefix = (css_class == "warning" || css_class == "valid") ? "white_" : "" %>
+
+<article class="course <%= css_class %>">
+  <img class="show-details" src="assets/<%= img_prefix %>plus_alt_16x16.png" alt="+" />
+  <h3><%= course.name %></h3>
+
+  <p class="informations">
+    <% if course.candidates.empty? %>
+      <% if course.assigned? %>
+        <%= course.manager.name %>
+      <% else %>
+        <em>Aucun postulant</em>
+      <% end %>
+    <% else %>
+      <%= pluralize(course.candidates.count, "postulant") %>
+    <% end %>
+  </p>
+
+  <div class="details">
+    <div class="candidates">
+      <% if course.candidates.empty? %>
+        <% if not course.assigned? %>
+          <em>Aucun postulant</em>
+        <% end %>
+      <% else %>
+        <ul>
+          <% course.candidates.each do |p| %>
+            <li>
+              <%= link_to p.name, root_path %>
+              <span class="actions">
+                <% if current_user.administrator? %>
+                  (
+                  <%= link_to "Désigner responsable", choose_course_manager_path(course, p), method: :post %>
+                  <%= link_to "Supprimer de la liste", dismiss_candidate_path(course, p), method: :post %>
+                  )
+                <% end %>
+              </span>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+    <p class="actions <%= css_class %>">
+      <% if current_user.administrator? %>
+        <%= link_to "Supprimer", course, method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
+      <% else %>
+        <% if current_user.applied?(course) %>
+          <%= link_to "Retirer ma candidature", withdraw_course_management_application_path(course), method: :post, class: "button" %>
+        <% elsif not course.assigned? %>
+          <%= link_to "Postuler", apply_to_course_management_path(course), method: :post, class: "button" %>
+        <% end %>
+
+        <% if course.manager == current_user %>
+          <%= link_to "Gérer", apply_to_course_management_path(course), class: "button" %>
+        <% end %>
+      <% end %>
+    </p>
+  </div>
+  
+</article>
