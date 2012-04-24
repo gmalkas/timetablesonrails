@@ -28,7 +28,7 @@
 
     <section class="activities">
       <% @activities.each do |activity| %>
-        <%= activity.render self %>
+        <%= activity.render self, true %>
       <% end %>
     </section>
 

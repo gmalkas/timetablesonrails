@@ -29,6 +29,7 @@ Timetablesonrails::Application.routes.draw do
           post 'retirer-candidature' => 'activities#withdraw', as: 'withdraw_activity_teaching_application'
           post 'retirer-enseignant/:teacher' => 'activities#dismiss_teacher', as: 'dismiss_activity_teacher'
           post 'supprimer-candidat/:candidate' => 'activities#dismiss_candidate', as: 'dismiss_activity_candidate'
+          post 'demissionner' => 'activities#resign', as: 'resign_as_teacher'
         end
       end
     end

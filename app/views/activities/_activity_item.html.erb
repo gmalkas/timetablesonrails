@@ -1,6 +1,6 @@
 <article class="activity">
   <%= image_tag 'plus_alt_16x16.png', alt: '+', class: 'show-details' %>
-  <h3><%= activity.type %></h3>
+  <h3><%= "#{activity.course.name} / " if show_course_name %><%= activity.type %></h3>
 
   <p style="" class="informations">
     &rarr; <span class="manager-name" style="background-color: #1C4270;"><%= pluralize(activity.groups, 'groupe') %></span>
@@ -36,9 +36,13 @@
     <p class="actions">
       <% unless activity.assigned? %>
         <% if current_user.applied_to_activity_teaching? activity %>
+          <%= link_to "Retirer ma candidature", withdraw_activity_teaching_application_course_activity_path(activity.course, activity), method: :post, class: 'button' %>
         <% else %>
           <%= link_to "Postuler", apply_to_activity_course_activity_path(activity.course, activity), method: :post, class: 'button' %>
         <% end %>
+      <% end %>
+      <% if current_user.teaches? activity %>
+          <%= link_to "Démissionner", resign_as_teacher_course_activity_path(activity.course, activity), method: :post, class: 'button' %>
       <% end %>
       <% if can? :destroy, activity %>
         <%= link_to "Supprimer", course_activity_path(activity.course, activity), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer cette activité ? Toutes les données associées seront perdues !", class: "button icon trash" %>

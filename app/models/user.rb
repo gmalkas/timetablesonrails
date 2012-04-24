@@ -64,6 +64,14 @@ class User < ActiveRecord::Base
     self.activity_applications.include? activity
   end
 
+  def teaches?(activity)
+    self.activities.include? activity
+  end
+
+  def resign_as_teacher(activity)
+    activities.delete activity
+  end
+
   def self.teachers
     self.where("administrator = ?", false).order("lastname ASC")
   end

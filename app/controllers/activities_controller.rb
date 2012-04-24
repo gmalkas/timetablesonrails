@@ -64,28 +64,26 @@ class ActivitiesController < ApplicationController
   def withdraw
     activity = Activity.find_by_id params[:id]
     
-    if current_user.applied? course
-      current_user.withdraw_course_management_application course
-      Notification.notify_withdraw_course_management_application  @active_school_year, current_user, course
+    if current_user.applied_to_activity_teaching? activity
+      current_user.withdraw_activity_teaching_application activity
 
-      flash[:success] = "Votre candidature à la gestion de l'U.E #{course.name} a été retirée."
-      redirect_to active_school_year_path
+      flash[:success] = "Votre candidature à la gestion de l'activité #{activity.type} de l'U.E #{activity.course.name} a été retirée."
+      redirect_to :back
     else
-      redirect_to active_school_year_path, alert: "Vous n'avez pas postulé à la gestion de l'U.E #{course.name}."
+      redirect_to :back, alert: "Vous n'avez pas postulé à la gestion de l'activité #{activity.type} de l'U.E #{activity.course.name}."
     end
   end
 
   def resign
-    course = Course.find_by_id params[:id]
+    activity = Activity.find_by_id params[:id]
     
-    if current_user.manage? course
-      current_user.resign_as_manager course
-      Notification.notify_course_manager_resigned  @active_school_year, current_user, course
+    if current_user.teaches? activity
+      current_user.resign_as_teacher activity
 
-      flash[:success] = "Votre démission du poste de responsable de l'U.E #{course.name} a été enregistrée."
+      flash[:success] = "Votre démission du poste d'enseignant de l'activité #{activity.type} de l'U.E #{activity.course.name} a été enregistrée."
       redirect_to :back
     else
-      redirect_to :back, alert: "Vous n'êtes pas responsable de l'U.E #{course.name}."
+      redirect_to :back, alert: "Vous n'êtes pas enseignant de l'activité #{activity.type} de l'U.E #{activity.course.name}."
     end
   end
 
