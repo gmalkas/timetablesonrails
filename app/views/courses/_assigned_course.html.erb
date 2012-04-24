@@ -33,7 +33,7 @@
     </div>
 
     <p class="actions">
-      <% if can? :create, Activity.new %> 
+      <% if can? :create, course.activities.build %> 
         <%= link_to "Créer une activité", new_course_activity_path(course), class: "button icon add" %>
       <% end %>
       <% if can? :resign, course %>

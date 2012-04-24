@@ -10,11 +10,12 @@ class Ability
 
     if user.administrator?
       can :manage, :all
-      cannot [:apply, :withdraw], Course
+      cannot [:apply, :withdraw, :resign], Course
+      cannot [:apply, :withdraw, :resign], Activity
     else
       can [:read, :apply, :withdraw], Course
       can [:read, :apply, :withdraw], Activity
-      can [:create], Activity
+      can [:create], Activity, course: { manager_id: user.id }
       can [:choose_teacher, :dismiss_teacher, :destroy], Activity, course: { manager_id: user.id }
       can [:resign], Course, manager_id: user.id
     end
