@@ -69,7 +69,20 @@ class CoursesController < ApplicationController
     else
       redirect_to active_school_year_path, alert: "Vous n'avez pas postulé à la gestion de l'U.E #{course.name}."
     end
+  end
 
+  def resign
+    course = Course.find_by_id params[:id]
+    
+    if current_user.manage? course
+      current_user.resign_as_manager course
+      Notification.notify_course_manager_resigned  @active_school_year, current_user, course
+
+      flash[:success] = "Votre démission du poste de responsable de l'U.E #{course.name} a été enregistrée."
+      redirect_to :back
+    else
+      redirect_to :back, alert: "Vous n'êtes pas responsable de l'U.E #{course.name}."
+    end
   end
 
   def destroy

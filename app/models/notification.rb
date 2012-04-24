@@ -32,3 +32,4 @@ end
 require_relative './notifications/new_course_candidate'
 require_relative './notifications/withdraw_course_management_application'
 require_relative './notifications/choose_course_manager'
+require_relative './notifications/course_manager_resigned'
