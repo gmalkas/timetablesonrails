@@ -1,0 +1,27 @@
+<article class="activity">
+  <%= image_tag 'plus_alt_16x16.png', alt: '+', class: 'show-details' %>
+  <h3><%= activity.type %></h3>
+
+  <p style="" class="informations">
+    &rarr; <span class="manager-name" style="background-color: #1C4270;"><%= pluralize(activity.groups, 'groupe') %></span>
+    <span class="manager-name" style="background-color: #AB8F2B;"><%= pluralize(activity.duration, 'heure') %> / groupe</span>
+  </p>
+
+  <div class="details">
+    <div class="candidates">
+
+      <% if activity.candidates.any? %>
+
+      <% else %>
+        <em>Aucun candidat pour le moment.</em>
+      <% end %>
+    </div>
+
+    <p class="actions">
+      <% if can? :destroy, activity %>
+        <%= link_to "Supprimer", course_activities_path(activity.course), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer cette activité ? Toutes les données associées seront perdues !", class: "button icon trash" %>
+      <% end %>
+    </p>
+  </div>
+  
+</article>

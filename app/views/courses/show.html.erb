@@ -4,16 +4,12 @@
   <h1><%= @active_school_year %> / <%= @course.name %></h1>
 </header>
 
-<section class="course-information">
-  <p class="manager-name">Responsable &rarr; <%= link_to @course.manager.name, teacher_path(@course.manager), class: 'manager-name' %></p>
-</section>
-
 <section class="activities">
   <header>
     <h1>Activités</h1>
   </header>
 
-  <% @course.activities.each do |activity| %>
-    <strong><%= activity.type %></strong>
+  <% @activities.each do |activity| %>
+    <%= activity.render self %>
   <% end %>
 </section>

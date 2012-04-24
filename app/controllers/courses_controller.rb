@@ -87,6 +87,7 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find_by_id params[:id]
+    @activities = @course.activities.map { |activity| ActivityItemPresenter.new activity }
   end
 
   def destroy
