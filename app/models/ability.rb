@@ -13,6 +13,10 @@ class Ability
       cannot [:apply, :withdraw], Course
     else
       can [:read, :apply, :withdraw], Course
+      can [:read, :apply, :withdraw], Activity
+      can [:create], Activity
+      can [:choose_teacher], Activity, course: { manager_id: user.id }
+      can [:resign], Course, manager_id: user.id
     end
   end
 end
