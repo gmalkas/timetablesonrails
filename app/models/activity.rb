@@ -1,3 +1,4 @@
+# encoding: utf-8
 class Activity < ActiveRecord::Base
 
   # === DATA ===
@@ -12,6 +13,10 @@ class Activity < ActiveRecord::Base
   has_and_belongs_to_many :teachers, class_name: 'User',
                                      join_table: 'activities_teachers',
                                      association_foreign_key: 'teacher_id'
+
+  validates_presence_of :course_id, :type, :duration, :groups
+  validates :type, inclusion: { in: %w(TP TD Cours Projet), message: "%{value} n'est pas un type d'activité correct."}
+
   # === BEHAVIOR ===
   def assigned?
     self.teachers.count == self.groups

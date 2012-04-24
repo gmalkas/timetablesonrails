@@ -14,6 +14,8 @@ class Course < ActiveRecord::Base
                                        join_table: 'candidates_courses',
                                        association_foreign_key: 'candidate_id'
 
+  has_many :activities, dependent: :destroy, order: 'type ASC'
+
   # === BEHAVIOR ===
  
   def assigned?
