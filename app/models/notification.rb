@@ -11,7 +11,7 @@ class Notification < ActiveRecord::Base
   # Fetches the notifications related to the given user.
   #
   def self.related_to_user(user)
-    self.joins(:properties).where('notification_properties.resource = ?', 'user').where('notification_properties.value = ?', user.id)
+    self.joins(:properties).where('notification_properties.resource = ?', 'user').where('notification_properties.value = ?', user.id).order('notifications.created_at DESC')
   end
 
   #
