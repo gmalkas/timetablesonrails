@@ -15,14 +15,10 @@ end
 class Notification
 
   def self.notify_course_manager_resigned(school_year, teacher, course)
-    notification = Notifications::CourseManagerResigned.new 
-    notification.school_year = school_year
-
-    notification.properties << NotificationProperty.new(name: 'teacher', value: teacher.id, resource: 'user')
-    notification.properties << NotificationProperty.new(name: 'course', value: course.id, resource: 'course')
-
-    notification.save!
-    notification
+    self.notify Notifications::CourseManagerResigned, school_year do |notification|
+      notification.properties << NotificationProperty.new(name: 'teacher', value: teacher.id, resource: 'user')
+      notification.properties << NotificationProperty.new(name: 'course', value: course.id, resource: 'course')
+    end
   end
 
 end

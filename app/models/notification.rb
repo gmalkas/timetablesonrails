@@ -26,6 +26,16 @@ class Notification < ActiveRecord::Base
   def find_property!(name)
     self.properties.select { |p| p.name == name }.first
   end
+
+  def self.notify(notification_type, school_year)
+    notification = notification_type.new
+    notification.school_year = school_year
+
+    yield notification
+
+    notification.save!
+    notification
+  end
 end
 
 # Necessary because of Rails autoloading

@@ -15,18 +15,15 @@ end
 class Notification
 
   def self.notify_withdraw_course_management_application(school_year, teacher, course)
-    notification = Notifications::WithdrawCourseManagementApplication.new 
-    notification.school_year = school_year
-    notification.properties << NotificationProperty.new(name: 'teacher', value: teacher.id, resource: 'user')
-    notification.properties << NotificationProperty.new(name: 'course', value: course.id, resource: 'course')
-    
-    # Other candidates need to see this notification, therefore we create these properties
-    course.candidates.each do |t|
-      notification.properties << NotificationProperty.new(name: "candidate_#{t.id}", value: t.id, resource: 'user') unless t == teacher
+    self.notify Notifications::WithdrawCourseManagementApplication, school_year do |notification|
+      notification.properties << NotificationProperty.new(name: 'teacher', value: teacher.id, resource: 'user')
+      notification.properties << NotificationProperty.new(name: 'course', value: course.id, resource: 'course')
+      
+      # Other candidates need to see this notification, therefore we create these properties
+      course.candidates.each do |t|
+        notification.properties << NotificationProperty.new(name: "candidate_#{t.id}", value: t.id, resource: 'user') unless t == teacher
+      end
     end
-
-    notification.save!
-    notification
   end
 
 end
