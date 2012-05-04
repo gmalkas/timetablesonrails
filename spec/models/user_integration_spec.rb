@@ -47,7 +47,7 @@ describe User do
       u.password = "gabriel"
       u.save
 
-      u.stub(:courses) { [:java] }
+      u.stub(:course_management_applications) { [:java] }
 
       u.applied?(:java).should be_true
       u.applied?(:assembly).should be_false
