@@ -14,7 +14,7 @@ class Semester < ActiveRecord::Base
   # === BEHAVIOR ===
   
   def new_course(name)
-    self.courses.build name: name
+    self.courses.create name: name
   end
 
   def find_course(id)

@@ -1,4 +1,5 @@
 require_relative './user'
+require_relative './activity'
 
 class Course < ActiveRecord::Base
 

@@ -43,11 +43,6 @@ describe Semester do
       subject.courses.last.should == course
     end
 
-    it "does not add the course if it is not valid" do
-      course = subject.new_course nil
-      subject.courses.should be_empty
-    end
-
     it "sets the semester reference to itself" do
       course = subject.new_course "Java"
       course.semester.should == subject
