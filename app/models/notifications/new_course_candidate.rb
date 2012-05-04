@@ -26,7 +26,7 @@ end
 class Notification
 
   def self.notify_new_course_candidate(school_year, teacher, course)
-    notify Notifications::NewCourseCandidate, school_year do |notification|
+    self.notify Notifications::NewCourseCandidate, school_year do |notification|
       notification.properties << NotificationProperty.new(name: 'teacher', value: teacher.id, resource: 'user')
       notification.properties << NotificationProperty.new(name: 'course', value: course.id, resource: 'course')
       notification.properties << NotificationProperty.new(name: 'candidates', value: course.candidates.size)
