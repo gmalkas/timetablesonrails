@@ -13,10 +13,7 @@ describe Notification do
   describe ".notify_new_course_candidate" do
 
     let(:teacher) {
-      user = User.new firstname: "Gabriel", lastname: "Malkas", username: "gmalkas"
-      user.password = "gabriel"
-      user.save!
-      user
+      FactoryGirl.create :teacher
     }
 
     let(:school_year) {

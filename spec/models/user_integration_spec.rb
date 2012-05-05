@@ -21,9 +21,7 @@ describe User do
   end
 
   it "has a unique username" do
-    u = User.new username: "gmalkas", firstname: "Gabriel", lastname: "Malkas"
-    u.password = "george"
-    u.save!
+    u = FactoryGirl.create :user
 
     user = User.new username: "gmalkas", firstname: "George", lastname: "Malkas"
     user.valid?.should be_false
@@ -31,10 +29,7 @@ describe User do
   end
 
   it "has a password" do
-    u = User.new username: "gmalkas", firstname: "Gabriel", lastname: "Malkas"
-    u.password = "george"
-    u.save!
-
+    u = FactoryGirl.create :user
     u.password_digest.should_not be_nil
   end
 
@@ -43,10 +38,7 @@ describe User do
     let(:java) { stub }
 
     it "checks wether the user has already applied to a given course" do
-      u = User.new username: "gmalkas", firstname: "Gabriel", lastname: "Malkas" 
-      u.password = "gabriel"
-      u.save
-
+      u = FactoryGirl.create :user
       u.stub(:course_management_applications) { [:java] }
 
       u.applied?(:java).should be_true
@@ -57,15 +49,12 @@ describe User do
   describe ".teachers" do
     before do
       [
-        { username: "gmalkas", firstname: "Gabriel", lastname: "Malkas" },
-        { username: "rlagrange", firstname: "Richard", lastname: "Lagrange" },
-        { username: "vguilpain", firstname: "Vincent", lastname: "Guilpain" },
-        { username: "alecahain", firstname: "Amandine", lastname: "Le Cahain" }
+        { username: "gmalkas", lastname: "Malkas" },
+        { username: "rlagrange", lastname: "Lagrange" },
+        { username: "vguilpain", lastname: "Guilpain" },
+        { username: "alecahain", lastname: "Le Cahain" }
       ].each do |user_data|
-        u = User.new user_data
-        u.password = user_data[:username]
-        u.administrator = user_data[:username] == "gmalkas"
-        u.save!
+        FactoryGirl.create :user, username: user_data[:username], lastname: user_data[:lastname], administrator: user_data[:username] == "gmalkas"
       end
     end
     

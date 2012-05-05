@@ -22,7 +22,7 @@ describe SchoolYear do
 
   context "with an existing school year" do
     before do
-      SchoolYear.create! start_date: @date, end_date: @date.next_year
+      FactoryGirl.create :school_year, start_date: @date
     end
 
     subject { school_year = SchoolYear.new start_date: @date, end_date: @date.next_year }
@@ -39,7 +39,7 @@ describe SchoolYear do
   end
 
   it "creates default semesters when created" do
-    school_year = SchoolYear.create start_date: @date, end_date: @date.next_year 
+    school_year = FactoryGirl.create :school_year
     school_year.semesters.map(&:name).should == ["5", "6", "7", "8", "9", "10"]
   end
 
@@ -48,7 +48,7 @@ describe SchoolYear do
   end
 
   context "with courses" do
-    subject { SchoolYear.create start_date: @date, end_date: @date.next_year }
+    subject { FactoryGirl.create :school_year }
 
     before do
       courses = []
@@ -74,7 +74,7 @@ describe SchoolYear do
 
   describe "#new_semester" do
 
-    subject { SchoolYear.create start_date: @date, end_date: @date + 10 }
+    subject { FactoryGirl.create :school_year }
 
     it "creates a semester and adds it to the list" do
       subject.new_semester "Semester", @date, @date

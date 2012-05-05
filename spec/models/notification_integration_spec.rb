@@ -9,17 +9,11 @@ require_relative '../../app/models/notifications/new_course_candidate'
 describe Notification do
 
   let(:gabriel) {
-    user = User.new firstname: "Gabriel", lastname: "Malkas", username: "gmalkas"
-    user.password = "gabriel"
-    user.save!
-    user
+    FactoryGirl.create :user
   }
 
   let(:marin) {
-    user = User.new firstname: "Marin", lastname: "Bertier", username: "mbertier"
-    user.password = "marin"
-    user.save!
-    user
+    FactoryGirl.create :user, username: "mbertier"
   }
 
   let(:school_year) {

@@ -19,10 +19,7 @@ describe User do
 
     context "when is a teacher" do
       let(:user) {
-        user = User.new username: "gmalkas", firstname: "Gabriel", lastname: "Malkas"
-        user.password = "gabriel"
-        user.save
-        user
+        FactoryGirl.create :user
       }
 
       it "can read courses" do
@@ -42,11 +39,7 @@ describe User do
 
     context "when is an administrator" do
       let(:user) {
-        user = User.new username: "gmalkas", firstname: "Gabriel", lastname: "Malkas"
-        user.password = "gabriel"
-        user.administrator = true
-        user.save
-        user
+        FactoryGirl.create :administrator
       }
 
       it "can do almost everything" do

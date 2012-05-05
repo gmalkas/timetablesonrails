@@ -1,5 +1,7 @@
 require_relative '../spec_helper_lite'
 require_relative '../../app/models/course'
+require_relative '../../app/models/semester'
+require_relative '../../app/models/school_year'
 
 describe Course do
 
@@ -29,18 +31,13 @@ describe Course do
   end
 
   context "when it has candidates" do
-    subject { Course.new name: "Ruby" }
+    subject { FactoryGirl.create :course }
+
     let(:user) { 
-      user = User.new username: "gmalkas", firstname: "Gabriel", lastname: "Malkas"
-      user.password = "gabriel"
-      user.save!
-      user
+      FactoryGirl.create :user
     }
 
     before do
-      subject.semester_id = 1
-      subject.save!
-
       subject.new_candidate user
     end
 

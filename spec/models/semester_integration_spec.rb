@@ -30,12 +30,7 @@ describe Semester do
   end
 
   describe "#new_course" do
-    subject { Semester.new name: "Semester", start_date: @date, end_date: @date.next_month }
-
-    before do
-      subject.school_year_id = 1
-      subject.save
-    end
+    subject { FactoryGirl.create :semester }
 
     it "adds the course to the list" do
       course = subject.new_course "Java"
@@ -50,12 +45,9 @@ describe Semester do
   end
 
   describe "#courses" do
-    subject { Semester.new name: "Semester", start_date: @date, end_date: @date.next_month }
+    subject { FactoryGirl.create :semester }
 
     before do
-      subject.school_year_id = 1
-      subject.save
-
       subject.new_course "Unix"
       subject.new_course "Assembly"
       subject.new_course "C#"
