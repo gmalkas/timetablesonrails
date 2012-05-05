@@ -42,6 +42,7 @@ gem 'capistrano'
 group :development, :test do
   gem 'rr'
   gem "rspec-rails"
+  gem 'factory_girl_rails'
 end
 
 # To use debugger
