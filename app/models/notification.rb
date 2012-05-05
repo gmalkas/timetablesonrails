@@ -15,6 +15,13 @@ class Notification < ActiveRecord::Base
   end
 
   #
+  # Fetches the notifications related to the given course
+  #
+  def self.related_to_course(course)
+    self.joins(:properties).where('notification_properties.resource = ?', 'course').where('notification_properties.value = ?', course.id).order('notifications.created_at DESC')
+  end
+
+  #
   # Fetches the notifications related to the given school year.
   #
   def self.occured_in(school_year)
