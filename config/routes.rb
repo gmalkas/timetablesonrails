@@ -18,8 +18,9 @@ Timetablesonrails::Application.routes.draw do
       end
     end
     resources :teachers, path: "enseignants"
-    resources :courses, path: 'unites-enseignement' do
+    resources :courses, path: 'ec' do
       member do
+        get 'choisir-responsable' => 'courses#pick_manager', as: 'pick_manager'
         post 'demissionner' => 'courses#resign', as: 'resign_as_manager'
       end
       resources :activities, path: 'activites' do

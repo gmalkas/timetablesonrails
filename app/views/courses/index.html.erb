@@ -1,7 +1,7 @@
 <% title @active_school_year %>
 
 <header>
-  <h1><%= @active_school_year %> / Unités d'enseigments</h1>
+  <h1><%= @active_school_year %> / &Eacute;léments constitutifs</h1>
 </header>
 
 <section class="filters">
@@ -22,7 +22,7 @@
       <% if current_user.administrator? %>
         <section class="new-course">
           <div class="add-course">
-            <%= link_to "Ajouter une U.E &rarr;".html_safe, root_path, :class => 'show-form' %>
+            <%= link_to "Ajouter un E.C &rarr;".html_safe, root_path, :class => 'show-form' %>
           </div>
         </section>
       <% end %>
@@ -44,7 +44,7 @@
       <%= form_for @course, html: { class: 'inline-form new-course-form', style: @is_course_semester ? 'display: block;' : '' } do |f| %>
         <div class="fields">
           <div class="field">
-            <%= f.text_field :name, placeholder: "Nom de l'unité", class: 'form-name' %>
+            <%= f.text_field :name, placeholder: "Nom de l'élément constitutif", class: 'form-name' %>
             <%= hidden_field_tag :semester_id, sem.id %>
             <%= f.submit "Créer &rarr;".html_safe %> ou <a href="" class="cancel-form">annuler</a> 
           </div>
