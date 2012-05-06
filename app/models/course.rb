@@ -37,6 +37,10 @@ class Course < ActiveRecord::Base
     self.candidates << user
   end
 
+  def find_candidate(id)
+    self.candidates.find id
+  end
+
   def dismiss_candidate(candidate)
     self.candidates.delete candidate
   end
