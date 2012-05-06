@@ -28,22 +28,28 @@ class User < ActiveRecord::Base
   
   ##
   # Adds the user to the candidates list of the given course.
+  #
   def apply_to_course_management(course)
     course.new_candidate self
   end
 
   ##
   # Removes the user from the candidates list of the given course.
+  #
   def withdraw_course_management_application(course)
     course.dismiss_candidate self
   end
 
   ##
   # Checks whether the user has already applied to a given course
+  #
   def applied?(course)
     course_management_applications.include? course
   end
 
+  ##
+  # Checks whether the user is responsible for managing a given course.
+  #
   def manage?(course)
     responsabilities.include? course
   end
