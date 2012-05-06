@@ -53,12 +53,22 @@ describe CoursesController do
         end
       end
 
-      context "when the semester does not exist" do
-        it "renders a 404 error" do
-          post :create, course: { name: "Ruby" }
-          response.should render_template("errors/404")
+    end
+
+    describe "POST choose a course manager" do
+      context "when the course exists" do
+        context "when the candidate exists" do
+          let(:course) { active_school_year.semesters.first.new_course "Ruby" }
+          let(:candidate) { FactoryGirl.create :teacher, username: "mbertier" }
+
+          before { candidate.apply_to_course_management course }
+
+          it "adds the candidate to the candidates list of the course"
+          it "creates a notification"
+          it "saves the course"
         end
       end
+
     end
   end
 
