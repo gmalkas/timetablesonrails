@@ -32,7 +32,7 @@ class SchoolYearsController < ApplicationController
 
   def disable
     school_year = SchoolYearManager.instance.find! params[:id]
-    SchoolYearManager.instance.disable_school_year school_year
+    SchoolYearManager.instance.disable_school_year
     flash[:success] = "L'année #{params[:id]} a correctement été désactivée."
     redirect_to school_years_path
   end
