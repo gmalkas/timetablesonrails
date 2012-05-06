@@ -144,3 +144,32 @@ section.teachers {
     box-shadow: 0 0 8px #ACA;
   }
 }
+
+.teacher_card {
+  display: inline-block;
+
+  border: 3px solid #DDD;
+  border-radius: 6px;
+  background-color: #EEE;
+
+  margin: 1em;
+  width: 22em;
+
+  header {
+    padding: 0.5em;
+
+    h1 {
+      text-align: left;
+      a {
+        font-size: 1.5em;
+        font-family: helvetica;
+        color: #2B2B2B;
+        text-decoration: none;
+      }
+    }
+
+    h2 {
+      margin: 0;
+    }
+  }
+}

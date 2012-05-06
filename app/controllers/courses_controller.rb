@@ -93,18 +93,27 @@ class CoursesController < ApplicationController
   end
 
   ##
+  # Shows a list of teachers to choose from in order to assign the course to one of them.
+  #
+  def pick_manager
+    @course = Course.find_by_id params[:id]
+    @teachers = User.teachers
+    @indexes = TimetablesOnRails::FirstLetterIndex.build_from_name @teachers
+  end
+
+  ##
   # Assigns a teacher to a specific course.
   # This action requires administrative privileges.
   #
   def assign_course_manager
     course = Course.find_by_id params[:id]
-    candidate = course.candidates.find params[:candidate]
+    candidate = User.teachers.find params[:candidate]
     Notification.notify_course_manager_chosen @school_year, current_user, candidate, course
     course.assign! candidate
     course.save!
 
     flash[:success] = "#{candidate.name} est désormais responsable de l'E.C #{course.name}."
-    redirect_to :back
+    redirect_to school_year_courses_path(@school_year)
   end
 
   ##

@@ -1,0 +1,25 @@
+<% title "Choisir un responsable", @course.name, @school_year %>
+
+<header>
+  <h1><%= @school_year %> / <%= @course.name %> / Choisir un responsable</h1>
+</header>
+
+<%= render 'shared/flash_messages' %>
+
+<section class="teachers">
+  <header>
+    <h1>Liste des enseignants</h1>
+  </header>
+
+  <p class="notice">Cliquer sur l'enseignent(e) afin de le/la désigner responsable.</p>
+
+  <% @indexes.each do |letter, teachers| %>
+
+    <h2><%= letter %></h2>
+    <section class="teacher_cards">
+      <% teachers.each do |teacher| %>
+        <%= render 'teachers/teacher', school_year: @school_year, course: @course, teacher: teacher %>
+      <% end %>
+    </section>
+  <% end %>
+</section>
