@@ -1,7 +1,7 @@
 # encoding: utf-8
 class ActivitiesController < ApplicationController
 
-  before_filter :load_active_year_and_course
+  before_filter :load_school_year_and_course
 
   def new
     @activity = @course.activities.build
@@ -12,7 +12,7 @@ class ActivitiesController < ApplicationController
 
     if @activity.save
       flash[:success] = "L'activité #{@activity.type} a été ajouté avec succès au cours #{@course.name}."
-      redirect_to @course
+      redirect_to school_year_course_path(@school_year, @course)
     else
       render 'new'
     end
@@ -35,7 +35,7 @@ class ActivitiesController < ApplicationController
     activity.save!
 
     flash[:success] = "#{candidate.name} est a été retiré de la liste de candidature à l'U.E #{course.name} pour l'activité #{activity.type}"
-    redirect_to active_school_year_path
+    redirect_to school_year_path
   end
 
   def dismiss_teacher
@@ -88,16 +88,16 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    activity = Activity.find_by_id params[:id]
+    activity = Activity.find_by_id! params[:id]
     activity.destroy
     flash[:success] = "L'activité #{activity.type} de l'U.E #{activity.course.name} a été supprimée avec succès."
-    redirect_to @course
+    redirect_to school_year_course_path(@school_year, @course)
   end
 
   private
 
-  def load_active_year_and_course
-    @active_school_year = SchoolYearManager.instance.active_school_year
+  def load_school_year_and_course
+    @school_year = SchoolYearManager.instance.find! params[:school_year_id]
     @course = Course.find_by_id params[:course_id]
   end
 end

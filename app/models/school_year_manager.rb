@@ -33,8 +33,15 @@ class SchoolYearManager
     @active = nil
   end
 
-  def find!(start_year)
-    SchoolYear.find_by_start_date! start_date_from_year(start_year)
+  ##
+  # Fetches a school year according to a string id with the following format:
+  #
+  #   2011-2012
+  #
+  # See SchoolYear#to_param
+  #
+  def find!(id)
+    SchoolYear.find_by_start_date! start_date_from_year(id.slice 0..3)
   end
 
   def activate_school_year(school_year)

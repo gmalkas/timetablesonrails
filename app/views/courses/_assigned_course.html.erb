@@ -1,6 +1,6 @@
 <article class="course">
-  <img class="show-details" src="assets/plus_alt_16x16.png" alt="+" />
-  <h3><%= link_to course.name, course %></h3>
+  <%= image_tag 'plus_alt_16x16.png', alt: '+', class: 'show-details' %>
+  <h3><%= link_to course.name, school_year_course_path(@school_year, course) %></h3>
 
   <p style="" class="informations">
     &rarr;
@@ -34,13 +34,13 @@
 
     <p class="actions">
       <% if can? :create, course.activities.build %> 
-        <%= link_to "Créer une activité", new_course_activity_path(course), class: "button icon add" %>
+        <%= link_to "Créer une activité", new_school_year_course_activity_path(@school_year, course), class: "button icon add" %>
       <% end %>
       <% if can? :resign, course %>
         <%= link_to "Démissionner", resign_as_manager_course_path(course), method: :post, class: "button" %>
       <% end %>
       <% if current_user.administrator? %>
-        <%= link_to "Supprimer", course, method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
+        <%= link_to "Supprimer", school_year_course_path(@school_year, course), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
       <% end %>
     </p>
   </div>

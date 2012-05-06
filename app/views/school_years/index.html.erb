@@ -41,7 +41,7 @@
     <ol>
       <% @archived_school_years.each do |sc| %>
         <li>
-          <%= link_to sc, sc %>
+          <%= link_to sc, school_year_courses_path(sc) %>
           <span class="actions">
             (<%= link_to "Activer", activate_school_year_path(sc), method: :post %> 
             <%= link_to "Retirer des archives", restore_school_year_path(sc), method: :post %>
@@ -62,7 +62,7 @@
       <ol>
         <% @disabled_school_years.each do |sc| %>
           <li>
-            <%= link_to sc, sc %>
+            <%= link_to sc, school_year_courses_path(sc) %>
             <span class="actions">
               (<%= link_to "Activer", activate_school_year_path(sc), method: :post %> 
               <%= link_to "Supprimer", sc, method: :delete, confirm: 'Êtes-vous sûr de vouloir définitivement supprimer cette année scolaire ? Toutes les données associées seront perdues !', class: 'warning' %>)

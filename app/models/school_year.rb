@@ -67,7 +67,7 @@ class SchoolYear < ActiveRecord::Base
   end
 
   def to_param
-    self.start_date.year.to_s
+    "#{self.start_date.year.to_s}-#{self.end_date.year.to_s}"
   end
 
   protected

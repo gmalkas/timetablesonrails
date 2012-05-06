@@ -36,16 +36,16 @@
     <p class="actions">
       <% unless activity.assigned? %>
         <% if current_user.applied_to_activity_teaching? activity %>
-          <%= link_to "Retirer ma candidature", withdraw_activity_teaching_application_course_activity_path(activity.course, activity), method: :post, class: 'button' %>
+          <%= link_to "Retirer ma candidature", withdraw_activity_teaching_application_school_year_course_activity_path(@school_year, activity.course, activity), method: :post, class: 'button' %>
         <% else %>
-          <%= link_to "Postuler", apply_to_activity_course_activity_path(activity.course, activity), method: :post, class: 'button' %>
+          <%= link_to "Postuler", apply_to_activity_school_year_course_activity_path(@school_year, activity.course, activity), method: :post, class: 'button' %>
         <% end %>
       <% end %>
       <% if current_user.teaches? activity %>
-          <%= link_to "Démissionner", resign_as_teacher_course_activity_path(activity.course, activity), method: :post, class: 'button' %>
+          <%= link_to "Démissionner", resign_as_teacher_school_year_course_activity_path(@school_year, activity.course, activity), method: :post, class: 'button' %>
       <% end %>
       <% if can? :destroy, activity %>
-        <%= link_to "Supprimer", course_activity_path(activity.course, activity), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer cette activité ? Toutes les données associées seront perdues !", class: "button icon trash" %>
+        <%= link_to "Supprimer", school_year_course_activity_path(@school_year, activity.course, activity), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer cette activité ? Toutes les données associées seront perdues !", class: "button icon trash" %>
       <% end %>
     </p>
   </div>

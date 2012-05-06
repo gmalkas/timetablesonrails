@@ -2,8 +2,8 @@
 <% img_prefix = (css_class == "warning" || css_class == "valid") ? "white_" : "" %>
 
 <article class="course <%= css_class %>">
-  <img class="show-details" src="assets/<%= img_prefix %>plus_alt_16x16.png" alt="+" />
-  <h3><%= link_to course.name, course %></h3>
+  <%= image_tag "#{img_prefix}plus_alt_16x16.png", alt: '+', class: 'show-details' %>
+  <h3><%= link_to course.name, school_year_course_path(@school_year, course) %></h3>
 
   <p class="informations">
     <% if course.candidates.empty? %>
@@ -31,8 +31,8 @@
               <span class="actions">
                 <% if current_user.administrator? %>
                   (
-                  <%= link_to "Désigner responsable", choose_course_manager_path(course, p), method: :post %>
-                  <%= link_to "Supprimer de la liste", dismiss_candidate_path(course, p), method: :post %>
+                  <%= link_to "Désigner responsable", assign_course_manager_school_year_course_path(@school_year, course, p), method: :post %>
+                  <%= link_to "Supprimer de la liste", dismiss_candidate_school_year_course_path(@school_year, course, p), method: :post %>
                   )
                 <% end %>
               </span>
@@ -43,12 +43,12 @@
     </div>
     <p class="actions <%= css_class %>">
       <% if current_user.administrator? %>
-        <%= link_to "Supprimer", course, method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
+        <%= link_to "Supprimer", school_year_course_path(@school_year, course), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
       <% else %>
         <% if current_user.applied?(course) %>
-          <%= link_to "Retirer ma candidature", withdraw_course_management_application_path(course), method: :post, class: "button" %>
+          <%= link_to "Retirer ma candidature", withdraw_course_management_application_school_year_course_path(@school_year, course), method: :post, class: "button" %>
         <% elsif not course.assigned? %>
-          <%= link_to "Postuler", apply_to_course_management_path(course), method: :post, class: "button" %>
+          <%= link_to "Postuler", apply_to_course_management_school_year_course_path(course), method: :post, class: "button" %>
         <% end %>
       <% end %>
     </p>

@@ -20,6 +20,11 @@
     </header>
 
     <%= render 'school_years/active_year', active_school_year: @active_school_year %>
+  <% else %>
+    <header>
+      <h1>Année en cours</h1>
+    </header>
+    <p class="notice">Aucune année scolaire n'est active.</p>
   <% end %>
 </section>
 
@@ -34,6 +39,10 @@
   <header>
     <h1>Activité récente</h1>
   </header>
+
+  <% if @notifications.empty? %>
+    <p class="notice">Aucune activité récente.</p>
+  <% end %>
 
   <% @notifications.each do |date, notifications| %>
     <article>

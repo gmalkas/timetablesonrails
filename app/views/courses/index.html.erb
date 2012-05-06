@@ -1,8 +1,10 @@
-<% title @active_school_year %>
+<% title @school_year %>
 
 <header>
-  <h1><%= @active_school_year %> / &Eacute;léments constitutifs</h1>
+  <h1><%= @school_year %> / &Eacute;léments constitutifs</h1>
 </header>
+
+<%= render 'shared/flash_messages' %>
 
 <section class="filters">
   Filtrer par &raquo;
@@ -41,7 +43,7 @@
         </p>
       <% end %>
 
-      <%= form_for @course, html: { class: 'inline-form new-course-form', style: @is_course_semester ? 'display: block;' : '' } do |f| %>
+      <%= form_for @course, url: school_year_courses_path(@school_year), html: { class: 'inline-form new-course-form', style: @is_course_semester ? 'display: block;' : '' } do |f| %>
         <div class="fields">
           <div class="field">
             <%= f.text_field :name, placeholder: "Nom de l'élément constitutif", class: 'form-name' %>
