@@ -1,4 +1,12 @@
 # encoding: utf-8
+
+##
+# = ApplicationController
+#
+# All controllers extend this controller, except SessionController.
+# This controller ensures the user is logged in, and defines some helpers methods.
+# Lastly, it defines methods to deal with some common exceptions.
+#
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
@@ -30,6 +38,14 @@ class ApplicationController < ActionController::Base
     render "errors/503", :status => 503 
 	end
 
+  ##
+  # 
+  # Fetches the user associated with the current session, and returns it.
+  #
+  # == Returns
+  #
+  # An instance of User, or nil.
+  #
   def current_user
     @user_session ||= TimetablesOnRails::UserSession.new session, cookies
     @user_session.current_user

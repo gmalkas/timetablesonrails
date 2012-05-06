@@ -51,7 +51,7 @@ class SchoolYear < ActiveRecord::Base
   end
 
   def find_semester(id)
-    Semester.find_by_id(id)
+    Semester.find_by_id!(id)
   end
 
   def conflicts

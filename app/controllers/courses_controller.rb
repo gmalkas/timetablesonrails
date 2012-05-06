@@ -1,6 +1,9 @@
 # encoding: utf-8
 require_relative '../models/notifications/new_course_candidate'
 
+##
+# = CoursesController
+#
 class CoursesController < ApplicationController
 
   before_filter :load_active_year
@@ -43,6 +46,9 @@ class CoursesController < ApplicationController
     redirect_to active_school_year_path
   end
 
+  ##
+  # Adds the current user to the candidates list.
+  #
   def apply
     course = Course.find_by_id params[:id]
 
@@ -57,6 +63,9 @@ class CoursesController < ApplicationController
     end
   end
 
+  ##
+  # Removes the current user from the candidates list.
+  #
   def withdraw
     course = Course.find_by_id params[:id]
     
@@ -71,6 +80,9 @@ class CoursesController < ApplicationController
     end
   end
 
+  ##
+  #
+  #  
   def resign
     course = Course.find_by_id params[:id]
     
@@ -99,6 +111,11 @@ class CoursesController < ApplicationController
 
   private
 
+  ##
+  # This controller needs an active school year to work properly.
+  # This method is used as a before_filter to ensure that an active
+  # school year is defined.
+  #
   def load_active_year
     @active_school_year = SchoolYearManager.instance.active_school_year
 
