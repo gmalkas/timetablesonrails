@@ -42,8 +42,7 @@ form {
     }
   }
 
-  .actions {
-    float: right;
+  .actions, .nofloat-actions {
 
     margin: 0 1em;
 
@@ -58,6 +57,10 @@ form {
       background-color: #043E6B; /* Error */
 
       color: #FFF;
+    }
+
+    .actions {
+      float: right;
     }
 
     input[type=submit]:hover {

@@ -16,6 +16,10 @@ class SchoolYearsController < ApplicationController
 
     if @school_year.valid?
       SchoolYearManager.instance.new_school_year @school_year
+      if params[:import] == '1'
+        @imported_school_year = SchoolYearManager.instance.find_by_id!(params[:import_year])
+        @school_year.import_from @imported_school_year
+      end
       flash[:success] = "L'année a été ajoutée avec succès."
       redirect_to school_years_path
     else

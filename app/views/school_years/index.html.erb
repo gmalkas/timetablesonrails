@@ -86,10 +86,18 @@
     </p>
   <% end %>
 
-  <%= form_for @school_year, html: { class: 'inline-form' } do |t| %>
+  <%= form_for @school_year do |t| %>
     <div class="fields">
       <div class="field">
         <%= t.text_field :start_year, placeholder: "Année de départ, e.g 2011" %>
+      </div>
+      <div class="field">
+        <%= options = @school_years.map { |s| [s.to_s, s.id] }
+          select_tag(:import_year, options_for_select(options))%>
+        <%= check_box_tag(:import) %>
+        <%= label_tag(:import, "Voulez-vous importer les données de l'année sélectionnée ?") %>
+      </div>
+      <div class="nofloat-actions">
         <%= submit_tag "Créer &rarr;".html_safe %>
       </div>
     </div>

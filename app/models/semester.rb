@@ -21,4 +21,12 @@ class Semester < ActiveRecord::Base
     self.courses.find id
   end
 
+  def import_from(semester)
+    semester.courses.each do |course|
+      new_course = self.courses.create name: course.name
+      new_course.import_from course
+      new_course.save!
+    end
+  end
+
 end

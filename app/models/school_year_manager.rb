@@ -44,6 +44,10 @@ class SchoolYearManager
     SchoolYear.find_by_start_date! start_date_from_year(id.slice 0..3)
   end
 
+  def find_by_id!(id)
+    SchoolYear.find_by_id!(id)
+  end
+
   def activate_school_year(school_year)
     @school_years.each do |s|
       s.disable!

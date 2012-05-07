@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   # === DATA ===
-  attr_accessible :username, :firstname, :lastname
+  attr_accessible :username, :firstname, :lastname, :status
 
   has_secure_password
 

@@ -56,6 +56,16 @@ class Course < ActiveRecord::Base
   def new_activity(type, groups, duration)
     self.activities.build type: type, groups: groups, duration: duration
   end
+
+  def import_from(course)
+    self.manager = course.manager
+
+    course.activities.each do |activity|
+      new_activity = activity.clone
+      new_activity.course = self
+      new_activity.save!
+    end
+  end
   
   # === Exceptions ===
   class AlreadyAssignedException < StandardError; end

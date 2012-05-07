@@ -62,6 +62,13 @@ class SchoolYear < ActiveRecord::Base
     self.courses.select { |c| c.assigned? }
   end
 
+  def import_from(school_year)
+    self.semesters.each do |semester|
+      semester.import_from school_year.semesters.find_by_name!(semester.name)
+    end
+    self.save!
+  end
+
   def to_s
     "#{self.start_date.year} - #{self.end_date.year}"
   end
