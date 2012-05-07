@@ -61,7 +61,7 @@ class Course < ActiveRecord::Base
     self.manager = course.manager
 
     course.activities.each do |activity|
-      new_activity = activity.clone
+      new_activity = activity.dup
       new_activity.course = self
       new_activity.save!
     end
