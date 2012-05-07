@@ -141,6 +141,17 @@ section.courses {
         vertical-align: middle;
       }
 
+      .activities-count {
+        display: inline-block;
+        margin: 0 0.25em;
+        padding: 0.1em 0.3em;
+
+        background-color: #943500;
+        border-radius: 4px;
+
+        color: #FFF;
+      }
+
     }
 
     .details {

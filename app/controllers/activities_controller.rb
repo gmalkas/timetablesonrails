@@ -35,7 +35,7 @@ class ActivitiesController < ApplicationController
     activity.save!
 
     flash[:success] = "#{candidate.name} est a été retiré de la liste de candidature à l'U.E #{course.name} pour l'activité #{activity.type}"
-    redirect_to school_year_path
+    redirect_to :back
   end
 
   def dismiss_teacher
@@ -45,7 +45,7 @@ class ActivitiesController < ApplicationController
     activity.save!
 
     flash[:success] = "#{teacher.name} est a été retiré de la liste des enseignants de l'activité #{activity.type}"
-    redirect_to @course
+    redirect_to :back
   end
 
   def apply
@@ -91,7 +91,7 @@ class ActivitiesController < ApplicationController
     activity = Activity.find_by_id! params[:id]
     activity.destroy
     flash[:success] = "L'activité #{activity.type} de l'U.E #{activity.course.name} a été supprimée avec succès."
-    redirect_to school_year_course_path(@school_year, @course)
+    redirect_to :back
   end
 
   private

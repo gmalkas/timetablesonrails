@@ -2,22 +2,22 @@
 class HomeController < ApplicationController
 
   def dashboard
-    @active_school_year = SchoolYearManager.instance.active_school_year
+    @school_year = SchoolYearManager.instance.active_school_year
     params[:depuis] ||= '2-semaines'
 
     notifications = Array.new
     notifications = case params[:depuis]  
                       when '1-semaine'
-                        @active_school_year.notifications.last_week
+                        @school_year.notifications.last_week
                       when '2-semaines'
-                        @active_school_year.notifications.last_two_weeks
+                        @school_year.notifications.last_two_weeks
                       when '1-mois'
-                        @active_school_year.notifications.last_month
+                        @school_year.notifications.last_month
                       when '3-mois'
-                        @active_school_year.notifications.last_three_months
+                        @school_year.notifications.last_three_months
                       else
-                        @active_school_year.notifications.last_two_weeks
-                    end if @active_school_year
+                        @school_year.notifications.last_two_weeks
+                    end if @school_year
 
     if current_user.administrator?
       @notifications = TimetablesOnRails::DateRegroup.group_by_day(notifications.map {|n| NotificationPresenter.new n})
