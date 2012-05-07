@@ -3,8 +3,8 @@
 <span class="actions">
   <% if can? :choose_teacher, activity %>
     (
-    <%= link_to "Accepter la candidature", choose_activity_teacher_course_activity_path(activity.course, activity, candidate), method: :post %>
-    <%= link_to "Supprimer de la liste", dismiss_activity_candidate_course_activity_path(activity.course, activity, candidate), method: :post %>
+    <%= link_to "Accepter la candidature", choose_activity_teacher_school_year_course_activity_path(activity.course.semester.school_year, activity.course, activity, candidate), method: :post %>
+    <%= link_to "Supprimer de la liste", dismiss_activity_candidate_school_year_course_activity_path(activity.course.semester.school_year, activity.course, activity, candidate), method: :post %>
     )
   <% end %>
 </span>
