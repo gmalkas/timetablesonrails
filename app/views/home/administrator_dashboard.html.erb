@@ -6,6 +6,8 @@
   </hgroup>
 </header>
 
+<%= render 'shared/flash_messages' %>
+
 <section class="active-year">
 
   <section class="utilities nav-tools">
@@ -14,12 +16,12 @@
     </header>
   </section>
 
-  <% if @active_school_year %>
+  <% if @school_year %>
     <header>
-      <h1>Année en cours / <%= @active_school_year %></h1>
+      <h1>Année en cours / <%= @school_year %></h1>
     </header>
 
-    <%= render 'school_years/active_year', active_school_year: @active_school_year %>
+    <%= render 'school_years/active_year', active_school_year: @school_year %>
   <% else %>
     <header>
       <h1>Année en cours</h1>
