@@ -86,6 +86,7 @@ class ActivitiesController < ApplicationController
     activity = Activity.find_by_id params[:id]
     
     if current_user.teaches? activity
+      Notification.notify_activity_teacher_resigned @school_year, current_user, activity
       current_user.resign_as_teacher activity
 
       flash[:success] = "Votre démission du poste d'enseignant de l'activité #{activity.type} de l'E.C #{activity.course.name} a été enregistrée."
