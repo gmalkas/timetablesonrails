@@ -1,0 +1,4 @@
+<li class="event <%= notification.style %>">
+  <time datetime="<%= notification.created_at %>"><%= l notification.created_at.to_time, format: :short %></time>
+  <%= notification.render self %>
+</li>

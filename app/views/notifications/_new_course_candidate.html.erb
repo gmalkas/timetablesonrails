@@ -1,4 +1,1 @@
-<li class="event <%= notification.style %>">
-  <time datetime="<%= notification.created_at %>"><%= l notification.created_at.to_time, format: :short %></time>
-  <%= link_to notification.teacher.name, teacher_path(notification.teacher) %> a postulé pour gérer l'E.C <%= link_to notification.course.name, school_year_course_path(notification.course.semester.school_year, notification.course) %>
-</li>
+<%= link_to notification.teacher.name, teacher_path(notification.teacher) %> a postulé pour gérer l'E.C <%= link_to notification.course.name, school_year_course_path(notification.course.semester.school_year, notification.course) %>
