@@ -26,7 +26,7 @@ class Notification
       notification.properties << NotificationProperty.new(name: 'picker', value: picker.id, resource: 'user')
       
       # The course's manager needs to be notified, even when he's not the one who chose the teacher
-      notification.properties << NotificationProperty.new(name: 'manager', value: activity.course.manager.id, resource: 'user')
+      notification.properties << NotificationProperty.new(name: 'manager', value: activity.course.manager.id, resource: 'user') if activity.course.manager
 
       notification.properties << NotificationProperty.new(name: 'teacher', value: teacher.id, resource: 'user')
       notification.properties << NotificationProperty.new(name: 'activity', value: activity.id, resource: 'activity')
