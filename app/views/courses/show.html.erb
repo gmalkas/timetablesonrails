@@ -7,11 +7,48 @@
 <%= render 'shared/flash_messages' %>
 
 <section class="activities">
+  <% if can? :create, @course.activities.build %> 
+    <section class="utilities nav-tools">
+      <header>
+        <%= link_to "Ajouter une activité &rarr;".html_safe, new_school_year_course_activity_path(@course.semester.school_year, @course) %>
+      </header>
+    </section>
+  <% end %>
+
   <header>
     <h1>Activités</h1>
   </header>
 
-  <% @activities.each do |activity| %>
-    <%= activity.render self %>
+  <% if @activities.any? %>
+    <% @activities.each do |activity| %>
+      <%= activity.render self %>
+    <% end %>
+  <% else %>
+    <p class="notice">Cet E.C n'a aucune activité pour le moment.</p>
+  <% end %>
+</section>
+
+<section class="recent-activity">
+
+  <header>
+    <h1>Activité récente</h1>
+  </header>
+
+  <% if @notifications.empty? %>
+    <p class="notice">Aucune activité récente.</p>
+  <% end %>
+
+  <% @notifications.each do |date, notifications| %>
+    <article>
+      <header>
+        <h1><%= l date, format: :human %></h1>
+      </header>
+
+      <ol>
+        <% notifications.each do |notification| %>
+          <%= render 'notifications/notification', notification: notification %>
+        <% end %>
+      </ol>
+    </article>
   <% end %>
 </section>

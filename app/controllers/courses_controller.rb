@@ -22,6 +22,7 @@ class CoursesController < ApplicationController
   def show
     @course = Course.find_by_id params[:id]
     @activities = @course.activities.map { |activity| ActivityItemPresenter.new activity }
+    @notifications = TimetablesOnRails::DateRegroup.group_by_day(Notification.related_to(@course).map {|n| NotificationPresenter.new n})
   end
   
   ##
