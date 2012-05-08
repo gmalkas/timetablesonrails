@@ -1,0 +1,25 @@
+<% title "Choisir un enseignant", @activity.type, @activity.course.name, @school_year %>
+
+<header>
+  <h1><%= @school_year %> / <%= @activity.course.name %> / <%= @activity.type %> / Choisir un enseignant</h1>
+</header>
+
+<%= render 'shared/flash_messages' %>
+
+<section class="teachers">
+  <header>
+    <h1>Liste des enseignants</h1>
+  </header>
+
+  <p class="notice">Cliquer sur l'enseignant(e) afin de le/la choisir en tant qu'enseignant de cette activité.</p>
+
+  <% @indexes.each do |letter, teachers| %>
+
+    <h2><%= letter %></h2>
+    <section class="teacher_cards">
+      <% teachers.each do |teacher| %>
+        <%= render 'teachers/pick_teacher', school_year: @school_year, activity: @activity, teacher: teacher %>
+      <% end %>
+    </section>
+  <% end %>
+</section>

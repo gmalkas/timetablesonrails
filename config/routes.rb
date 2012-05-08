@@ -26,7 +26,8 @@ Timetablesonrails::Application.routes.draw do
 
           resources :activities, path: 'activites' do
             member do
-              post 'choisir-candidat/:candidate' => 'activities#choose_activity_teacher', as: 'choose_activity_teacher'
+              get 'choisir-enseignant' => 'activities#pick_teacher', as: 'pick_teacher'
+              post 'choisir-enseignant/:teacher' => 'activities#choose_teacher', as: 'choose_activity_teacher'
               post 'retirer-enseignant/:teacher' => 'activities#dismiss_teacher', as: 'dismiss_activity_teacher'
 
               post 'postuler' => 'activities#apply', as: 'apply_to_activity'
