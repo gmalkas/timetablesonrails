@@ -40,14 +40,43 @@
 
         <article class="teacher">
           <%= image_tag "plus_alt_16x16.png", class: "show-details", atl: "+" %>
-          <h3><%= teacher.name %></h3>
+          <h3><%= link_to teacher.name, teacher_path(teacher) %></h3>
 
           <p class="informations">
+            &rarr; 
+            <% if teacher.responsabilities.any? %>
+              <span class="manager-name responsabilities-count"><%= pluralize(teacher.responsabilities.count, 'responsabilité') %></span>
+            <% end %>
+            <% if teacher.activities.any? %>
+              <span class="manager-name activities-count"><%= pluralize(teacher.activities.count, 'activité') %></span>
+            <% end %>
+            <span class="manager-name work-time"><%= pluralize(teacher.work_time, 'heure') %></span>
           </p>
 
           <div class="details">
-            <p class="actions">
-            </p>
+            <h4>Responsabilités</h4>
+
+            <% if teacher.responsabilities.any? %>
+              <ul>
+                <% teacher.responsabilities.each do |course| %>
+                  <li><%= link_to course.name, school_year_course_path(course.semester.school_year, course) %></li> 
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="notice">Aucune responsabilité</p>
+            <% end %>
+            
+            <h4>Activités</h4>
+
+            <% if teacher.activities.any? %>
+              <ul>
+                <% teacher.activities.each do |activity| %>
+                  <li><%= activity.type %> de <%= link_to activity.course.name, school_year_course_path(activity.course.semester.school_year, activity.course) %></li> 
+                <% end %>
+              </ul>
+            <% else %>
+              <p class="notice">Aucune activité</p>
+            <% end %>
           </div>
           
         </article>

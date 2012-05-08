@@ -78,6 +78,10 @@ class User < ActiveRecord::Base
     activities.delete activity
   end
 
+  def work_time
+    self.activities.inject(0) { |total, activity| total + activity.duration }
+  end
+
   def self.teachers
     self.where("administrator = ?", false).order("lastname ASC")
   end

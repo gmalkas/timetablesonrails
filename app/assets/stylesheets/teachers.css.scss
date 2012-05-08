@@ -69,7 +69,13 @@ section.teachers {
     h3 {
       display: inline-block;
       
-      color: #2B2B2B;
+      a {
+        color: #2B2B2B;
+        text-decoration: none;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
 
     }
 
@@ -78,6 +84,18 @@ section.teachers {
 
       img {
         vertical-align: middle;
+      }
+
+      .responsabilities-count {
+        background-color: #1C4270;
+      }
+
+      .activities-count {
+        background-color: #AB8F2B;
+      }
+
+      .work-time {
+        background-color: #2B2B2B;
       }
 
     }
@@ -91,11 +109,26 @@ section.teachers {
       margin-top: 0.5em;
       padding: 0.5em;
 
+      ul {
+        li {
+          margin: 0.5em;
+
+          font-size: 0.875em;
+
+          list-style-type: none;
+
+        }
+      }
+
       p.actions {
         margin: 0.5em 0.5em 0 0.5em;
         padding: 0.5em 0 0 0;
 
         border-top: 1px dashed #CCC;
+      }
+
+      p.notice {
+        background-color: #FAFAFA;
       }
 
       h4 {
