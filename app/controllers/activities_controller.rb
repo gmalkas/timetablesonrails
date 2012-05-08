@@ -58,6 +58,7 @@ class ActivitiesController < ApplicationController
     activity = Activity.find_by_id params[:id]
 
     unless current_user.applied_to_activity_teaching? activity
+      Notification.notify_new_activity_candidate @school_year, current_user, activity
       current_user.apply_to_activity_teaching activity
 
       flash[:success] = "Votre candidature pour enseigner l'activité #{activity.type} de l'E.C #{activity.course.name} a été enregistrée."

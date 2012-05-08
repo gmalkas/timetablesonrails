@@ -1,0 +1,1 @@
+<%= link_to notification.teacher.name, teacher_path(notification.teacher) %> a postulé pour enseigner l'activité <%= notification.activity.type %> de l'E.C <%= link_to notification.activity.course.name, school_year_course_path(notification.activity.course.semester.school_year, notification.activity.course) %>
