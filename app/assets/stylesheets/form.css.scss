@@ -59,14 +59,14 @@ form {
       color: #FFF;
     }
 
-    .actions {
-      float: right;
-    }
-
     input[type=submit]:hover {
       background-color: #A62F00;
       background-color: #007C21; /* Valid form */
     }
+  }
+
+  .actions {
+    float: right;
   }
 }
 
