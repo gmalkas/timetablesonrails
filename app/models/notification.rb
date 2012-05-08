@@ -8,17 +8,10 @@ class Notification < ActiveRecord::Base
   scope :last_three_months, lambda { where(created_at: (3.month.ago)..(Time.zone.now) ) }
 
   #
-  # Fetches the notifications related to the given user.
+  # Fetches the notifications related to the given resource (e.g user, course, activity).
   #
-  def self.related_to_user(user)
-    self.joins(:properties).where('notification_properties.resource = ?', 'user').where('notification_properties.value = ?', user.id).order('notifications.created_at DESC')
-  end
-
-  #
-  # Fetches the notifications related to the given course
-  #
-  def self.related_to_course(course)
-    self.joins(:properties).where('notification_properties.resource = ?', 'course').where('notification_properties.value = ?', course.id).order('notifications.created_at DESC')
+  def self.related_to(resource)
+    self.joins(:properties).where('notification_properties.resource = ?', resource.class.name.downcase).where('notification_properties.value = ?', resource.id).order('notifications.created_at DESC')
   end
 
   #
@@ -51,3 +44,4 @@ require_relative './notifications/withdraw_course_management_application'
 require_relative './notifications/choose_course_manager'
 require_relative './notifications/course_manager_resigned'
 require_relative './notifications/new_activity_candidate'
+require_relative './notifications/choose_activity_teacher'

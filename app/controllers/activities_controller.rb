@@ -27,6 +27,7 @@ class ActivitiesController < ApplicationController
   def choose_teacher
     activity = Activity.find_by_id params[:id]
     candidate = User.teachers.find params[:teacher]
+    Notification.notify_activity_teacher_chosen @school_year, current_user, candidate, activity
     activity.assign! candidate
     activity.save!
 
