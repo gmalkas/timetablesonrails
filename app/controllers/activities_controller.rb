@@ -74,6 +74,7 @@ class ActivitiesController < ApplicationController
     
     if current_user.applied_to_activity_teaching? activity
       current_user.withdraw_activity_teaching_application activity
+      Notification.notify_withdraw_activity_teaching_application @school_year, current_user, activity
 
       flash[:success] = "Votre candidature à la gestion de l'activité #{activity.type} de l'E.C #{activity.course.name} a été retirée."
       redirect_to :back
