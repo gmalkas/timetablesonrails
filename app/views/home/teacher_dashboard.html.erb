@@ -61,7 +61,7 @@
 
       <ol>
         <% notifications.each do |notification| %>
-          <%= notification.render self %>
+          <%= render 'notifications/notification', notification: notification %>
         <% end %>
       </ol>
     </article>
