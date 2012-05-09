@@ -44,6 +44,7 @@
     <p class="actions <%= css_class %>">
       <% if current_user.administrator? %>
         <%= link_to "Choisir le responsable", pick_manager_school_year_course_path(course.semester.school_year, course), class: "button" %>
+        <%= link_to "Modifier", edit_school_year_course_path(course.semester.school_year, course), class: "button icon edit" %>
         <%= link_to "Supprimer", school_year_course_path(course.semester.school_year, course), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
       <% else %>
         <% if current_user.applied?(course) %>

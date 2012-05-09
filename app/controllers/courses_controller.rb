@@ -15,6 +15,21 @@ class CoursesController < ApplicationController
   def index
     @course = Course.new
   end
+
+  def edit
+    @course = Course.find_by_id params[:id]
+  end
+
+  def update
+    @course = Course.find_by_id params[:id]
+
+		if @course.update_attributes(params[:course]) 
+			flash[:success] = "Les modifications ont été enregistrées."
+			redirect_to school_year_course_path(@school_year, @course)
+		else 
+			render :edit
+		end
+  end
   
   ##
   # Shows the course and its related activities.

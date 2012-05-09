@@ -1,0 +1,27 @@
+<% title "Modifier un E.C", @course.name, @school_year %>
+
+<header>
+  <h1><%= @school_year %> / <%= @course.name %> / Modifier</h1>
+</header>
+
+<section>
+  <% if @course.errors.any? %>
+    <p class="error">
+      <% @course.errors[:name].each do |e| %>
+        <strong class="error"><%= @course.errors.full_message(:name, e) %></strong><br />
+      <% end %>
+    </p>
+  <% end %>
+
+  <%= form_for @course, url: school_year_course_path(@school_year, @course), html: { class: 'centered-form' } do |f| %>
+    <div class="fields">
+      <div class="field">
+        <%= f.label :name, "Nom de l'E.C :" %>
+        <%= f.text_field :name, placeholder: "Nom de l'élément constitutif", class: 'form-name' %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Enregistrer &rarr;".html_safe %>
+      </div>
+    </div>
+  <% end %>
+</section>

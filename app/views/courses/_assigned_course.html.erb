@@ -33,14 +33,17 @@
     </div>
 
     <p class="actions">
-      <% if can? :create, course.activities.build %> 
-        <%= link_to "Créer une activité", new_school_year_course_activity_path(course.semester.school_year, course), class: "button icon add" %>
-      <% end %>
       <% if can? :resign, course %>
         <%= link_to "Démissionner", resign_as_manager_school_year_course_path(course.semester.school_year, course), method: :post, class: "button" %>
       <% end %>
       <% if can? :assign, course %>
         <%= link_to "Choisir le responsable", pick_manager_school_year_course_path(course.semester.school_year, course), class: "button" %>
+      <% end %>
+      <% if can? :create, course.activities.build %> 
+        <%= link_to "Créer une activité", new_school_year_course_activity_path(course.semester.school_year, course), class: "button icon add" %>
+      <% end %>
+      <% if can? :edit, course %> 
+        <%= link_to "Modifier", edit_school_year_course_path(course.semester.school_year, course), class: "button icon edit" %>
       <% end %>
       <% if current_user.administrator? %>
         <%= link_to "Supprimer", school_year_course_path(course.semester.school_year, course), method: :delete, confirm: "Êtes-vous sûr de vouloir définitivement supprimer ce cours ? Toutes les données associées seront perdues !", class: "button icon trash" %>
