@@ -62,6 +62,9 @@ class Course < ActiveRecord::Base
 
     course.activities.each do |activity|
       new_activity = activity.dup
+      activity.teachers.each do |teacher|
+        new_activity.teachers << teacher
+      end
       new_activity.course = self
       new_activity.save!
     end
