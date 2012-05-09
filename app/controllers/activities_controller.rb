@@ -3,6 +3,8 @@ class ActivitiesController < ApplicationController
 
   before_filter :load_school_year_and_course
 
+  authorize_resource
+
   def new
     @activity = @course.activities.build
   end
@@ -18,8 +20,23 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def edit
+    @activity = @course.activities.find params[:id]
+  end
+
+  def update
+    @activity = @course.activities.find params[:id]
+
+		if @activity.update_attributes(params[:activity]) 
+			flash[:success] = "Les modifications ont été enregistrées."
+			redirect_to school_year_course_path(@school_year, @course)
+		else 
+			render :edit
+		end
+  end
+
   def pick_teacher
-    @activity = Activity.find_by_id params[:id]
+    @activity = @course.activities.find params[:id]
     @teachers = User.teachers
     @indexes = TimetablesOnRails::FirstLetterIndex.build_from_name @teachers
   end

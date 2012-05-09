@@ -1,0 +1,24 @@
+<% title "Modifier une activité", @activity.type, @course.name, @school_year %>
+
+<header>
+  <h1><%= @school_year %> / <%= @course.name %> / <%= @activity.type %> / Modifier</h1>
+</header>
+
+<section>
+
+  <% if @activity.errors.any? %>
+    <p class="error">
+      Ce formulaire comporte <%= pluralize @activity.errors.count, "erreur" %>.
+    </p>
+  <% end %>
+
+  <%= form_for @activity, url: school_year_course_activity_path(@course.semester.school_year, @course, @activity), html: { class: 'centered-form' } do |t| %>
+    <div class="fields">
+      <%= render 'form', t: t %>
+
+      <div class="actions">
+        <%= t.submit "Enregistrer &rarr;".html_safe %>
+      </div>
+    </div>
+  <% end %>
+</section>
