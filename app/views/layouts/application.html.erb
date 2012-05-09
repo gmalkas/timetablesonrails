@@ -15,7 +15,7 @@
       |
       <%= link_to "Tableau de bord", root_path %>
       |
-      <%= link_to "(#{current_user.username})", root_path %>
+      <%= link_to "(#{current_user.username})", teacher_path(current_user) unless current_user.administrator? %>
       <%= link_to "Déconnexion", sign_out_path, class: "warning" %> 
     </nav>
 		<%= link_to image_tag('logo.png'), root_path, :height => 96, :width => 256 %>

@@ -3,7 +3,7 @@
 <span class="actions">
   <% if can? :dismiss_teacher, activity %>
     (
-    <%= link_to "Supprimer", dismiss_activity_teacher_school_year_course_activity_path(@school_year, activity.course, activity, teacher), method: :post %>
+    <%= link_to "Supprimer", dismiss_activity_teacher_school_year_course_activity_path(activity.course.semester.school_year, activity.course, activity, teacher), method: :post %>
     )
   <% end %>
 </span>

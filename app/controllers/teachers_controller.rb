@@ -22,4 +22,11 @@ class TeachersController < ApplicationController
     end
   end
 
+  def show
+    @teacher = User.teachers.find params[:id]
+    @notifications = TimetablesOnRails::DateRegroup.group_by_day(Notification.related_to(@teacher).last_six_months.map {|n| NotificationPresenter.new n})
+    @responsabilities = @teacher.responsabilities.map { |c| CoursePresenter.new c }
+    @activities = @teacher.activities.map { |activity| ActivityItemPresenter.new activity }
+  end
+
 end

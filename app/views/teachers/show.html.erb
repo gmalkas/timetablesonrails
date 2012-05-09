@@ -1,0 +1,62 @@
+<% title @teacher.name %>
+
+<header>
+  <h1><%= @teacher.name %></h1>
+</header>
+
+<%= render 'shared/flash_messages' %>
+
+<section class="teacher-summary">
+	<header>
+		<h1>Responsabilités</h1>
+	</header>
+
+  <% if @responsabilities.empty? && @activities.empty? %>
+
+    <p class="notice">
+      Cet enseignant n'a aucune responsabilité pour le moment.
+    </p>
+  <% else %>
+
+    <section class="courses">
+      <% @responsabilities.each do |responsability| %>
+        <%= responsability.render self %>
+      <% end %>
+    </section>
+
+    <section class="activities">
+      <% @activities.each do |activity| %>
+        <%= activity.render self, true %>
+      <% end %>
+    </section>
+
+  <% end %>
+
+</section>
+
+<section class="recent-activity">
+
+  <header>
+    <h1>Activité récente (6 derniers mois)</h1>
+  </header>
+
+  <% if @notifications.empty? %>
+    <p class="notice">
+      Aucune activité récente.
+    </p>
+  <% end %>
+
+  <% @notifications.each do |date, notifications| %>
+    <article>
+      <header>
+        <h1><%= l date, format: :human %></h1>
+      </header>
+
+      <ol>
+        <% notifications.each do |notification| %>
+          <%= render 'notifications/notification', notification: notification %>
+        <% end %>
+      </ol>
+    </article>
+  <% end %>
+</section>
