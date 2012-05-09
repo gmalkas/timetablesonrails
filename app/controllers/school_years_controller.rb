@@ -28,35 +28,35 @@ class SchoolYearsController < ApplicationController
   end
 
   def activate
-    school_year = SchoolYearManager.instance.find! params[:id]
+    school_year = SchoolYearManager.instance.find_by_id! params[:id]
     SchoolYearManager.instance.activate_school_year school_year
     flash[:success] = "L'année #{params[:id]} a correctement été activée."
     redirect_to school_years_path
   end
 
   def disable
-    school_year = SchoolYearManager.instance.find! params[:id]
+    school_year = SchoolYearManager.instance.find_by_id! params[:id]
     SchoolYearManager.instance.disable_school_year
     flash[:success] = "L'année #{params[:id]} a correctement été désactivée."
     redirect_to school_years_path
   end
 
   def archive
-    school_year = SchoolYearManager.instance.find! params[:id]
+    school_year = SchoolYearManager.instance.find_by_id! params[:id]
     SchoolYearManager.instance.archive_school_year school_year
     flash[:success] = "L'année #{params[:id]} a correctement été archivée."
     redirect_to school_years_path
   end
 
   def restore
-    school_year = SchoolYearManager.instance.find! params[:id]
+    school_year = SchoolYearManager.instance.find_by_id! params[:id]
     SchoolYearManager.instance.restore_school_year school_year
     flash[:success] = "L'année #{params[:id]} a correctement été restaurée."
     redirect_to school_years_path
   end
 
   def destroy
-    school_year = SchoolYearManager.instance.find! params[:id]
+    school_year = SchoolYearManager.instance.find_by_id! params[:id]
     SchoolYearManager.instance.destroy_school_year school_year
     flash[:success] = "L'année #{params[:id]} a correctement été supprimée."
     redirect_to school_years_path
