@@ -206,3 +206,17 @@ section.teachers {
     }
   }
 }
+
+@media print {
+  .teachers-stats {
+    display: none;
+  }
+
+  section.teachers article.teacher .show-details {
+    display: none;
+  }
+
+  section.teachers article.teacher .details {
+    display: block;
+  }
+}

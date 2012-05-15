@@ -176,3 +176,15 @@ body {
   }
 
 }
+
+@media print {
+  body {
+    > header {
+      display: none;
+    }
+  }
+
+  section#help_message {
+    display: none;
+  }
+}
