@@ -1,0 +1,19 @@
+<section class="managers">
+  <% indexes.each do |manager, courses| %>
+    <article class="manager">
+      <header>
+        <h2><%= (manager.nil?) ? "Sans responsable" : manager.name %></h2>
+      </header>
+        <section class="courses">
+
+          <% courses.each do |course| %>
+            <%= CoursePresenter.new(course).render self %>
+          <% end %>
+
+        </section>
+
+      </article>
+
+  <% end %>
+</section>
+

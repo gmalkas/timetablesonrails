@@ -1,0 +1,53 @@
+<section class="semesters">
+
+  <% semesters.each do |sem| %>
+
+    <article class="semester">
+
+      <% if current_user.administrator? %>
+        <section class="new-course">
+          <div class="add-course">
+            <%= link_to "Ajouter un E.C &rarr;".html_safe, root_path, :class => 'show-form' %>
+          </div>
+        </section>
+      <% end %>
+
+      <header>
+        <h2>Semestre <%= sem.name %></h2>
+      </header>
+    
+      <% @is_course_semester = @course.semester_id == sem.id %> 
+
+      <% if @course.errors.any? && @is_course_semester %>
+        <p class="error">
+          <% @course.errors[:name].each do |e| %>
+            <strong class="error"><%= @course.errors.full_message(:name, e) %></strong><br />
+          <% end %>
+        </p>
+      <% end %>
+
+      <%= form_for @course, url: school_year_courses_path(@school_year), html: { class: 'inline-form new-course-form', style: @is_course_semester ? 'display: block;' : '' } do |f| %>
+        <div class="fields">
+          <div class="field">
+            <%= f.text_field :name, placeholder: "Nom de l'élément constitutif", class: 'form-name' %>
+            <%= hidden_field_tag :semester_id, sem.id %>
+            <%= f.submit "Créer &rarr;".html_safe %> ou <a href="" class="cancel-form">annuler</a> 
+          </div>
+        </div>
+      <% end %>
+
+    <% if sem.courses.empty? %>
+      <p class="notice">Aucune matière n'a été ajoutée à ce semestre.</p>
+    <% else %>
+      <section class="courses">
+
+        <% sem.courses.each do |course| %>
+          <%= CoursePresenter.new(course).render self %>
+        <% end %>
+
+      </section>
+    <% end %>
+    </article>
+  <% end %>
+  </div>
+</section>

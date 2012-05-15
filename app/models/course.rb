@@ -17,6 +17,9 @@ class Course < ActiveRecord::Base
 
   has_many :activities, dependent: :destroy, order: 'type ASC'
 
+  Filters = [ { name: 'Semestre', filter: 'semester' }, { name: 'Statut', filter: 'status' }, { name: 'Responsable', filter: 'manager' } ]
+  DefaultFilter = Filters.first
+
   # === BEHAVIOR ===
  
   def assigned?
@@ -51,6 +54,17 @@ class Course < ActiveRecord::Base
 
   def conflict?
     self.candidates.count > 1 
+  end
+
+  def status
+    case
+    when conflict?
+      'En conflit'
+    when assigned?
+      'Avec responsable'
+    else
+      'En attente'
+    end
   end
 
   def new_activity(type, groups, duration)

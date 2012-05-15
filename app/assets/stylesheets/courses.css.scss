@@ -10,7 +10,10 @@ section.filters {
       font-size: 0.875em;
 
       list-style-type: none;
+    }
 
+    li.selected {
+      font-weight: bold;
     }
   }
 }

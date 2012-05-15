@@ -1,0 +1,18 @@
+<section class="statuses">
+  <% indexes.each do |status, courses| %>
+    <article class="status">
+      <header>
+        <h2><%= status %></h2>
+      </header>
+        <section class="courses">
+
+          <% courses.each do |course| %>
+            <%= CoursePresenter.new(course).render self %>
+          <% end %>
+
+        </section>
+
+      </article>
+
+  <% end %>
+</section>

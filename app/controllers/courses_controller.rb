@@ -14,6 +14,18 @@ class CoursesController < ApplicationController
 
   def index
     @course = Course.new
+
+    params[:filter] ||= Course::DefaultFilter[:filter]
+
+    courses = @semesters.map(&:courses).flatten
+    courses = case params[:filter]
+    when 'manager'
+      TimetablesOnRails::CourseFilter.by_manager courses
+    when 'status'
+      TimetablesOnRails::CourseFilter.by_status courses
+    end
+
+    @course_list = CourseListPresenter.new @semesters, courses, params[:filter]
   end
 
   def edit
