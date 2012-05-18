@@ -1,4 +1,12 @@
 # encoding: utf-8
+
+##
+#
+# = SessionController
+#
+# Handles session creation and session destruction. This controller is the only
+# one that does not require the user to be logged in.
+#
 class SessionController < ApplicationController
 
   skip_before_filter :require_login

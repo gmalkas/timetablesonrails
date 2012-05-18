@@ -1,11 +1,22 @@
 # encoding: utf-8
+
+##
+# = Home Controller
+#
+# Renders a user-specific dashboard. There are two kinds of dashboard : one for 
+# administrators and one for teachers.
+#
 class HomeController < ApplicationController
 
   def dashboard
     @school_year = SchoolYearManager.instance.active_school_year
+
     params[:depuis] ||= '2-semaines'
 
     notifications = Array.new
+    
+    # TODO: this 'switch' does not belong in a controller
+    # It probably should be moved to a 'lib' class.
     notifications = case params[:depuis]  
                       when '1-semaine'
                         @school_year.notifications.last_week

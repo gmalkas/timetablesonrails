@@ -1,4 +1,13 @@
 # encoding: utf-8
+
+##
+#
+# = SchoolYearsController
+#
+# Handles common CRUD functions for school years, as well as specific operations
+# such as archiving and activating school years. This controller is only
+# available to administrator.
+# 
 class SchoolYearsController < ApplicationController
 
   before_filter :load_school_years
@@ -27,6 +36,14 @@ class SchoolYearsController < ApplicationController
     end
   end
 
+  ##
+  #
+  # Activates the school year.
+  #
+  # == See also
+  #
+  # SchoolYear for more information about the 'active' state.
+  #
   def activate
     school_year = SchoolYearManager.instance.find! params[:id]
     SchoolYearManager.instance.activate_school_year school_year
@@ -34,6 +51,14 @@ class SchoolYearsController < ApplicationController
     redirect_to school_years_path
   end
 
+  ##
+  #
+  # Disables the school year.
+  #
+  # == See also
+  #
+  # SchoolYear for more information about the 'disabled' state.
+  #
   def disable
     school_year = SchoolYearManager.instance.find! params[:id]
     SchoolYearManager.instance.disable_school_year
@@ -41,6 +66,14 @@ class SchoolYearsController < ApplicationController
     redirect_to school_years_path
   end
 
+  ##
+  # 
+  # Archives the school year.
+  #
+  # == See also
+  #
+  # SchoolYear for more information about the 'archived' state.
+  #
   def archive
     school_year = SchoolYearManager.instance.find! params[:id]
     SchoolYearManager.instance.archive_school_year school_year
@@ -48,6 +81,14 @@ class SchoolYearsController < ApplicationController
     redirect_to school_years_path
   end
 
+  ##
+  #
+  # Restores the school year from the archives.
+  #
+  # == See also
+  #
+  # SchoolYear for more information about the 'disabled' state.
+  #
   def restore
     school_year = SchoolYearManager.instance.find! params[:id]
     SchoolYearManager.instance.restore_school_year school_year
@@ -55,6 +96,10 @@ class SchoolYearsController < ApplicationController
     redirect_to school_years_path
   end
 
+  ##
+  #
+  # Destroys the school year and all its related data.
+  #
   def destroy
     school_year = SchoolYearManager.instance.find! params[:id]
     SchoolYearManager.instance.destroy_school_year school_year
