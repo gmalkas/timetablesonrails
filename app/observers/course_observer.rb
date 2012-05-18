@@ -1,7 +1,8 @@
 ##
+#
 # = CourseObserver
 #
-# Destroys notifications related to a destroyed course.
+# Destroys notifications related to a newly destroyed course.
 #
 class CourseObserver < ActiveRecord::Observer
 

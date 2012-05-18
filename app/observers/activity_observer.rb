@@ -1,7 +1,8 @@
 ##
+#
 # = ActivityObserver
 #
-# Destroys notifications related to a destroyed activity.
+# Destroys notifications related to a newly destroyed activity.
 #
 class ActivityObserver < ActiveRecord::Observer
 

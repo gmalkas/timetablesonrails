@@ -1,6 +1,8 @@
 ##
+#
 # = UserObserver
-# Destroys notification related to a destroyed user.
+#
+# Destroys notification related to a newly destroyed user.
 #
 class UserObserver < ActiveRecord::Observer
 
