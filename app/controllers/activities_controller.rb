@@ -1,4 +1,12 @@
 # encoding: utf-8
+
+##
+#
+# = ActivitiesController
+#
+# Handles CRUD functions and some operations specific to activities, such as
+# choosing a teacher or dismissing a candidate.
+#
 class ActivitiesController < ApplicationController
 
   before_filter :load_school_year_and_course
@@ -35,12 +43,22 @@ class ActivitiesController < ApplicationController
 		end
   end
 
+  ##
+  #
+  # Shows a list of teachers to choose from in order to assign the activity to one of them.
+  # This action requires either the user to be the course's manager or administrative privileges.
+  #
   def pick_teacher
     @activity = @course.activities.find params[:id]
     @teachers = User.teachers
     @indexes = TimetablesOnRails::FirstLetterIndex.build_from_name @teachers
   end
 
+  ##
+  #
+  # Assigns a teacher to a specific activity.
+  # This action requires either the user to be the course's manager or administrative privileges.
+  #
   def choose_teacher
     activity = Activity.find_by_id params[:id]
     candidate = User.teachers.find params[:teacher]
@@ -52,6 +70,10 @@ class ActivitiesController < ApplicationController
     redirect_to school_year_course_path(@school_year, @course) 
   end
 
+  ##
+  #
+  # Removes a candidate from the activity's candidates list.
+  #
   def dismiss_candidate
     activity = Activity.find_by_id params[:id]
     candidate = activity.candidates.find params[:candidate]
@@ -62,6 +84,10 @@ class ActivitiesController < ApplicationController
     redirect_to :back
   end
 
+  ##
+  #
+  # Removes a teacher from the activity's teachers list.
+  #
   def dismiss_teacher
     activity = Activity.find_by_id params[:id]
     teacher = activity.teachers.find params[:teacher]
@@ -72,6 +98,11 @@ class ActivitiesController < ApplicationController
     redirect_to :back
   end
 
+  ##
+  #
+  # Adds the current user to the activity's candidates list, unless she
+  # is already a candidate, in which case it renders an error message.
+  #
   def apply
     activity = Activity.find_by_id params[:id]
 
@@ -86,6 +117,11 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  ##
+  #
+  # Removes the current user from the activity's candidates list if
+  # she has applied, otherwise it renders an error message.
+  #
   def withdraw
     activity = Activity.find_by_id params[:id]
     
@@ -100,6 +136,10 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  ##
+  #
+  # Removes the current user from the activity's teachers list.
+  #
   def resign
     activity = Activity.find_by_id params[:id]
     
@@ -114,6 +154,10 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  ##
+  #
+  # Destroys the activity and its related data.
+  #
   def destroy
     activity = Activity.find_by_id! params[:id]
     activity.destroy

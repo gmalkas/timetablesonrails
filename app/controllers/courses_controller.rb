@@ -4,7 +4,8 @@ require_relative '../models/notifications/new_course_candidate'
 ##
 # = CoursesController
 #
-# Handles everything related to courses : 
+# Handles CRUC functions and specific operations for courses, such as choosing
+# a manager and dismissing candidates.
 #
 class CoursesController < ApplicationController
 
@@ -18,6 +19,8 @@ class CoursesController < ApplicationController
     params[:filter] ||= Course::DefaultFilter[:filter]
 
     courses = @semesters.map(&:courses).flatten
+
+    # TODO: This 'switch' should not be in a controller.
     courses = case params[:filter]
     when 'manager'
       TimetablesOnRails::CourseFilter.by_manager courses
@@ -44,6 +47,7 @@ class CoursesController < ApplicationController
   end
   
   ##
+  #
   # Shows the course and its related activities.
   #
   def show
@@ -53,6 +57,7 @@ class CoursesController < ApplicationController
   end
   
   ##
+  #
   # Adds the current user to the candidates list.
   #
   def apply
@@ -70,6 +75,7 @@ class CoursesController < ApplicationController
   end
 
   ##
+  #
   # Removes the current user from the candidates list.
   #
   def withdraw
@@ -87,6 +93,7 @@ class CoursesController < ApplicationController
   end
 
   ##
+  #
   # Given that the current user is the course's manager,
   # this action removes the "manager" association.
   # The current user effectively resigns as this course's manager.
@@ -106,6 +113,7 @@ class CoursesController < ApplicationController
   end
 
   ##
+  #
   # Creates a course for a specific semester.
   # This action requires administrative privileges.
   #
@@ -121,7 +129,9 @@ class CoursesController < ApplicationController
   end
 
   ##
+  #
   # Shows a list of teachers to choose from in order to assign the course to one of them.
+  # This action requires administrative privileges.
   #
   def pick_manager
     @course = Course.find_by_id params[:id]
@@ -130,6 +140,7 @@ class CoursesController < ApplicationController
   end
 
   ##
+  #
   # Assigns a teacher to a specific course.
   # This action requires administrative privileges.
   #
@@ -145,6 +156,7 @@ class CoursesController < ApplicationController
   end
 
   ##
+  #
   # Removes a candidate from the list.
   # This action requires administrative privileges.
   #
@@ -159,6 +171,7 @@ class CoursesController < ApplicationController
   end
 
   ##
+  #
   # Destroys the course.
   # This action requires administrative privileges.
   #
@@ -172,6 +185,7 @@ class CoursesController < ApplicationController
   private
 
   ##
+  #
   # This controller needs a school year to work properly.
   # This method is used as a before_filter to ensure that a 
   # school year is defined.
