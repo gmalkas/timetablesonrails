@@ -5,13 +5,14 @@
 #
 # All controllers extend this controller, except SessionController.
 # This controller ensures the user is logged in, and defines some helpers methods.
-# Lastly, it defines methods to deal with some common exceptions.
+# Lastly, it defines callbacks to deal with some common exceptions.
 #
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
 	rescue_from ActiveRecord::RecordNotFound, with: :not_found
+	rescue_from ActionController::RoutingError, with: :not_found
 	rescue_from Errno::ECONNREFUSED, with: :unavailable
   rescue_from CanCan::AccessDenied, with: :unauthorized
 
@@ -26,14 +27,33 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  ##
+  # 
+  # Renders a 404 error message in case there is a RecordNotFound exception or a RountingError.
+  #
+  # == Note
+  #
+  # This could be improved since the error message is not really helpful for the user. The message
+  # should be specific to the resource that is missing. One way to do that would be to override this method
+  # in controllers to render a specific view.
+  #
   def not_found
     render "errors/404", :status => 404
   end
 
+  ##
+  #
+  # Renders a 401 error message in case there is a Cancan::AccessDenied exception.
+  #
 	def unauthorized
     render "errors/401", :status => 401
 	end
 
+  ##
+  # 
+  # Render a  503 error message in case there is a Errno::ECONNREFUSED exception. This is necessary
+  # since we use a LDAP to sign in users.
+  #
 	def unavailable
     render "errors/503", :status => 503 
 	end
