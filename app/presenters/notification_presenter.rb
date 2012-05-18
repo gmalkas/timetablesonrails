@@ -1,3 +1,10 @@
+##
+#
+# = NotificationPresenter
+#
+#  Decorates notifications to encapsulate the knowledge of
+#  notifications rendering.
+#
 class NotificationPresenter
   attr_accessor :notification
 
@@ -5,6 +12,8 @@ class NotificationPresenter
     @notification = notification
     
     # Delegate methods specific to the notification (e.g properties)
+    # We need this since subclasses of Notification may add their own
+    # property accessor (e.g Notifications::NewCourseCandidate#course).
     notification.public_methods(false).each do |meth|
       (class << self; self; end).class_eval do
         define_method meth do |*args|
@@ -30,6 +39,10 @@ class NotificationPresenter
     @notification.created_at
   end
 
+  ##
+  #
+  # Renders the notification-specific view
+  #
   def render(context)
     context.render type.underscore, notification: self.notification
   end

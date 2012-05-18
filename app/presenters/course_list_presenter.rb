@@ -1,3 +1,9 @@
+##
+#
+# = CourseListPresenter
+#
+# Encapsulate the knowledge associatd with rendering a courses list with a filter.
+#
 class CourseListPresenter
   attr_reader :filter, :semesters, :courses
 

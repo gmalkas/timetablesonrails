@@ -1,3 +1,15 @@
+##
+#
+# = ActivityItemPresenter
+#
+# Decorates Activity to encapsulate the knowledge of activity rendering
+# as an item in an activities list.
+#
+# == Note
+#
+# This presenter is not very useful for now. It should be completed to handle
+# more activity's states.
+#
 class ActivityItemPresenter
   attr_accessor :activity
 
