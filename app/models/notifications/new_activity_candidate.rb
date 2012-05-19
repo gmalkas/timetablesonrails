@@ -1,3 +1,10 @@
+##
+#
+# = Notifications::NewActivityCandidate
+#
+# This notification is created when there is a new candidate for
+# an activity's teaching position.
+#
 module Notifications
   class NewActivityCandidate < Notification
 

@@ -1,6 +1,12 @@
 require_relative './user'
 require_relative './course'
 
+##
+#
+# = Ability
+#
+# Defines abilities (i.e authorizations).
+#
 class Ability
   include CanCan::Ability
 

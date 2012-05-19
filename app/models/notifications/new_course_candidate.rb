@@ -1,3 +1,10 @@
+##
+#
+# = Notifications::NewCourseCandidate
+#
+# This notification is created when there is a new candidate
+# for a course's management position.
+#
 module Notifications
   class NewCourseCandidate < Notification
 

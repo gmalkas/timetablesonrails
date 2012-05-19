@@ -1,3 +1,10 @@
+##
+#
+# = Notifications::WithdrawActivityTeachingApplication
+#
+# This notification is created when a teacher withdraws his application
+# for an activity's teaching position.
+#
 module Notifications
   class WithdrawActivityTeachingApplication < Notification
 

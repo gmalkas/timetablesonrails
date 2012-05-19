@@ -1,3 +1,9 @@
+##
+# 
+# = Notifications::CourseManagerResigned
+#
+# This notification is created when a course's manager resigned from his position.
+#
 module Notifications
   class CourseManagerResigned < Notification
 

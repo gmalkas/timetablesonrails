@@ -1,6 +1,17 @@
+##
+#
+# = Notifications::ChooseActivityTeacher
+#
+# This notification is created when a teacher has been chosen to
+# teach an activity.
+#
 module Notifications
   class ChooseActivityTeacher < Notification
 
+    ##
+    # 
+    # The 'picker' is either an administrator or the course's manager.
+    #
     def picker
       User.find_by_id find_property!('picker').value
     end

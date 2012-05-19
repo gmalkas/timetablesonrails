@@ -1,3 +1,10 @@
+##
+#
+# = Notifications::WithdrawCourseManagementApplication
+#
+# This notification is created when a teacher withdraws his application
+# for a course's management position.
+#
 module Notifications
   class WithdrawCourseManagementApplication < Notification
 

@@ -1,3 +1,9 @@
+##
+#
+# = Notifications::ActivityTeacherResigned
+#
+# This notification is created when an activity's teacher resigned.
+#
 module Notifications
   class ActivityTeacherResigned < Notification
 

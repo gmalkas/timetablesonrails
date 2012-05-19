@@ -1,6 +1,17 @@
+##
+#
+# = Notifications::ChooseCourseManager
+#
+# This notification is created when a teacher has been assigned
+# as a course's manager.
+#
 module Notifications
   class ChooseCourseManager < Notification
 
+    ##
+    #
+    # The administrator that chose the teacher.
+    #
     def administrator
       User.find_by_id find_property!('administrator').value
     end

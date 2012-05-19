@@ -1,4 +1,22 @@
+##
+#
+# = User
+#
+# There are two kinds of users : administrators and teachers.
+#
+# Administrators can do pretty much everything on the application, whereas teachers
+# can only handle data related to them in some way.
+#
+# Most user records will come from the LDAP, but some users (e.g temporary teachers)
+# will not have LDAP accounts. Yet, administrators and course's managers need to assign
+# these teachers to teaching positions.
+#
+# Hence, administrators are able to create placeholder user records that
+# nobody will use to actually sign in, but that will be used as
+# references in the application.
+#
 class User < ActiveRecord::Base
+ 
   # === DATA ===
   attr_accessible :username, :firstname, :lastname, :status
 
@@ -27,6 +45,7 @@ class User < ActiveRecord::Base
   # === BEHAVIOR ===
   
   ##
+  #
   # Adds the user to the candidates list of the given course.
   #
   def apply_to_course_management(course)
@@ -34,6 +53,7 @@ class User < ActiveRecord::Base
   end
 
   ##
+  #
   # Removes the user from the candidates list of the given course.
   #
   def withdraw_course_management_application(course)
@@ -41,6 +61,7 @@ class User < ActiveRecord::Base
   end
 
   ##
+  #
   # Checks whether the user has already applied to a given course
   #
   def applied?(course)
@@ -48,6 +69,7 @@ class User < ActiveRecord::Base
   end
 
   ##
+  #
   # Checks whether the user is responsible for managing a given course.
   #
   def manage?(course)
@@ -78,6 +100,10 @@ class User < ActiveRecord::Base
     activities.delete activity
   end
 
+  ##
+  #
+  # Returns the total work time.
+  #
   def work_time
     self.activities.inject(0) { |total, activity| total + activity.duration }
   end
